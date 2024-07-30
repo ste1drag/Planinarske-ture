@@ -1,25 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Nav from "./components/Nav/Nav";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {homeEndpoint, tourEndpoint, toursEndpoint} from "./utils/apiEndpoints";
+import Home from "./components/Home/Home";
+import Tours from "./components/Tours/Tours";
+import TourInfo from "./components/TourInfo/TourInfo";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <BrowserRouter>
+        <div className="App">
+                <Nav/>
+                <Routes>
+                    <Route path={homeEndpoint} element={<Home/>} />
+                    <Route path={toursEndpoint} element={<Tours/>} />
+                    <Route path={tourEndpoint} element={<TourInfo/>} />
+                </Routes>
+        </div>
+      </BrowserRouter>
   );
 }
 

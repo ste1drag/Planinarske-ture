@@ -1,6 +1,6 @@
 type Status = "active" | "canceled";
 
-interface ITour {
+export interface ITour {
     id: number;
     name: string;
     height: number;
@@ -10,5 +10,3 @@ interface ITour {
     date: string;
     status: Status;
 }
-
-export default ITour;
