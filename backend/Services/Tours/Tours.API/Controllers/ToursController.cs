@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using MediatR;
 
 namespace Tours.API.Controllers
 {
@@ -6,20 +7,21 @@ namespace Tours.API.Controllers
     [Route("[controller]")]
     public class ToursController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
 
-        private readonly ILogger<ToursController> _logger;
+        private readonly IMediator _mediator;
 
-        public ToursController(ILogger<ToursController> logger)
+        public ToursController(IMediator mediator)
         {
-            _logger = logger;
+            _mediator = mediator;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public void Get()
+        [HttpGet(Name = "GetAllTours")]
+        public void GetAllTours()
+        {
+        }
+
+        [HttpGet("{tourId}")]
+        public void GetTour(string tourId)
         {
         }
     }
