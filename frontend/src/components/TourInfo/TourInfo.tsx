@@ -1,5 +1,4 @@
-import {Link, useParams} from "react-router-dom";
-import {ITourParams} from "../../interfaces/IParams";
+import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {ITour} from "../../interfaces/ITour";
 import axios, {AxiosResponse} from "axios";

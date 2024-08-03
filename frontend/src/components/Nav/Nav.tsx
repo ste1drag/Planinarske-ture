@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {homeEndpoint, toursEndpoint} from "../../utils/apiEndpoints";
 
 const Nav = () => {
     return (<>
         <nav>
-                <li><Link to={ homeEndpoint }/>Home</li>
-                <li><Link to={ toursEndpoint }/>Tours</li>
+                <li><NavLink to={ homeEndpoint }/>Home</li>
+                <li><NavLink to={ toursEndpoint }/>Tours</li>
         </nav>
     </>)
 }
