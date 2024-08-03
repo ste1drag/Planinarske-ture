@@ -1,5 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
+using Tours.Application.UseCases.Tours.Queries.ViewModel;
+using Tours.Application.UseCases.Tours.Queries.GetTour;
+using Tours.Application.UseCases.Tours.Queries.GetListOfTours;
+using Tours.Application.UseCases.Tours.Commands.DTOs;
+using Tours.Application.UseCases.Tours.Commands.AddTour;
 
 namespace Tours.API.Controllers
 {
@@ -16,13 +21,30 @@ namespace Tours.API.Controllers
         }
 
         [HttpGet(Name = "GetAllTours")]
-        public void GetAllTours()
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task <ActionResult<List<TourViewModel>>> GetAllTours()
         {
+            GetListOfToursQuery toursQuery = new GetListOfToursQuery();
+
+            var toursDTO = await _mediator.Send(toursQuery);
+            return Ok(toursDTO);
         }
 
         [HttpGet("{tourId}")]
-        public void GetTour(string tourId)
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<TourViewModel>> GetTour([FromBody] GetTourQuery tourQuery)
         {
+            var tourDTO = await _mediator.Send(tourQuery);
+            return Ok(tourDTO);
+        }
+
+        [HttpPost(Name = "AddTour")]
+        public async Task<IActionResult> AddTour([FromBody] AddTourCommand addTourCommand)
+        {
+            await _mediator.Send(addTourCommand);
+            return Accepted();
         }
     }
 }
