@@ -3,21 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tours.Application", "Tours.Application\Tours.Application.csproj", "{7DA5543D-0811-45EB-B112-1AFD36101F46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tours.Application", "Tours.Application\Tours.Application.csproj", "{7DA5543D-0811-45EB-B112-1AFD36101F46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tours.API", "Tours.API\Tours.API.csproj", "{60DA6E6C-E562-44CF-A4C6-E48062F8E3B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tours.API", "Tours.API\Tours.API.csproj", "{60DA6E6C-E562-44CF-A4C6-E48062F8E3B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tours.Domain", "Tours.Domain\Tours.Domain.csproj", "{E28A1541-B291-4CC7-888A-D0967A4D4337}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tours.Domain", "Tours.Domain\Tours.Domain.csproj", "{E28A1541-B291-4CC7-888A-D0967A4D4337}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tours.Infrastructure", "Tours.Infrastructure\Tours.Infrastructure.csproj", "{825A95BA-8C6E-4CCB-BD6E-BC8A09F14A18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tours.Infrastructure", "Tours.Infrastructure\Tours.Infrastructure.csproj", "{825A95BA-8C6E-4CCB-BD6E-BC8A09F14A18}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{7DA5543D-0811-45EB-B112-1AFD36101F46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -36,5 +33,11 @@ Global
 		{825A95BA-8C6E-4CCB-BD6E-BC8A09F14A18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{825A95BA-8C6E-4CCB-BD6E-BC8A09F14A18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{825A95BA-8C6E-4CCB-BD6E-BC8A09F14A18}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {918715C8-BE8E-49A2-8351-5496E08F7123}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,13 @@
+C:\Users\steva\OneDrive\Desktop\rs2\Planinarske-ture\backend\Services\Tours\Tours.Domain\bin\Debug\net8.0\Tours.Domain.deps.json
+C:\Users\steva\OneDrive\Desktop\rs2\Planinarske-ture\backend\Services\Tours\Tours.Domain\bin\Debug\net8.0\Tours.Domain.dll
+C:\Users\steva\OneDrive\Desktop\rs2\Planinarske-ture\backend\Services\Tours\Tours.Domain\bin\Debug\net8.0\Tours.Domain.pdb
+C:\Users\steva\OneDrive\Desktop\rs2\Planinarske-ture\backend\Services\Tours\Tours.Domain\obj\Debug\net8.0\Tours.Domain.csproj.AssemblyReference.cache
+C:\Users\steva\OneDrive\Desktop\rs2\Planinarske-ture\backend\Services\Tours\Tours.Domain\obj\Debug\net8.0\Tours.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\steva\OneDrive\Desktop\rs2\Planinarske-ture\backend\Services\Tours\Tours.Domain\obj\Debug\net8.0\Tours.Domain.AssemblyInfoInputs.cache
+C:\Users\steva\OneDrive\Desktop\rs2\Planinarske-ture\backend\Services\Tours\Tours.Domain\obj\Debug\net8.0\Tours.Domain.AssemblyInfo.cs
+C:\Users\steva\OneDrive\Desktop\rs2\Planinarske-ture\backend\Services\Tours\Tours.Domain\obj\Debug\net8.0\Tours.Domain.csproj.CoreCompileInputs.cache
+C:\Users\steva\OneDrive\Desktop\rs2\Planinarske-ture\backend\Services\Tours\Tours.Domain\obj\Debug\net8.0\Tours.Domain.sourcelink.json
+C:\Users\steva\OneDrive\Desktop\rs2\Planinarske-ture\backend\Services\Tours\Tours.Domain\obj\Debug\net8.0\Tours.Domain.dll
+C:\Users\steva\OneDrive\Desktop\rs2\Planinarske-ture\backend\Services\Tours\Tours.Domain\obj\Debug\net8.0\refint\Tours.Domain.dll
+C:\Users\steva\OneDrive\Desktop\rs2\Planinarske-ture\backend\Services\Tours\Tours.Domain\obj\Debug\net8.0\Tours.Domain.pdb
+C:\Users\steva\OneDrive\Desktop\rs2\Planinarske-ture\backend\Services\Tours\Tours.Domain\obj\Debug\net8.0\ref\Tours.Domain.dll
