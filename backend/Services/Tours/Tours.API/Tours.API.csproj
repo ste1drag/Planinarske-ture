@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tours.Application\Tours.Application.csproj" />
+    <ProjectReference Include="..\Tours.Infrastructure\Tours.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
