@@ -7,11 +7,8 @@ using Tours.Application.UseCases.Tours.Commands.DTOs;
 
 namespace Tours.Application.UseCases.Tours.Queries.ViewModel
 {
-    public class TourViewModel
+    public class MountainViewModel
     {
-        public string Name { get; set; }
-        public MountainViewModel Mountain { get; set; }
-        public string Description { get; set; }
-        public DateTime TourDate { get; set; }
+        public MountainDTO Mountain { get; set; }
     }
 }

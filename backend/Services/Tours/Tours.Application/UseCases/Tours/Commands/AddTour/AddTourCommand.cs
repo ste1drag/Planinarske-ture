@@ -10,6 +10,6 @@ namespace Tours.Application.UseCases.Tours.Commands.AddTour
 {
     public class AddTourCommand : IRequest
     {
-        public AddTourDTO addTourDTO;
+        public AddTourDTO AddTourDTO { get; set; }
     }
 }

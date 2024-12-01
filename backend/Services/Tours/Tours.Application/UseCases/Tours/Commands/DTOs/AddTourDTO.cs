@@ -8,11 +8,9 @@ namespace Tours.Application.UseCases.Tours.Commands.DTOs
 {
     public class AddTourDTO
     {
-        public string TourName;
-        public int Height;
-        public int MaxNumberOfPeople;
-        public int MinNumberOfPeople;
-        public string Description;
-        public DateTime Date;
+        public string TourName { get; set; }
+        public MountainDTO Mountain { get; set; }
+        public string Description { get; set; }
+        public DateTime Date { get; set; }
     }
 }

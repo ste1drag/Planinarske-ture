@@ -24,7 +24,7 @@ namespace Tours.Application.UseCases.Tours.Commands.AddTour
 
         public async Task Handle(AddTourCommand request, CancellationToken cancellationToken)
         {
-            Tour tour = _mapper.Map<Tour>(request.addTourDTO);
+            Tour tour = _mapper.Map<Tour>(request.AddTourDTO);
             await _toursRepository.Update(tour);
         }
     }

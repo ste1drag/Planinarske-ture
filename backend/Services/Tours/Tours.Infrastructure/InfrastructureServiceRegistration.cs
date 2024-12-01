@@ -20,7 +20,7 @@ namespace Tours.Infrastructure
                 options.UseSqlServer(configuration.GetConnectionString("conStr")));
 
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseService<>));
-            services.AddScoped(IToursRepository, ToursService);
+            services.AddScoped(typeof(IToursRepository), typeof(ToursService));
 
             return services;
         }

@@ -43,7 +43,12 @@ namespace Tours.API.Controllers
         [HttpPost(Name = "AddTour")]
         public async Task<IActionResult> AddTour([FromBody] AddTourCommand addTourCommand)
         {
+            if (addTourCommand == null || addTourCommand.AddTourDTO == null)
+            {
+                return BadRequest("Invalid payload");
+            }
             await _mediator.Send(addTourCommand);
+            
             return Accepted();
         }
     }

@@ -9,6 +9,7 @@ namespace Tours.Domain.Enums
     public enum TourStatusEnum
     {
         ACTIVE,
+        RESERVED,
         CANCELED
     }
 }
