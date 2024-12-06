@@ -20,18 +20,6 @@ namespace Tours.Infrastructure
         {
             var connectionString = configuration.GetConnectionString("ToursDB") ?? throw new InvalidOperationException("Connection string 'ToursDB' not found.");
 
-            var connection = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=ToursDB;Trusted_Connection=True;");
-
-            try
-            {
-                connection.Open();
-                Console.WriteLine("Database connection successful!");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Database connection failed: {ex.Message}");
-            }
-
             services.AddDbContext<ToursDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
