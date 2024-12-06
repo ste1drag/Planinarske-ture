@@ -12,6 +12,12 @@ namespace Tours.Infrastructure.Services
     {
 
         protected readonly ToursDbContext _dbContext;
+
+        public BaseService(ToursDbContext dbContext)
+        {
+            _dbContext = dbContext ?? throw new ArgumentNullException("Greska");
+        }
+
         public virtual async Task<T> AddNew(T entity)
         {
             _dbContext.Set<T>().Add(entity);

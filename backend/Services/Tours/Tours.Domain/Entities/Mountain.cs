@@ -12,7 +12,7 @@ namespace Tours.Domain.Entities
         public Guid Id { get; init; }
         public string Name { get; init; }
         public int Height { get; set; }
-        public List<Tour> Tours { get; set; }
+        public List<Tour>? Tours { get; set; }
         #endregion
     }
 }

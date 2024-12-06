@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -14,13 +15,6 @@ namespace Tours.Application
         public static IServiceCollection AddApplicationServices(
             this IServiceCollection services, Action<IServiceCollection> configureInfrastructureServices)
         {
-            var config = new AutoMapper.MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new Mapper());
-            });
-            var mapper = config.CreateMapper();
-            services.AddSingleton(mapper);
-
             services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());

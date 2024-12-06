@@ -10,5 +10,6 @@ namespace Tours.Infrastructure.Services
 {
     public class ToursService : BaseService<Tour>, IToursRepository
     {
+        public ToursService(ToursDbContext dbContext) : base(dbContext) { }
     }
 }
