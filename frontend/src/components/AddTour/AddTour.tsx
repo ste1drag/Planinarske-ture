@@ -5,12 +5,12 @@ import axios from "axios";
 const AddTour = () => {
 
     const initialTourState: IAddTour = {
-        tourName : "",
-        height : 0,
+        name : "",
         maxNumberOfPeople : 0,
         minNumberOfPeople : 0,
         description : "",
-        datum : ""
+        mountainId: "83725c0c-3ee3-4dc2-2a86-08dd165ab1c5",
+        date : ""
     }
 
     const [tour, setTour] = useState<IAddTour>(initialTourState);
@@ -25,12 +25,8 @@ const AddTour = () => {
         <>
             <form onSubmit={onAddTour}>
                 <div>
-                    <label htmlFor="tourName">Name:</label>
-                    <input type="text" value ={tour.tourName} onChange={(e: React.FormEvent<HTMLInputElement>) => { setTour({...tour, tourName: e.currentTarget.value})}}/>
-                </div>
-                <div>
-                    <label htmlFor="height">Height:</label>
-                    <input type="text" value ={tour.height} onChange={(e: React.FormEvent<HTMLInputElement>) => { setTour({...tour, height: parseInt(e.currentTarget.value)})}}/>
+                    <label htmlFor="name">Name:</label>
+                    <input type="text" value ={tour.name} onChange={(e: React.FormEvent<HTMLInputElement>) => { setTour({...tour, name: e.currentTarget.value})}}/>
                 </div>
                 <div>
                     <label htmlFor="minNumberOfPeople">Minimum number of people:</label>
@@ -46,7 +42,7 @@ const AddTour = () => {
                 </div>
                 <div>
                     <label htmlFor="tourName">Tour Date:</label>
-                    <input type="text" value ={tour.datum} onChange={(e: React.FormEvent<HTMLInputElement>) => { setTour({...tour, datum: e.currentTarget.value})}}/>
+                    <input type="text" value ={tour.date} onChange={(e: React.FormEvent<HTMLInputElement>) => { setTour({...tour, date: e.currentTarget.value})}}/>
                 </div>
                 <input type="submit" value="Post"/>
             </form>
