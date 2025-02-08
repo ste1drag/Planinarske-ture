@@ -10,12 +10,13 @@ namespace Tours.Domain.Entities
 {
     public class Tour
     {
-        public Guid TourId { get; init; }
+        public Guid Id { get; init; }
         public string Name { get; set; }
         public HikerRange? HikerRange { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
         public TourStatusEnum Status { get; set; }
+        public Guid MountainId { get; set; }
         public Mountain Mountain { get; init; }
     }
 }

@@ -24,9 +24,9 @@ namespace Tours.Application.UseCases.Tours.Queries.GetTour
 
         public async Task<TourViewModel> Handle(GetTourQuery request, CancellationToken cancellationToken)
         {
-            var toursList = await _toursRepository.GetById(request.TourId);
+            var tour = await _toursRepository.GetById(request.TourId);
 
-            return _mapper.Map<TourViewModel>(toursList);
+            return _mapper.Map<TourViewModel>(tour);
         }
     }
 }

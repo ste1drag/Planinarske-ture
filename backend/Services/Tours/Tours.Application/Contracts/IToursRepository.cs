@@ -10,5 +10,6 @@ namespace Tours.Application.Repositories
 {
     public interface IToursRepository : IAsyncRepository<Tour>
     {
+        Task<List<Tour>> GetToursByMountainId(Guid mountainId);
     }
 }

@@ -16,8 +16,8 @@ namespace Tours.Application
         {
             CreateMap<Mountain, MountainDTO>().ReverseMap();
             CreateMap<AddTourDTO, Tour>().ReverseMap();
-            /*CreateMap<Mountain, MountainViewModel>().ReverseMap();
-            CreateMap<Tour, TourViewModel>().ReverseMap();*/
+            //CreateMap<Mountain, MountainViewModel>().ReverseMap();
+            CreateMap<Tour, TourViewModel>().ReverseMap();
         }
     }
 }

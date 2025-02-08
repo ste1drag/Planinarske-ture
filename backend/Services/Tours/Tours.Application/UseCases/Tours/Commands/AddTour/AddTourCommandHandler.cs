@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Tours.Application.Repositories;
 using Tours.Application.UseCases.Tours.Commands.DTOs;
 using Tours.Domain.Entities;
+using Tours.Domain.ValueObjects;
 
 namespace Tours.Application.UseCases.Tours.Commands.AddTour
 {
@@ -25,6 +26,7 @@ namespace Tours.Application.UseCases.Tours.Commands.AddTour
         public async Task Handle(AddTourCommand request, CancellationToken cancellationToken)
         {
             Tour tour = _mapper.Map<Tour>(request.AddTourDTO);
+            tour.HikerRange = new HikerRange(request.AddTourDTO.MinNumberOfPeople, request.AddTourDTO.MaxNumberOfPeople);
             await _toursRepository.AddNew(tour);
         }
     }

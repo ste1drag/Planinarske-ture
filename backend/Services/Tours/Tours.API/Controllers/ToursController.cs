@@ -5,11 +5,15 @@ using Tours.Application.UseCases.Tours.Queries.GetTour;
 using Tours.Application.UseCases.Tours.Queries.GetListOfTours;
 using Tours.Application.UseCases.Tours.Commands.DTOs;
 using Tours.Application.UseCases.Tours.Commands.AddTour;
+using Tours.Application.UseCases.Tours.Queries.GetToursByMountainId;
+using Microsoft.AspNetCore.Cors;
+using Tours.Application.UseCases.Tours.Commands.DeleteTour;
 
 namespace Tours.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [EnableCors("MyPolicy")]
     public class ToursController : ControllerBase
     {
 
@@ -40,6 +44,34 @@ namespace Tours.API.Controllers
             return Ok(tourDTO);
         }
 
+        [HttpGet("{mountainId}/tours")]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<TourViewModel>>> GetToursByMountainId([FromBody] GetToursByMountainIdQuery tourQuery)
+        {
+            var tourDTO = await _mediator.Send(tourQuery);
+            return Ok(tourDTO);
+        }
+
+        [HttpPut("{tourId}/description")]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> UpdateTourDesctiption([FromBody] GetToursByMountainIdQuery tourQuery)
+        {
+            var tourDTO = await _mediator.Send(tourQuery);
+            return Ok(tourDTO);
+        }
+
+        [HttpPut("{tourId}/numOfParticipants")]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> UpdateTourParticipants([FromBody] GetToursByMountainIdQuery tourQuery)
+        {
+            var tourDTO = await _mediator.Send(tourQuery);
+            return Ok(tourDTO);
+        }
+
+
         [HttpPost(Name = "AddTour")]
         public async Task<IActionResult> AddTour([FromBody] AddTourCommand addTourCommand)
         {
@@ -49,6 +81,15 @@ namespace Tours.API.Controllers
             }
             await _mediator.Send(addTourCommand);
             
+            return Accepted();
+        }
+
+        [HttpDelete(Name ="DeleteTour")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> DeleteTour([FromBody] DeleteTourCommand deleteTourCommand)
+        {
+            await _mediator.Send(deleteTourCommand);
+
             return Accepted();
         }
     }

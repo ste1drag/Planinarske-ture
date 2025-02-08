@@ -11,7 +11,7 @@ namespace Tours.Domain.ValueObjects
         #region Properties
         public int MinNumberOfPeople { get; init; }
         public int MaxNumberOfPeople { get; init; }
-        public int NumberOfRegisteredPeople { get; init; }
+        public int NumberOfRegisteredPeople { get; set; }
         #endregion
 
         #region Constructors

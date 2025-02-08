@@ -5,20 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tours.Domain.Entities;
-using Tours.Domain.ValueObjects;
 
 namespace Tours.Infrastructure
 {
-    public class ToursDbContext(DbContextOptions options) : DbContext(options)
+    public class ToursDbContext : DbContext
     {
+        public ToursDbContext(DbContextOptions<ToursDbContext> options) : base(options)
+        {
+        }
         public DbSet<Tour> Tours { get; set; }
-
+        public DbSet<Mountain> Mountains { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Tour>().HasKey(x => x.TourId);
-            modelBuilder.Entity<Tour>().HasOne(x => x.Mountain).WithMany(x => x.Tours).HasForeignKey(x => x.TourId).HasPrincipalKey(x => x.Id);
+            modelBuilder.Entity<Mountain>().HasKey(x => x.Id);
+            modelBuilder.Entity<Tour>().HasOne(x => x.Mountain).WithMany(x => x.Tours).HasForeignKey(x => x.MountainId).IsRequired();
             modelBuilder.Entity<Tour>().OwnsOne(x => x.HikerRange, h =>
             {
                 h.Property<int>(hr => hr.MaxNumberOfPeople).HasColumnName("NaxNumberOfPeople");
