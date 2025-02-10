@@ -8,6 +8,7 @@ using Tours.Application.UseCases.Tours.Commands.AddTour;
 using Tours.Application.UseCases.Tours.Queries.GetToursByMountainId;
 using Microsoft.AspNetCore.Cors;
 using Tours.Application.UseCases.Tours.Commands.DeleteTour;
+using Tours.Application.UseCases.Tours.Queries.GetListOfMountains;
 
 namespace Tours.API.Controllers
 {

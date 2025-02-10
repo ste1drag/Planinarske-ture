@@ -9,6 +9,8 @@ namespace Tours.Application.UseCases.Tours.Queries.ViewModel
 {
     public class MountainViewModel
     {
-        public MountainDTO Mountain { get; set; }
+        public Guid Id { get; init; }
+        public string Name { get; init; }
+        public int Height { get; set; }
     }
 }

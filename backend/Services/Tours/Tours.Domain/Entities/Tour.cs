@@ -10,6 +10,7 @@ namespace Tours.Domain.Entities
 {
     public class Tour
     {
+        #region Properties
         public Guid Id { get; init; }
         public string Name { get; set; }
         public HikerRange? HikerRange { get; set; }
@@ -18,5 +19,7 @@ namespace Tours.Domain.Entities
         public TourStatusEnum Status { get; set; }
         public Guid MountainId { get; set; }
         public Mountain Mountain { get; init; }
+        public MountainWeatherEnum Weather { get; set; }
+        #endregion 
     }
 }

@@ -14,7 +14,6 @@ namespace Tours.Domain.Entities
         public string Name { get; init; }
         public int Height { get; init; }
         public List<Tour> Tours { get; } = new List<Tour>();
-        public MountainWeatherEnum Weather { get; set; }
         #endregion
     }
 }
