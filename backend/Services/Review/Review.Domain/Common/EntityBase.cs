@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Review.Domain.Common
 {
-    class EntityBase
+    public abstract class EntityBase
     {
-
+        public int Id { get; protected set; }
+        public DateTime CreatedDate { get; protected set; }
+        public DateTime UpdatedDate { get; protected set; }
     }
 }
