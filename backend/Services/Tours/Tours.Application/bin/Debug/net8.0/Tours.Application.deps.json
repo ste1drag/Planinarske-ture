@@ -85,7 +85,10 @@
           "MediatR": "12.4.0"
         },
         "runtime": {
-          "Tours.Domain.dll": {}
+          "Tours.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

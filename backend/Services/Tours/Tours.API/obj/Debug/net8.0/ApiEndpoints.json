@@ -1,0 +1,254 @@
+[
+  {
+    "ContainingType": "Tours.API.Controllers.MountainsController",
+    "Method": "GetAllMountains",
+    "RelativePath": "api/Mountains",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 0
+      },
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Tours.Application.UseCases.Tours.Queries.ViewModel.MountainViewModel, Tours.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetAllMountains"
+  },
+  {
+    "ContainingType": "Tours.API.Controllers.ToursController",
+    "Method": "GetAllTours",
+    "RelativePath": "Tours",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 0
+      },
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Tours.Application.UseCases.Tours.Queries.ViewModel.TourViewModel, Tours.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetAllTours"
+  },
+  {
+    "ContainingType": "Tours.API.Controllers.ToursController",
+    "Method": "AddTour",
+    "RelativePath": "Tours",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "addTourCommand",
+        "Type": "Tours.Application.UseCases.Tours.Commands.AddTour.AddTourCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [],
+    "EndpointName": "AddTour"
+  },
+  {
+    "ContainingType": "Tours.API.Controllers.ToursController",
+    "Method": "DeleteTour",
+    "RelativePath": "Tours",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "deleteTourCommand",
+        "Type": "Tours.Application.UseCases.Tours.Commands.DeleteTour.DeleteTourCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "DeleteTour"
+  },
+  {
+    "ContainingType": "Tours.API.Controllers.ToursController",
+    "Method": "GetToursByMountainId",
+    "RelativePath": "Tours/{mountainId}/tours",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tourQuery",
+        "Type": "Tours.Application.UseCases.Tours.Queries.GetToursByMountainId.GetToursByMountainIdQuery",
+        "IsRequired": true
+      },
+      {
+        "Name": "mountainId",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 0
+      },
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Tours.Application.UseCases.Tours.Queries.ViewModel.TourViewModel, Tours.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Tours.API.Controllers.ToursController",
+    "Method": "GetTour",
+    "RelativePath": "Tours/{tourId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tourQuery",
+        "Type": "Tours.Application.UseCases.Tours.Queries.GetTour.GetTourQuery",
+        "IsRequired": true
+      },
+      {
+        "Name": "tourId",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 0
+      },
+      {
+        "Type": "Tours.Application.UseCases.Tours.Queries.ViewModel.TourViewModel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Tours.API.Controllers.ToursController",
+    "Method": "UpdateTourDesctiption",
+    "RelativePath": "Tours/{tourId}/description",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tourQuery",
+        "Type": "Tours.Application.UseCases.Tours.Queries.GetToursByMountainId.GetToursByMountainIdQuery",
+        "IsRequired": true
+      },
+      {
+        "Name": "tourId",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 0
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Tours.API.Controllers.ToursController",
+    "Method": "UpdateTourParticipants",
+    "RelativePath": "Tours/{tourId}/numOfParticipants",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tourQuery",
+        "Type": "Tours.Application.UseCases.Tours.Queries.GetToursByMountainId.GetToursByMountainIdQuery",
+        "IsRequired": true
+      },
+      {
+        "Name": "tourId",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 0
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

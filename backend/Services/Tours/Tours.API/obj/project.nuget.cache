@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DAfhrup553q6vu16BgOjRVTnhEEx8Si2pM0rkP2g9LmTetbFfh5+RKn9Utpb2QHGEjx3L0pOj55UE1CZbDyHfg==",
+  "dgSpecHash": "yJFfyMWJD1Y=",
   "success": true,
-  "projectFilePath": "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Tours.API.csproj",
+  "projectFilePath": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Tours.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\steva\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\steva\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",

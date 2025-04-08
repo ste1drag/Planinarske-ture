@@ -1,12 +1,10 @@
+using Microsoft.EntityFrameworkCore;
 using Tours.Application;
 using Tours.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Mapper));
@@ -16,24 +14,27 @@ builder.Services.AddApplicationServices(services =>
 });
 builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
 {
-    builder.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
 }));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+using (var scope = app.Services.CreateScope())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    var dbContext = scope.ServiceProvider.GetRequiredService<ToursDbContext>();
+    dbContext.Database.Migrate();
 }
 
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tours API V1");
+    c.RoutePrefix = string.Empty;
+});
 
 app.UseCors("MyPolicy");
-
+app.UseAuthorization();
 app.MapControllers();
+app.Urls.Add("http://0.0.0.0:8080");
 
 app.Run();

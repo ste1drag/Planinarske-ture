@@ -654,7 +654,10 @@
           "Tours.Domain": "1.0.0"
         },
         "runtime": {
-          "Tours.Application.dll": {}
+          "Tours.Application.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "Tours.Domain/1.0.0": {
@@ -663,7 +666,10 @@
           "MediatR": "12.4.0"
         },
         "runtime": {
-          "Tours.Domain.dll": {}
+          "Tours.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

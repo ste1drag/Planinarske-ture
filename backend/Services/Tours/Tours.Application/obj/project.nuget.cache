@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pcjndiTWEogZ1azmv/8F86COvT9D1PrHppai12nmTbkqJxWTi4hUV3GPCXlOYv4BppZvMbyBWlAbqSj1m/8+FQ==",
+  "dgSpecHash": "OLVs23vPuwc=",
   "success": true,
-  "projectFilePath": "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Tours.Application.csproj",
+  "projectFilePath": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Tours.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\steva\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\steva\\.nuget\\packages\\mediatr\\12.4.0\\mediatr.12.4.0.nupkg.sha512",

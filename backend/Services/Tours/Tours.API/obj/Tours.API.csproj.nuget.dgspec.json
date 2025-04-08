@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Tours.API.csproj": {}
+    "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Tours.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Tours.API.csproj": {
+    "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Tours.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Tours.API.csproj",
+        "projectUniqueName": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Tours.API.csproj",
         "projectName": "Tours.API",
-        "projectPath": "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Tours.API.csproj",
+        "projectPath": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Tours.API.csproj",
         "packagesPath": "C:\\Users\\steva\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\obj\\",
+        "outputPath": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\steva\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,11 +32,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Tours.Application.csproj": {
-                "projectPath": "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Tours.Application.csproj"
+              "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Tours.Application.csproj": {
+                "projectPath": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Tours.Application.csproj"
               },
-              "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\Tours.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\Tours.Infrastructure.csproj"
+              "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\Tours.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\Tours.Infrastructure.csproj"
               }
             }
           }
@@ -46,7 +50,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -95,21 +100,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Tours.Application.csproj": {
+    "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Tours.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Tours.Application.csproj",
+        "projectUniqueName": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Tours.Application.csproj",
         "projectName": "Tours.Application",
-        "projectPath": "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Tours.Application.csproj",
+        "projectPath": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Tours.Application.csproj",
         "packagesPath": "C:\\Users\\steva\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\obj\\",
+        "outputPath": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\steva\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -123,8 +132,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Domain\\Tours.Domain.csproj": {
-                "projectPath": "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Domain\\Tours.Domain.csproj"
+              "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Domain\\Tours.Domain.csproj": {
+                "projectPath": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Domain\\Tours.Domain.csproj"
               }
             }
           }
@@ -138,7 +147,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -169,21 +179,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Domain\\Tours.Domain.csproj": {
+    "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Domain\\Tours.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Domain\\Tours.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Domain\\Tours.Domain.csproj",
         "projectName": "Tours.Domain",
-        "projectPath": "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Domain\\Tours.Domain.csproj",
+        "projectPath": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Domain\\Tours.Domain.csproj",
         "packagesPath": "C:\\Users\\steva\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Domain\\obj\\",
+        "outputPath": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\steva\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -208,7 +222,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -239,21 +254,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\Tours.Infrastructure.csproj": {
+    "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\Tours.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\Tours.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\Tours.Infrastructure.csproj",
         "projectName": "Tours.Infrastructure",
-        "projectPath": "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\Tours.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\Tours.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\steva\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\steva\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -267,8 +286,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Tours.Application.csproj": {
-                "projectPath": "C:\\Users\\steva\\OneDrive\\Desktop\\rs2\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Tours.Application.csproj"
+              "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Tours.Application.csproj": {
+                "projectPath": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Tours.Application.csproj"
               }
             }
           }
@@ -282,7 +301,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -313,7 +333,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
