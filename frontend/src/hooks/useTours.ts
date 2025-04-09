@@ -9,7 +9,7 @@ export const useTours = () : ITour[] => {
     },[]);
 
     const fetchTours = async () => {
-        const toursData: ITour[] = await axios.get("http://localhost:7075/Tours")
+        const toursData: ITour[] = await axios.get("http://localhost:8080/Tours")
                                             .then((response: AxiosResponse) => response.data);
 
         setTours(toursData);
@@ -24,10 +24,14 @@ export const useTour = (id: string) : (ITour | undefined) => {
     },[id]);
 
     const fetchTour = async (id?: string) => {
+        debugger;
         if(!id)
             return;
 
-        const tourInfoData = await axios.get(`http://localhost:7075/${id}`).then((response: AxiosResponse)=> response.data);
+        debugger;
+
+        const tourInfoData = await axios.get(`http://localhost:8080/Tours/${id}`).then((response: AxiosResponse)=> response.data);
+        debugger;
         if(!tourInfoData)
             return;
 
