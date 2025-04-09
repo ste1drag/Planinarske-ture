@@ -10,12 +10,11 @@ namespace Tours.Application.UseCases.Tours.Queries.ViewModel
 {
     public class TourViewModel
     {
-        public Guid Id;
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public Guid MountainId { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
-
         public TourStatusEnum Status { get; set; }
         public MountainWeatherEnum Weather { get; set; }
     }

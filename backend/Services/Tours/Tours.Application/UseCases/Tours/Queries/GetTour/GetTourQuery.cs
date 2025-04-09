@@ -10,6 +10,6 @@ namespace Tours.Application.UseCases.Tours.Queries.GetTour
 {
     public class GetTourQuery : IRequest<TourViewModel>
     {
-        public string TourId;
+        public string TourId { get; set; }
     }
 }

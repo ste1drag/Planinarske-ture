@@ -10,6 +10,6 @@ namespace Tours.Application.UseCases.Tours.Queries.GetToursByMountainId
 {
     public class GetToursByMountainIdQuery : IRequest<List<TourViewModel>>
     {
-        public Guid MountainId;
+        public Guid MountainId { get; set; }
     }
 }

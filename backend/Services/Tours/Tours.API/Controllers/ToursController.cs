@@ -8,7 +8,7 @@ using Tours.Application.UseCases.Tours.Commands.AddTour;
 using Tours.Application.UseCases.Tours.Queries.GetToursByMountainId;
 using Microsoft.AspNetCore.Cors;
 using Tours.Application.UseCases.Tours.Commands.DeleteTour;
-using Tours.Application.UseCases.Tours.Queries.GetListOfMountains;
+using Tours.Application.Common.Exceptions;
 
 namespace Tours.API.Controllers
 {
@@ -17,7 +17,6 @@ namespace Tours.API.Controllers
     [EnableCors("MyPolicy")]
     public class ToursController : ControllerBase
     {
-
         private readonly IMediator _mediator;
 
         public ToursController(IMediator mediator)
@@ -28,70 +27,59 @@ namespace Tours.API.Controllers
         [HttpGet(Name = "GetAllTours")]
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task <ActionResult<List<TourViewModel>>> GetAllTours()
+        public async Task<ActionResult<List<TourViewModel>>> GetAllTours()
         {
-            GetListOfToursQuery toursQuery = new GetListOfToursQuery();
-
-            var toursDTO = await _mediator.Send(toursQuery);
-            return Ok(toursDTO);
+            var toursQuery = new GetListOfToursQuery();
+            var tours = await _mediator.Send(toursQuery);
+            return Ok(tours);
         }
 
         [HttpGet("{tourId}")]
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<TourViewModel>> GetTour([FromBody] GetTourQuery tourQuery)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<TourViewModel>> GetTour(GetTourQuery tourQuery)
         {
-            var tourDTO = await _mediator.Send(tourQuery);
-            return Ok(tourDTO);
+            var tour = await _mediator.Send(tourQuery);
+            if (tour == null)
+                throw new NotFoundException(nameof(Tour), tourQuery.TourId);
+                
+            return Ok(tour);
         }
 
         [HttpGet("{mountainId}/tours")]
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<List<TourViewModel>>> GetToursByMountainId([FromBody] GetToursByMountainIdQuery tourQuery)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<List<TourViewModel>>> GetToursByMountainId(Guid mountainId)
         {
-            var tourDTO = await _mediator.Send(tourQuery);
-            return Ok(tourDTO);
+            var tourQuery = new GetToursByMountainIdQuery { MountainId = mountainId };
+            var tours = await _mediator.Send(tourQuery);
+            return Ok(tours);
         }
-
-        [HttpPut("{tourId}/description")]
-        [ProducesDefaultResponseType]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> UpdateTourDesctiption([FromBody] GetToursByMountainIdQuery tourQuery)
-        {
-            var tourDTO = await _mediator.Send(tourQuery);
-            return Ok(tourDTO);
-        }
-
-        [HttpPut("{tourId}/numOfParticipants")]
-        [ProducesDefaultResponseType]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> UpdateTourParticipants([FromBody] GetToursByMountainIdQuery tourQuery)
-        {
-            var tourDTO = await _mediator.Send(tourQuery);
-            return Ok(tourDTO);
-        }
-
 
         [HttpPost(Name = "AddTour")]
-        public async Task<IActionResult> AddTour([FromBody] AddTourCommand addTourCommand)
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<Unit>> AddTour([FromBody] AddTourCommand addTourCommand)
         {
             if (addTourCommand == null || addTourCommand.AddTourDTO == null)
             {
-                return BadRequest("Invalid payload");
+                throw new ValidationException(new[] { ("Tour", "Invalid tour data provided") });
             }
-            await _mediator.Send(addTourCommand);
             
+            await _mediator.Send(addTourCommand);
             return Accepted();
         }
 
         [HttpDelete(Name ="DeleteTour")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> DeleteTour([FromBody] DeleteTourCommand deleteTourCommand)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> DeleteTour([FromBody] DeleteTourCommand deleteTourCommand)
         {
             await _mediator.Send(deleteTourCommand);
-
-            return Accepted();
+            return Ok();
         }
     }
 }

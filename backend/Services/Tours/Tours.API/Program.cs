@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Tours.Application;
 using Tours.Infrastructure;
+using Tours.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,7 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = string.Empty;
 });
 
+app.UseExceptionHandler();
 app.UseCors("MyPolicy");
 app.UseAuthorization();
 app.MapControllers();
