@@ -33,7 +33,7 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = string.Empty;
 });
 
-app.UseExceptionHandler();
+app.UseCustomExceptionHandler();
 app.UseCors("MyPolicy");
 app.UseAuthorization();
 app.MapControllers();

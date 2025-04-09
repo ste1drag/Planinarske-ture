@@ -29,7 +29,7 @@ namespace Tours.API.Middleware
         {
             context.Response.ContentType = "application/json";
 
-            var (statusCode, result) = exception switch
+            (HttpStatusCode statusCode, object result) response = exception switch
             {
                 ValidationException validationException => 
                     (HttpStatusCode.BadRequest, new { Message = validationException.Message, Errors = validationException.Errors }),
@@ -40,14 +40,14 @@ namespace Tours.API.Middleware
                 _ => (HttpStatusCode.InternalServerError, new { Message = "An error occurred while processing your request." })
             };
 
-            context.Response.StatusCode = (int)statusCode;
-            await context.Response.WriteAsync(JsonSerializer.Serialize(result));
+            context.Response.StatusCode = (int)response.statusCode;
+            await context.Response.WriteAsync(JsonSerializer.Serialize(response.result));
         }
     }
 
     public static class ExceptionHandlerMiddlewareExtensions
     {
-        public static IApplicationBuilder UseExceptionHandler(this IApplicationBuilder builder)
+        public static IApplicationBuilder UseCustomExceptionHandler(this IApplicationBuilder builder)
         {
             return builder.UseMiddleware<ExceptionHandlerMiddleware>();
         }

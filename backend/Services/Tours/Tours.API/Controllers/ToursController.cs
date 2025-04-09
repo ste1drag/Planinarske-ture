@@ -9,6 +9,7 @@ using Tours.Application.UseCases.Tours.Queries.GetToursByMountainId;
 using Microsoft.AspNetCore.Cors;
 using Tours.Application.UseCases.Tours.Commands.DeleteTour;
 using Tours.Application.Common.Exceptions;
+using Tours.Domain.Entities;
 
 namespace Tours.API.Controllers
 {
