@@ -9,6 +9,6 @@ namespace Tours.Application.UseCases.Tours.Commands.DeleteTour
 {
     public class DeleteTourCommand : IRequest
     {
-        public string TourId { get; set; }
+        public Guid TourId { get; set; }
     }
 }

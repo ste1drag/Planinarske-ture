@@ -9,6 +9,6 @@ namespace Tours.Application.UseCases.Tours.Commands.UpdateTourReservations
 {
     public class UpdateTourReservationsCommand : IRequest
     {
-        public string TourId { get; set; }
+        public Guid TourId { get; set; }
     }
 }

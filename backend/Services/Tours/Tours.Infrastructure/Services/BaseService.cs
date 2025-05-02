@@ -38,7 +38,7 @@ namespace Tours.Infrastructure.Services
             return retValue;
         }
 
-        public virtual async Task<T?> GetById(string id)
+        public virtual async Task<T?> GetById(Guid id)
         {
             var retValue = await _dbContext.Set<T>().FindAsync(id);
 

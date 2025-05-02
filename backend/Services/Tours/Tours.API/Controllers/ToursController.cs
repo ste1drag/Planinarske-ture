@@ -39,9 +39,11 @@ namespace Tours.API.Controllers
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<TourViewModel>> GetTour(GetTourQuery tourQuery)
+        public async Task<ActionResult<TourViewModel>> GetTour(Guid tourId)
         {
+            var tourQuery = new GetTourQuery { TourId = tourId };
             var tour = await _mediator.Send(tourQuery);
+
             if (tour == null)
                 throw new NotFoundException(nameof(Tour), tourQuery.TourId);
                 

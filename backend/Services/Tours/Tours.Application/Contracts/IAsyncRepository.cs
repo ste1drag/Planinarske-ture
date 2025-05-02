@@ -10,7 +10,7 @@ namespace Tours.Application.Contracts
     {
         Task<List<T>> GetAll();
         Task<T> AddNew(T entity);
-        Task<T?> GetById(string id);
+        Task<T?> GetById(Guid id);
         Task Update(T entity);
         Task Delete(T entity);
     }
