@@ -1,0 +1,568 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{825A95BA-8C6E-4CCB-BD6E-BC8A09F14A18}|Tours.Infrastructure\\Tours.Infrastructure.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.infrastructure\\services\\baseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{825A95BA-8C6E-4CCB-BD6E-BC8A09F14A18}|Tours.Infrastructure\\Tours.Infrastructure.csproj|solutionrelative:tours.infrastructure\\services\\baseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.application\\usecases\\tours\\commands\\updatetourreservations\\updatetourreservationscommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|solutionrelative:tours.application\\usecases\\tours\\commands\\updatetourreservations\\updatetourreservationscommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.application\\usecases\\tours\\commands\\updatetourreservations\\updatetourreservationscommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|solutionrelative:tours.application\\usecases\\tours\\commands\\updatetourreservations\\updatetourreservationscommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.application\\usecases\\tours\\commands\\updatetourdescription\\updatetourdescriptioncommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|solutionrelative:tours.application\\usecases\\tours\\commands\\updatetourdescription\\updatetourdescriptioncommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.application\\usecases\\tours\\commands\\updatetourdescription\\updatetourdescriptioncommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|solutionrelative:tours.application\\usecases\\tours\\commands\\updatetourdescription\\updatetourdescriptioncommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.application\\usecases\\tours\\commands\\deletetour\\deletetourcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|solutionrelative:tours.application\\usecases\\tours\\commands\\deletetour\\deletetourcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.application\\usecases\\tours\\commands\\deletetour\\deletetourcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|solutionrelative:tours.application\\usecases\\tours\\commands\\deletetour\\deletetourcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.application\\usecases\\tours\\commands\\addtour\\addtourcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|solutionrelative:tours.application\\usecases\\tours\\commands\\addtour\\addtourcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60DA6E6C-E562-44CF-A4C6-E48062F8E3B3}|Tours.API\\Tours.API.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.api\\controllers\\tourscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60DA6E6C-E562-44CF-A4C6-E48062F8E3B3}|Tours.API\\Tours.API.csproj|solutionrelative:tours.api\\controllers\\tourscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.application\\usecases\\tours\\queries\\gettour\\gettourqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|solutionrelative:tours.application\\usecases\\tours\\queries\\gettour\\gettourqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.application\\contracts\\iasyncrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|solutionrelative:tours.application\\contracts\\iasyncrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.application\\usecases\\tours\\queries\\gettour\\gettourquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|solutionrelative:tours.application\\usecases\\tours\\queries\\gettour\\gettourquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60DA6E6C-E562-44CF-A4C6-E48062F8E3B3}|Tours.API\\Tours.API.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.api\\controllers\\mountainscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60DA6E6C-E562-44CF-A4C6-E48062F8E3B3}|Tours.API\\Tours.API.csproj|solutionrelative:tours.api\\controllers\\mountainscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60DA6E6C-E562-44CF-A4C6-E48062F8E3B3}|Tours.API\\Tours.API.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.api\\middleware\\exceptionhandlermiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60DA6E6C-E562-44CF-A4C6-E48062F8E3B3}|Tours.API\\Tours.API.csproj|solutionrelative:tours.api\\middleware\\exceptionhandlermiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60DA6E6C-E562-44CF-A4C6-E48062F8E3B3}|Tours.API\\Tours.API.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60DA6E6C-E562-44CF-A4C6-E48062F8E3B3}|Tours.API\\Tours.API.csproj|solutionrelative:tours.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.application\\usecases\\tours\\queries\\viewmodel\\tourviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|solutionrelative:tours.application\\usecases\\tours\\queries\\viewmodel\\tourviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E28A1541-B291-4CC7-888A-D0967A4D4337}|Tours.Domain\\Tours.Domain.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.domain\\entities\\tour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E28A1541-B291-4CC7-888A-D0967A4D4337}|Tours.Domain\\Tours.Domain.csproj|solutionrelative:tours.domain\\entities\\tour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.application\\usecases\\tours\\commands\\addtour\\addtourcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|solutionrelative:tours.application\\usecases\\tours\\commands\\addtour\\addtourcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.application\\usecases\\tours\\queries\\viewmodel\\mountainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|solutionrelative:tours.application\\usecases\\tours\\queries\\viewmodel\\mountainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E28A1541-B291-4CC7-888A-D0967A4D4337}|Tours.Domain\\Tours.Domain.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.domain\\entities\\mountain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E28A1541-B291-4CC7-888A-D0967A4D4337}|Tours.Domain\\Tours.Domain.csproj|solutionrelative:tours.domain\\entities\\mountain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60DA6E6C-E562-44CF-A4C6-E48062F8E3B3}|Tours.API\\Tours.API.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{60DA6E6C-E562-44CF-A4C6-E48062F8E3B3}|Tours.API\\Tours.API.csproj|solutionrelative:tours.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60DA6E6C-E562-44CF-A4C6-E48062F8E3B3}|Tours.API\\Tours.API.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{60DA6E6C-E562-44CF-A4C6-E48062F8E3B3}|Tours.API\\Tours.API.csproj|solutionrelative:tours.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60DA6E6C-E562-44CF-A4C6-E48062F8E3B3}|Tours.API\\Tours.API.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{60DA6E6C-E562-44CF-A4C6-E48062F8E3B3}|Tours.API\\Tours.API.csproj|solutionrelative:tours.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60DA6E6C-E562-44CF-A4C6-E48062F8E3B3}|Tours.API\\Tours.API.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.api\\tours.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{60DA6E6C-E562-44CF-A4C6-E48062F8E3B3}|Tours.API\\Tours.API.csproj|solutionrelative:tours.api\\tours.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{825A95BA-8C6E-4CCB-BD6E-BC8A09F14A18}|Tours.Infrastructure\\Tours.Infrastructure.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.infrastructure\\migrations\\20241206235341_initialmigration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{825A95BA-8C6E-4CCB-BD6E-BC8A09F14A18}|Tours.Infrastructure\\Tours.Infrastructure.csproj|solutionrelative:tours.infrastructure\\migrations\\20241206235341_initialmigration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60DA6E6C-E562-44CF-A4C6-E48062F8E3B3}|Tours.API\\Tours.API.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.api\\.dockerignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{60DA6E6C-E562-44CF-A4C6-E48062F8E3B3}|Tours.API\\Tours.API.csproj|solutionrelative:tours.api\\.dockerignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.application\\tours.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|solutionrelative:tours.application\\tours.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{825A95BA-8C6E-4CCB-BD6E-BC8A09F14A18}|Tours.Infrastructure\\Tours.Infrastructure.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.infrastructure\\tours.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{825A95BA-8C6E-4CCB-BD6E-BC8A09F14A18}|Tours.Infrastructure\\Tours.Infrastructure.csproj|solutionrelative:tours.infrastructure\\tours.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{825A95BA-8C6E-4CCB-BD6E-BC8A09F14A18}|Tours.Infrastructure\\Tours.Infrastructure.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.infrastructure\\infrastructureserviceregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{825A95BA-8C6E-4CCB-BD6E-BC8A09F14A18}|Tours.Infrastructure\\Tours.Infrastructure.csproj|solutionrelative:tours.infrastructure\\infrastructureserviceregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.application\\mapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|solutionrelative:tours.application\\mapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DA5543D-0811-45EB-B112-1AFD36101F46}|Tours.Application\\Tours.Application.csproj|solutionrelative:tours.application\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{825A95BA-8C6E-4CCB-BD6E-BC8A09F14A18}|Tours.Infrastructure\\Tours.Infrastructure.csproj|c:\\users\\steva\\desktop\\planinarske-ture\\planinarske-ture\\backend\\services\\tours\\tours.infrastructure\\toursdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{825A95BA-8C6E-4CCB-BD6E-BC8A09F14A18}|Tours.Infrastructure\\Tours.Infrastructure.csproj|solutionrelative:tours.infrastructure\\toursdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BaseService.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\Services\\BaseService.cs",
+              "RelativeDocumentMoniker": "Tours.Infrastructure\\Services\\BaseService.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\Services\\BaseService.cs",
+              "RelativeToolTip": "Tours.Infrastructure\\Services\\BaseService.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAuwCYAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T12:34:20.186Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UpdateTourReservationsCommand.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Commands\\UpdateTourReservations\\UpdateTourReservationsCommand.cs",
+              "RelativeDocumentMoniker": "Tours.Application\\UseCases\\Tours\\Commands\\UpdateTourReservations\\UpdateTourReservationsCommand.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Commands\\UpdateTourReservations\\UpdateTourReservationsCommand.cs",
+              "RelativeToolTip": "Tours.Application\\UseCases\\Tours\\Commands\\UpdateTourReservations\\UpdateTourReservationsCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T12:34:02.848Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UpdateTourReservationsCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Commands\\UpdateTourReservations\\UpdateTourReservationsCommandHandler.cs",
+              "RelativeDocumentMoniker": "Tours.Application\\UseCases\\Tours\\Commands\\UpdateTourReservations\\UpdateTourReservationsCommandHandler.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Commands\\UpdateTourReservations\\UpdateTourReservationsCommandHandler.cs",
+              "RelativeToolTip": "Tours.Application\\UseCases\\Tours\\Commands\\UpdateTourReservations\\UpdateTourReservationsCommandHandler.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAIA8wBkAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T12:34:00.61Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UpdateTourDescriptionCommand.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Commands\\UpdateTourDescription\\UpdateTourDescriptionCommand.cs",
+              "RelativeDocumentMoniker": "Tours.Application\\UseCases\\Tours\\Commands\\UpdateTourDescription\\UpdateTourDescriptionCommand.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Commands\\UpdateTourDescription\\UpdateTourDescriptionCommand.cs",
+              "RelativeToolTip": "Tours.Application\\UseCases\\Tours\\Commands\\UpdateTourDescription\\UpdateTourDescriptionCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T12:33:50.262Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UpdateTourDescriptionCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Commands\\UpdateTourDescription\\UpdateTourDescriptionCommandHandler.cs",
+              "RelativeDocumentMoniker": "Tours.Application\\UseCases\\Tours\\Commands\\UpdateTourDescription\\UpdateTourDescriptionCommandHandler.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Commands\\UpdateTourDescription\\UpdateTourDescriptionCommandHandler.cs",
+              "RelativeToolTip": "Tours.Application\\UseCases\\Tours\\Commands\\UpdateTourDescription\\UpdateTourDescriptionCommandHandler.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAIA8wBkAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T12:33:48.523Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DeleteTourCommand.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Commands\\DeleteTour\\DeleteTourCommand.cs",
+              "RelativeDocumentMoniker": "Tours.Application\\UseCases\\Tours\\Commands\\DeleteTour\\DeleteTourCommand.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Commands\\DeleteTour\\DeleteTourCommand.cs",
+              "RelativeToolTip": "Tours.Application\\UseCases\\Tours\\Commands\\DeleteTour\\DeleteTourCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T12:33:36.631Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DeleteTourCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Commands\\DeleteTour\\DeleteTourCommandHandler.cs",
+              "RelativeDocumentMoniker": "Tours.Application\\UseCases\\Tours\\Commands\\DeleteTour\\DeleteTourCommandHandler.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Commands\\DeleteTour\\DeleteTourCommandHandler.cs",
+              "RelativeToolTip": "Tours.Application\\UseCases\\Tours\\Commands\\DeleteTour\\DeleteTourCommandHandler.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAArwBUAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T12:33:02.238Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "IAsyncRepository.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Contracts\\IAsyncRepository.cs",
+              "RelativeDocumentMoniker": "Tours.Application\\Contracts\\IAsyncRepository.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Contracts\\IAsyncRepository.cs",
+              "RelativeToolTip": "Tours.Application\\Contracts\\IAsyncRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T12:11:47.484Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ExceptionHandlerMiddleware.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Middleware\\ExceptionHandlerMiddleware.cs",
+              "RelativeDocumentMoniker": "Tours.API\\Middleware\\ExceptionHandlerMiddleware.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Middleware\\ExceptionHandlerMiddleware.cs",
+              "RelativeToolTip": "Tours.API\\Middleware\\ExceptionHandlerMiddleware.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAnwBgAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T11:09:07.644Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AddTourCommand.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Commands\\AddTour\\AddTourCommand.cs",
+              "RelativeDocumentMoniker": "Tours.Application\\UseCases\\Tours\\Commands\\AddTour\\AddTourCommand.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Commands\\AddTour\\AddTourCommand.cs",
+              "RelativeToolTip": "Tours.Application\\UseCases\\Tours\\Commands\\AddTour\\AddTourCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAwAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T22:57:13.249Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "TourViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Queries\\ViewModel\\TourViewModel.cs",
+              "RelativeDocumentMoniker": "Tours.Application\\UseCases\\Tours\\Queries\\ViewModel\\TourViewModel.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Queries\\ViewModel\\TourViewModel.cs",
+              "RelativeToolTip": "Tours.Application\\UseCases\\Tours\\Queries\\ViewModel\\TourViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T22:57:06.144Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "GetTourQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Queries\\GetTour\\GetTourQueryHandler.cs",
+              "RelativeDocumentMoniker": "Tours.Application\\UseCases\\Tours\\Queries\\GetTour\\GetTourQueryHandler.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Queries\\GetTour\\GetTourQueryHandler.cs",
+              "RelativeToolTip": "Tours.Application\\UseCases\\Tours\\Queries\\GetTour\\GetTourQueryHandler.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T22:14:37.769Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ToursController.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Controllers\\ToursController.cs",
+              "RelativeDocumentMoniker": "Tours.API\\Controllers\\ToursController.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Controllers\\ToursController.cs",
+              "RelativeToolTip": "Tours.API\\Controllers\\ToursController.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAADgv0MAAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T22:13:50.105Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Program.cs",
+              "RelativeDocumentMoniker": "Tours.API\\Program.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Program.cs",
+              "RelativeToolTip": "Tours.API\\Program.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAjwCkAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T16:46:49.964Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "MountainViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Queries\\ViewModel\\MountainViewModel.cs",
+              "RelativeDocumentMoniker": "Tours.Application\\UseCases\\Tours\\Queries\\ViewModel\\MountainViewModel.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Queries\\ViewModel\\MountainViewModel.cs",
+              "RelativeToolTip": "Tours.Application\\UseCases\\Tours\\Queries\\ViewModel\\MountainViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T22:57:06.763Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Tour.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Domain\\Entities\\Tour.cs",
+              "RelativeDocumentMoniker": "Tours.Domain\\Entities\\Tour.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Domain\\Entities\\Tour.cs",
+              "RelativeToolTip": "Tours.Domain\\Entities\\Tour.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABMAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T22:13:38.866Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "MountainsController.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Controllers\\MountainsController.cs",
+              "RelativeDocumentMoniker": "Tours.API\\Controllers\\MountainsController.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Controllers\\MountainsController.cs",
+              "RelativeToolTip": "Tours.API\\Controllers\\MountainsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-31T17:32:47.513Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "AddTourCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Commands\\AddTour\\AddTourCommandHandler.cs",
+              "RelativeDocumentMoniker": "Tours.Application\\UseCases\\Tours\\Commands\\AddTour\\AddTourCommandHandler.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Commands\\AddTour\\AddTourCommandHandler.cs",
+              "RelativeToolTip": "Tours.Application\\UseCases\\Tours\\Commands\\AddTour\\AddTourCommandHandler.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAA4AAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T22:57:14.226Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Mountain.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Domain\\Entities\\Mountain.cs",
+              "RelativeDocumentMoniker": "Tours.Domain\\Entities\\Mountain.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Domain\\Entities\\Mountain.cs",
+              "RelativeToolTip": "Tours.Domain\\Entities\\Mountain.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA4AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T20:37:43.482Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Dockerfile",
+              "RelativeDocumentMoniker": "Tours.API\\Dockerfile",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Dockerfile",
+              "RelativeToolTip": "Tours.API\\Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-03-31T20:10:10.011Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\appsettings.json",
+              "RelativeDocumentMoniker": "Tours.API\\appsettings.json",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\appsettings.json",
+              "RelativeToolTip": "Tours.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-05T17:27:17.932Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Tours.API\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Tours.API\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-31T18:05:01.906Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Tours.API.csproj",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Tours.API.csproj",
+              "RelativeDocumentMoniker": "Tours.API\\Tours.API.csproj",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\Tours.API.csproj",
+              "RelativeToolTip": "Tours.API\\Tours.API.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-31T20:08:40.873Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": ".dockerignore",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\.dockerignore",
+              "RelativeDocumentMoniker": "Tours.API\\.dockerignore",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.API\\.dockerignore",
+              "RelativeToolTip": "Tours.API\\.dockerignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-03-31T20:33:19.986Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "20241206235341_InitialMigration.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\Migrations\\20241206235341_InitialMigration.cs",
+              "RelativeDocumentMoniker": "Tours.Infrastructure\\Migrations\\20241206235341_InitialMigration.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\Migrations\\20241206235341_InitialMigration.cs",
+              "RelativeToolTip": "Tours.Infrastructure\\Migrations\\20241206235341_InitialMigration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-03T19:41:06.963Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Tours.Application.csproj",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Tours.Application.csproj",
+              "RelativeDocumentMoniker": "Tours.Application\\Tours.Application.csproj",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Tours.Application.csproj",
+              "RelativeToolTip": "Tours.Application\\Tours.Application.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-31T20:08:37.622Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Tours.Infrastructure.csproj",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\Tours.Infrastructure.csproj",
+              "RelativeDocumentMoniker": "Tours.Infrastructure\\Tours.Infrastructure.csproj",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\Tours.Infrastructure.csproj",
+              "RelativeToolTip": "Tours.Infrastructure\\Tours.Infrastructure.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-05T16:49:40.326Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "Tours.Application\\DependencyInjection.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\DependencyInjection.cs",
+              "RelativeToolTip": "Tours.Application\\DependencyInjection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T16:49:19.931Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "InfrastructureServiceRegistration.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\InfrastructureServiceRegistration.cs",
+              "RelativeDocumentMoniker": "Tours.Infrastructure\\InfrastructureServiceRegistration.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\InfrastructureServiceRegistration.cs",
+              "RelativeToolTip": "Tours.Infrastructure\\InfrastructureServiceRegistration.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABUAAABNAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T16:48:43.344Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Mapper.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Mapper.cs",
+              "RelativeDocumentMoniker": "Tours.Application\\Mapper.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\Mapper.cs",
+              "RelativeToolTip": "Tours.Application\\Mapper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T16:49:21.659Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "ToursDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\ToursDbContext.cs",
+              "RelativeDocumentMoniker": "Tours.Infrastructure\\ToursDbContext.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Infrastructure\\ToursDbContext.cs",
+              "RelativeToolTip": "Tours.Infrastructure\\ToursDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T16:47:01.535Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "32968eff-620f-4bc3-9021-387bfd833d1b",
+        "Display": 0,
+        "X": -5,
+        "Y": 132,
+        "Width": 1474,
+        "Height": 785,
+        "WindowState": 0
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "GetTourQuery.cs",
+              "DocumentMoniker": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Queries\\GetTour\\GetTourQuery.cs",
+              "RelativeDocumentMoniker": "Tours.Application\\UseCases\\Tours\\Queries\\GetTour\\GetTourQuery.cs",
+              "ToolTip": "C:\\Users\\steva\\Desktop\\planinarske-ture\\Planinarske-ture\\backend\\Services\\Tours\\Tours.Application\\UseCases\\Tours\\Queries\\GetTour\\GetTourQuery.cs",
+              "RelativeToolTip": "Tours.Application\\UseCases\\Tours\\Queries\\GetTour\\GetTourQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T22:14:35.808Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

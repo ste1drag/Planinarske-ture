@@ -34,10 +34,16 @@ namespace Identity.Application.UseCases.Authentication.Commands.Refresh
             RefreshToken refreshToken = user.RefreshTokens.FirstOrDefault(r => r.Token == request.refreshTokenCredentials.RefreshToken);
 
             if (refreshToken is null)
-                return null;
+                return new AuthenticationModel()
+                {
+                    isAuthorized = false
+                };
 
             if (refreshToken.ExpiryTime < DateTime.Now)
-                return null;
+                return new AuthenticationModel()
+                {
+                    isAuthorized = false
+                };
 
             return await _authService.CreateAuthenticationModel(user);
 

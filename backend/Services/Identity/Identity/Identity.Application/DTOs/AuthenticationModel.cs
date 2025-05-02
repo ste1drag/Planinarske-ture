@@ -10,5 +10,6 @@ namespace Identity.Application.DTOs
     {
         public string AccessToken { get; set; }
         public string RefreshToken { get; set; }
+        public bool isAuthorized { get; set; } = true;
     }
 }
