@@ -1,13 +1,13 @@
-﻿using Review.Domain.Common;
-using Review.Domain.Enums;
-using Review.Domain.ValueObjects;
+﻿using Reviewing.Domain.Common;
+using Reviewing.Domain.Enums;
+using Reviewing.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Review.Domain.Entities
+namespace Reviewing.Domain.Entities
 {
     public class Review(int userId, int tourId, string title, string? comment, Difficulty difficulty, Score score) : EntityBase
     {

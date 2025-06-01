@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Review.Domain.Enums
+namespace Reviewing.Domain.Enums
 {
     public enum Difficulty
     {
