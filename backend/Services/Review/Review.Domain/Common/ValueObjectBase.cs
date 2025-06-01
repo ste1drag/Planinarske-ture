@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Review.Domain.Common
+namespace Reviewing.Domain.Common
 {
     public abstract class ValueObjectBase
     {
