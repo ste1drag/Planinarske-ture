@@ -1,10 +1,4 @@
-﻿using Reviewing.Application.Contracts;
-using Reviewing.Application.DTOs;
-using Reviewing.Domain.Entities;
-
-// TODO 
-// Change wildcard type to dto type that w define in contracts
-
+﻿using Reviewing.Application.DTOs;
 namespace Reviewing.Application.Contracts
 {
 
