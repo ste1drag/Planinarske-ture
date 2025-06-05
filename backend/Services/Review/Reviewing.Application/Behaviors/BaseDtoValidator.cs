@@ -1,5 +1,4 @@
-﻿
-using FluentValidation;
+﻿using FluentValidation;
 using Reviewing.Application.DTOs;
 
 namespace Reviewing.Application.Behaviors

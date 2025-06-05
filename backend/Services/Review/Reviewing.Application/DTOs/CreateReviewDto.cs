@@ -1,5 +1,4 @@
-﻿
-namespace Reviewing.Application.DTOs
+﻿namespace Reviewing.Application.DTOs
 {
     public class CreateReviewDto : BaseReviewDto
     {
