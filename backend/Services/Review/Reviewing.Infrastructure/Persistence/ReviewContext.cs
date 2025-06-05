@@ -6,7 +6,7 @@ using Reviewing.Infrastructure.Persistence.EntityConfigurations;
 
 namespace Reviewing.Infrastructure.Persistence
 {
-    class ReviewContext : DbContext
+    public class ReviewContext : DbContext
     {
         public DbSet<Review> Reviews { get; set; } = null!;
 
