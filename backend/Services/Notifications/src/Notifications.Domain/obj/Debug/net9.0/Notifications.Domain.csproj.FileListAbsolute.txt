@@ -1,0 +1,12 @@
+/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Domain/bin/Debug/net9.0/Notifications.Domain.deps.json
+/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Domain/bin/Debug/net9.0/Notifications.Domain.dll
+/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Domain/bin/Debug/net9.0/Notifications.Domain.pdb
+/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Domain/obj/Debug/net9.0/Notifications.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Domain/obj/Debug/net9.0/Notifications.Domain.AssemblyInfoInputs.cache
+/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Domain/obj/Debug/net9.0/Notifications.Domain.AssemblyInfo.cs
+/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Domain/obj/Debug/net9.0/Notifications.Domain.csproj.CoreCompileInputs.cache
+/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Domain/obj/Debug/net9.0/Notifications.Domain.sourcelink.json
+/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Domain/obj/Debug/net9.0/Notifications.Domain.dll
+/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Domain/obj/Debug/net9.0/refint/Notifications.Domain.dll
+/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Domain/obj/Debug/net9.0/Notifications.Domain.pdb
+/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Domain/obj/Debug/net9.0/ref/Notifications.Domain.dll

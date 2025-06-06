@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "lg2VSFTua68=",
+  "success": true,
+  "projectFilePath": "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Infrastructure/Notifications.Infrastructure.csproj",
+  "expectedPackageFiles": [
+    "/Users/urosd/.nuget/packages/fluentvalidation/12.0.0/fluentvalidation.12.0.0.nupkg.sha512",
+    "/Users/urosd/.nuget/packages/mediatr/12.5.0/mediatr.12.5.0.nupkg.sha512",
+    "/Users/urosd/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
+    "/Users/urosd/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.5/microsoft.extensions.dependencyinjection.abstractions.9.0.5.nupkg.sha512",
+    "/Users/urosd/.nuget/packages/microsoft.extensions.logging.abstractions/9.0.5/microsoft.extensions.logging.abstractions.9.0.5.nupkg.sha512"
+  ],
+  "logs": []
+}
