@@ -17,7 +17,7 @@ function App() {
                 <Routes>
                     <Route path={homeEndpoint} element={<Home/>} />
                     <Route path={toursEndpoint} element={<Tours/>} />
-                    <Route path={tourEndpoint} element={<TourInfo/>} />
+                    <Route path={toursEndpoint} element={<TourInfo/>} />
                     <Route path={addTourEndpoint} element={<AddTour/>} />
                 </Routes>
         </div>
