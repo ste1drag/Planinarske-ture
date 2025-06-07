@@ -1,11 +1,19 @@
+
+using Notifications.Domain.Enums;
+
+namespace Notifications.Domain.Interfaces;
+
 public interface INotification
 {
-    Guid Guid { get; }
-    string UserId {get; }
-    NotificationType Type { get; }
-    string Subject {get; }
-    string Body {get; }
-    DeliveryStatus Status {get; }
-    DateTime CreatedAt {get; }
-    List<DeliveryAttempts> DeliveryAttempts {get; }
+    string Id { get; }
+    string UserId { get; }
+    NotificationTypeEnum Type { get; }
+    string Content { get; }
+    DeliveryStatusEnum Status { get; }
+    DateTime CreatedAt { get; }
+
+
+    void MarkAsDelivered(DateTime deliveredAt);
+    void MarkAsFailed(string reason);
+    bool CanBeRetried();
 }
