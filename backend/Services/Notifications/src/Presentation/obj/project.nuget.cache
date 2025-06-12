@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "+Ghfq7pmWLo=",
+  "success": true,
+  "projectFilePath": "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Presentation/Notifications.Presentation.csproj",
+  "expectedPackageFiles": [
+    "/Users/urosd/.nuget/packages/microsoft.extensions.dependencyinjection/9.0.6/microsoft.extensions.dependencyinjection.9.0.6.nupkg.sha512",
+    "/Users/urosd/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.6/microsoft.extensions.dependencyinjection.abstractions.9.0.6.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,11 +1,5 @@
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/.msCoverageSourceRootsMapping_Notifications.IntegrationTests
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/CoverletSourceRootsMapping_Notifications.IntegrationTests
-/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Notifications.API.deps.json
-/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Notifications.API.runtimeconfig.json
-/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/appsettings.Development.json
-/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/appsettings.json
-/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Notifications.API.staticwebassets.endpoints.json
-/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Notifications.API
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/xunit.runner.visualstudio.testadapter.dll
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/xunit.runner.reporters.netcoreapp10.dll
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/xunit.runner.utility.netcoreapp10.dll
@@ -13,9 +7,7 @@
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Notifications.IntegrationTests.runtimeconfig.json
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Notifications.IntegrationTests.dll
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Notifications.IntegrationTests.pdb
-/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Microsoft.AspNetCore.OpenApi.dll
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Microsoft.VisualStudio.CodeCoverage.Shim.dll
-/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Microsoft.OpenApi.dll
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Microsoft.TestPlatform.CoreUtilities.dll
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Microsoft.TestPlatform.PlatformAbstractions.dll
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
@@ -94,11 +86,9 @@
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/zh-Hant/Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/zh-Hant/Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
-/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Notifications.API.dll
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Notifications.Application.dll
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Notifications.Domain.dll
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Notifications.Infrastructure.dll
-/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Notifications.API.pdb
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Notifications.Infrastructure.pdb
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Notifications.Application.pdb
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Notifications.Domain.pdb
@@ -118,7 +108,4 @@
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/MediatR.dll
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/MediatR.Contracts.dll
 /Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
-/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Microsoft.Extensions.Logging.Abstractions.dll
-/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Swashbuckle.AspNetCore.Swagger.dll
-/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerGen.dll
-/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/bin/Debug/net9.0/FluentValidation.DependencyInjectionExtensions.dll

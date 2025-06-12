@@ -4,90 +4,6 @@
     "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/tests/Notifications.IntegrationTests/Notifications.IntegrationTests.csproj": {}
   },
   "projects": {
-    "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.API/Notifications.API.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.API/Notifications.API.csproj",
-        "projectName": "Notifications.API",
-        "projectPath": "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.API/Notifications.API.csproj",
-        "packagesPath": "/Users/urosd/.nuget/packages/",
-        "outputPath": "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.API/obj/",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/Users/urosd/.nuget/NuGet/NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "net9.0"
-        ],
-        "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net9.0": {
-            "targetAlias": "net9.0",
-            "projectReferences": {
-              "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Application/Notifications.Application.csproj": {
-                "projectPath": "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Application/Notifications.Application.csproj"
-              },
-              "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Infrastructure/Notifications.Infrastructure.csproj": {
-                "projectPath": "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Infrastructure/Notifications.Infrastructure.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
-      },
-      "frameworks": {
-        "net9.0": {
-          "targetAlias": "net9.0",
-          "dependencies": {
-            "MediatR": {
-              "target": "Package",
-              "version": "[12.5.0, )"
-            },
-            "Microsoft.AspNetCore.OpenApi": {
-              "target": "Package",
-              "version": "[9.0.5, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[8.1.4, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.300/PortableRuntimeIdentifierGraph.json"
-        }
-      }
-    },
     "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Application/Notifications.Application.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -133,17 +49,13 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
-            "FluentValidation": {
+            "FluentValidation.DependencyInjectionExtensions": {
               "target": "Package",
               "version": "[12.0.0, )"
             },
             "MediatR": {
               "target": "Package",
               "version": "[12.5.0, )"
-            },
-            "Microsoft.Extensions.Logging.Abstractions": {
-              "target": "Package",
-              "version": "[9.0.5, )"
             }
           },
           "imports": [
@@ -313,9 +225,6 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.API/Notifications.API.csproj": {
-                "projectPath": "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.API/Notifications.API.csproj"
-              },
               "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Infrastructure/Notifications.Infrastructure.csproj": {
                 "projectPath": "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Infrastructure/Notifications.Infrastructure.csproj"
               }
