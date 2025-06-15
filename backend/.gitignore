@@ -38,6 +38,15 @@ msbuild.log
 msbuild.err
 msbuild.wrn
 
+# .NET build artifacts (add these)
+*.dll
+*.pdb
+*.exe
+*.cache
+*.deps.json
+*.runtimeconfig.json
+*.runtimeconfig.dev.json
+
 # NuGet
 *.nupkg
 **/packages/*
