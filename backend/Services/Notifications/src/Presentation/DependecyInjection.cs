@@ -1,6 +1,4 @@
-
 using Microsoft.Extensions.DependencyInjection;
-
 
 namespace Presentation;
 
@@ -10,5 +8,4 @@ public static class DependecyInjection
     {
         return services;
     }
-
 }

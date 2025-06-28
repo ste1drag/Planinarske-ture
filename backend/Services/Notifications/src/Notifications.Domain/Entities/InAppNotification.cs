@@ -24,8 +24,6 @@ public class InAppNotification : INotification
         ReadAt = null;
     }
 
-
-
     public void MarkAsDelivered(DateTime deliveredAt)
     {
         // For in-app notifications, "delivered" means "read"
