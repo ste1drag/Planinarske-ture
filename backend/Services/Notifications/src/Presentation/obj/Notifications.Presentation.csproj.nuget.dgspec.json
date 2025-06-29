@@ -4,6 +4,66 @@
     "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Presentation/Notifications.Presentation.csproj": {}
   },
   "projects": {
+    "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Domain/Notifications.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Domain/Notifications.Domain.csproj",
+        "projectName": "Notifications.Domain",
+        "projectPath": "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Domain/Notifications.Domain.csproj",
+        "packagesPath": "/Users/urosd/.nuget/packages/",
+        "outputPath": "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/urosd/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.300/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Presentation/Notifications.Presentation.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -26,7 +86,11 @@
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Domain/Notifications.Domain.csproj": {
+                "projectPath": "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Domain/Notifications.Domain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -62,6 +126,9 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

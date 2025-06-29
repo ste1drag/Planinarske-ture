@@ -571,14 +571,18 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection": "9.0.6"
+          "Microsoft.Extensions.DependencyInjection": "9.0.6",
+          "Notifications.Domain": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Notifications.Presentation.dll": {}
         },
         "runtime": {
           "bin/placeholder/Notifications.Presentation.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },

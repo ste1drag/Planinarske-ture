@@ -36,6 +36,16 @@
         "build": {
           "buildTransitive/net8.0/_._": {}
         }
+      },
+      "Notifications.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Notifications.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Notifications.Domain.dll": {}
+        }
       }
     }
   },
@@ -99,11 +109,17 @@
         "microsoft.extensions.dependencyinjection.abstractions.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Notifications.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Notifications.Domain/Notifications.Domain.csproj",
+      "msbuildProject": "../Notifications.Domain/Notifications.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
-      "Microsoft.Extensions.DependencyInjection >= 9.0.6"
+      "Microsoft.Extensions.DependencyInjection >= 9.0.6",
+      "Notifications.Domain >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -131,7 +147,11 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Domain/Notifications.Domain.csproj": {
+              "projectPath": "/Users/urosd/Documents/coding/Planinarske-ture/backend/Services/Notifications/src/Notifications.Domain/Notifications.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -167,6 +187,9 @@
         "assetTargetFallback": true,
         "warn": true,
         "frameworkReferences": {
+          "Microsoft.AspNetCore.App": {
+            "privateAssets": "none"
+          },
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
