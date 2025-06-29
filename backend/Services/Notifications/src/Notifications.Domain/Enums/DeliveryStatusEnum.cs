@@ -5,5 +5,5 @@ public enum DeliveryStatusEnum
     Pending,
     Sent,
     Read,
-    Failed
+    Failed,
 }

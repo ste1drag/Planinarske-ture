@@ -8,5 +8,5 @@ public enum NotificationTypeEnum
 
     // User-related (basic auth integration)
     Welcome,
-    PasswordReset
+    PasswordReset,
 }
