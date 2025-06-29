@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Notifications.API\Notifications.API.csproj" />
     <ProjectReference Include="..\..\src\Notifications.Infrastructure\Notifications.Infrastructure.csproj" />
   </ItemGroup>
 
