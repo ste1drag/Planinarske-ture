@@ -1,7 +1,5 @@
 import {useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
-import {ITour} from "../../interfaces/ITour";
-import axios, {AxiosResponse} from "axios";
+import { useTour } from "../../hooks/useTours";
 
 type TourParam = {
     id: string;
@@ -9,32 +7,27 @@ type TourParam = {
 
 const TourInfo = () => {
     const { id } = useParams<TourParam>();
-    const [tourInfo, setTourInfo] = useState<ITour>();
+    debugger;
+    const tourInfo = useTour(id as string);
 
-    useEffect(()=>{
-        fetchTour(id);
-    },[]);
-
-    const fetchTour = async (id?: string) => {
-        if(!id)
-            return;
-
-        const toursData:ITour[] = await axios.get("http://localhost:30001/tours").then((response: AxiosResponse)=> response.data);
-        const tourInfoData: ITour = toursData.filter((tour: ITour) => tour.id === parseInt(id))[0];
-        if(!tourInfoData)
-            return;
-
-        setTourInfo(tourInfoData);
-    }
-
-    return <>
-        <div >
-            <h1>{tourInfo?.name}</h1>
-            <h2>{tourInfo?.height}</h2>
-            <h3>{tourInfo?.date}</h3>
-            <h4>{tourInfo?.description}</h4>
+    debugger;
+    return (
+        <div className="max-w-2xl mx-auto p-6">
+            <div className="bg-white rounded-xl shadow-lg p-8">
+                <h1 className="text-3xl font-bold text-blue-600 mb-4">
+                    {tourInfo?.name}
+                </h1>
+                <h3 className="text-xl text-gray-600 mb-3">
+                    {tourInfo?.date}
+                </h3>
+                <div className="mt-6 pt-6 border-t border-gray-100">
+                    <h4 className="text-gray-700 leading-relaxed">
+                        {tourInfo?.description}
+                    </h4>
+                </div>
+            </div>
         </div>
-    </>
+    );
 }
 
 export default TourInfo;

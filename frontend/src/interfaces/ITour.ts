@@ -3,19 +3,17 @@ type Status = "active" | "canceled";
 export interface ITour {
     id: number;
     name: string;
-    height: number;
-    maxNumberOfPeople: number;
-    minNumberOfPeople: number;
+    mountainId: string;
     description: string;
     date: string;
     status: Status;
 }
 
 export interface IAddTour {
-    tourName: string;
-    height: number;
-    maxNumberOfPeople: number;
-    minNumberOfPeople: number;
+    name: string;
+    mountainId: string;
     description: string;
-    datum: string;
+    minNumberOfPeople: number;
+    maxNumberOfPeople: number;
+    date: string;
 }

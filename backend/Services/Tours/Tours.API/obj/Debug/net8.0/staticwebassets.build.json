@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "8cdxey69t66mRhkI1U5R3mMCu0l7g2NZHcsofbbFlWw=",
+  "Source": "Tours.API",
+  "BasePath": "_content/Tours.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
