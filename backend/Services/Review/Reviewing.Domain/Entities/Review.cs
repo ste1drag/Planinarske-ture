@@ -5,7 +5,7 @@ using Reviewing.Domain.ValueObjects;
 namespace Reviewing.Domain.Entities
 {
     public class Review(int userId, int tourId, string title, string? comment, Difficulty? difficulty, Score? score) : EntityBase
-    (0, DateTime.Now, DateTime.Now)
+    (0, DateTime.UtcNow, DateTime.UtcNow)
     {
         public int UserId { get; } = userId;
         public int TourId { get; } = tourId;

@@ -5,7 +5,7 @@ using Reviewing.Domain.ValueObjects;
 
 namespace Reviewing.Infrastructure.Persistence.EntityConfigurations
 {
-    class ReviewEntityConfiguration : IEntityTypeConfiguration<Review>
+    public class ReviewEntityConfiguration : IEntityTypeConfiguration<Review>
     {
         public void Configure(EntityTypeBuilder<Review> builder)
         {
