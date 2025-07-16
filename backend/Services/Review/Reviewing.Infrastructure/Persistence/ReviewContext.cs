@@ -21,12 +21,12 @@ namespace Reviewing.Infrastructure.Persistence
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        DateTime currentTimestamp = DateTime.Now;
+                        DateTime currentTimestamp = DateTime.UtcNow;
                         entry.Entity.CreatedDate = currentTimestamp;
                         entry.Entity.UpdatedDate = currentTimestamp;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.UpdatedDate = DateTime.Now;
+                        entry.Entity.UpdatedDate = DateTime.UtcNow;
                         break;
                 }
             }

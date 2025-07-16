@@ -5,7 +5,7 @@ using Reviewing.Domain.Enums;
 
 namespace Reviewing.Infrastructure.Persistence
 {
-    class ReviewContextSeed
+    public class ReviewContextSeed
     {
         public static async Task SeedAsync(ReviewContext reviewContext, ILogger<ReviewContextSeed> logger)
         {
