@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Identity.Domain.Entities;
+﻿using Identity.Domain.Entities;
 using Identity.Infrastructure.EntityTypeConfigurations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -32,9 +27,7 @@ namespace Identity.Infrastructure
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.ConfigureWarnings(warnings =>
-            {
-                warnings.Ignore(RelationalEventId.PendingModelChangesWarning);
-            });
+                warnings.Ignore(RelationalEventId.MigrationAttributeMissingWarning));
 
             base.OnConfiguring(optionsBuilder);
         }

@@ -12,21 +12,21 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__ToursDB=Server=tours_db;Initial Catalog=ToursDb;User Id=sa;Password=PlaninarskeTureToursDB*1;TrustServerCertificate=True;
     depends_on:
-      - db
+      - tours_db
   identity-api:
     image: identity-api:latest
     build:
       context: .
       dockerfile: Services/Identity/Identity.API/Dockerfile
     ports:
-      - "8080:8080"
+      - "8081:8081"
     environment:
-      - ASPNETCORE_URLS=http://+:8080
-      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_URLS=http://+:8081
+      - ASPNETCORE_HTTP_PORTS=8081
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__IdentityDB=Server=identity_db;Initial Catalog=IdentityDb;User Id=sa;Password=IdentityDB*1;TrustServerCertificate=True;
     depends_on:
-      - db
+      - identity_db
 
 
   tours_db:
@@ -43,4 +43,4 @@ services:
       SA_PASSWORD: "IdentityDB*1"
       ACCEPT_EULA: "Y"
     ports:
-      - "1433:1433"
+      - "1434:1433"

@@ -8,6 +8,6 @@ namespace Identity.Application.Contracts
 {
     public interface IResult
     {
-        bool Succeeded { get; protected set;}
+        public bool Succeeded { get; protected set;}
     }
 }

@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authentication;
+using Identity.Infrastructure.Services;
+using Identity.Application.Contracts;
 
 namespace Identity.Infrastructure
 {
@@ -15,9 +16,14 @@ namespace Identity.Infrastructure
     {
         private static IServiceCollection ConfigurePersistence(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<IdentityDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-            
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("IdentityDB"),
+                sql => sql.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)
+            ));
+
+            services.AddScoped(typeof(IRoleService), typeof(RoleService));
+            services.AddScoped(typeof(IUserService), typeof(UserService));
+
             return services;
         }
 
@@ -32,7 +38,7 @@ namespace Identity.Infrastructure
                 options.Password.RequireLowercase = true;
                 options.User.RequireUniqueEmail = true;
             })
-                .AddEntityFrameworkStores<IdentityDbContext>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
             return services;

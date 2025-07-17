@@ -9,6 +9,6 @@ namespace Identity.Application.Contracts
 {
     public interface IRoleService
     {
-        public Task<bool> RoleExistsAsync(Roles role);
+        public Task<bool> RoleExistsAsync(string roleName);
     }
 }
