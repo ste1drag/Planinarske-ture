@@ -24,7 +24,7 @@ namespace Reviewing.Infrastructure.Repositories
             return entity;
         }
 
-        async public Task<IEnumerable<T>> GetAll()
+        public async Task<IEnumerable<T>> GetAll()
         {
             return await _context.Set<T>().AsNoTracking().ToListAsync();
         }
@@ -39,7 +39,7 @@ namespace Reviewing.Infrastructure.Repositories
             return pagedList;
         }
 
-        async public Task<T?> GetById(int id)
+        public async Task<T?> GetById(int id)
         {
             return await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
         }

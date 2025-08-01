@@ -1,6 +1,4 @@
-﻿using Reviewing.Domain.Common;
-
-namespace Reviewing.Application.Contracts
+﻿namespace Reviewing.Application.Contracts
 {
     public interface IAsyncRepository<T> where T : class
     {

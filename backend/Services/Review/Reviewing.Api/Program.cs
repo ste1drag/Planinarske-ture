@@ -1,45 +1,52 @@
 using Microsoft.EntityFrameworkCore;
 using Reviewing.Infrastructure.Persistence;
 using Reviewing.Infrastructure.Repositories;
-using Reviewing.Application.Contracts;
-using Reviewing.Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
+ConfigureServices(builder.Services, builder.Configuration);
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<ReviewContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddScoped<ReviewRepository>();
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger(options
-        =>
-    {
-        options.OpenApiVersion = Microsoft.OpenApi.OpenApiSpecVersion.OpenApi2_0;
-    });
-    app.UseSwaggerUI();
-
-    /*
-    using (var scope = app.Services.CreateScope())
-    {
-        var context = scope.ServiceProvider.GetRequiredService<ReviewContext>();
-        var logger = scope.ServiceProvider.GetRequiredService<ILogger<ReviewContextSeed>>();
-        await context.Database.MigrateAsync();
-        await ReviewContextSeed.SeedAsync(context, logger);
-    }
-    */
-}
-
-app.UseAuthorization();
-
-app.MapControllers();
+ConfigureMiddleware(app);
 
 app.Run();
+
+void ConfigureServices(IServiceCollection services, IConfiguration configuration)
+{
+    services.AddControllers();
+    services.AddEndpointsApiExplorer();
+    services.AddSwaggerGen();
+    services.AddDbContext<ReviewContext>(options =>
+        options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+    services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+    services.AddScoped<ReviewRepository>();
+}
+
+void ConfigureMiddleware(WebApplication app)
+{
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger(options =>
+        {
+            options.OpenApiVersion = Microsoft.OpenApi.OpenApiSpecVersion.OpenApi2_0;
+        });
+        app.UseSwaggerUI();
+
+        using var scope = app.Services.CreateScope();
+        {
+            var context = scope.ServiceProvider.GetRequiredService<ReviewContext>();
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger<ReviewContextSeed>>();
+            context.Database.Migrate();
+
+            // Only seed if the Reviews table is empty
+            if (!context.Reviews.Any())
+            {
+                ReviewContextSeed.SeedAsync(context, logger).GetAwaiter().GetResult();
+            }
+        }
+    }
+
+    app.UseAuthorization();
+    app.MapControllers();
+}

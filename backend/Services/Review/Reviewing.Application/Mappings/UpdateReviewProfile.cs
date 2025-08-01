@@ -8,7 +8,6 @@ namespace Reviewing.Application.Mappings
     {
         public UpdateReviewProfile()
         {
-            // Map UpdateReviewDto to Review, updating existing Review object
             CreateMap<UpdateReviewDto, Review>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
         }

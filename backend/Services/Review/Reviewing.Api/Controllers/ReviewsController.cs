@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
-using Reviewing.Application.Contracts;
 using Reviewing.Application.DTOs;
 using Reviewing.Infrastructure.Repositories;
 using Swashbuckle.AspNetCore.Annotations;
@@ -13,9 +12,8 @@ namespace Reviewing.API.Controllers
     [Route("api/[controller]")]
     public class ReviewsController(ReviewRepository reviewRepository, IMapper mapper) : ControllerBase
     {
-        private readonly ILogger<ReviewsController> _logger;
-        private readonly ReviewRepository _reviewRepository = reviewRepository;
-        private readonly IMapper _mapper = mapper;
+        protected readonly ReviewRepository _reviewRepository = reviewRepository;
+        protected readonly IMapper _mapper = mapper;
 
         [HttpGet]
         [SwaggerOperation(Summary = "Retrieve all reviews", Description = "Returns a list of all reviews.")]
@@ -39,9 +37,9 @@ namespace Reviewing.API.Controllers
             var pagedList = await _reviewRepository.GetPaged(pageNumber, pageSize);
             var metadata = PaginationMetadataFactory.FromPagedList(
                 pagedList,
-                Url, // IUrlHelper from ControllerBase
+                Url,
                 nameof(GetPaged),
-                null, // or pass additional route values if needed
+                null,
                 Request.Scheme
             );
             var result = _mapper.Map<IEnumerable<ReadReviewDto>>(pagedList);
