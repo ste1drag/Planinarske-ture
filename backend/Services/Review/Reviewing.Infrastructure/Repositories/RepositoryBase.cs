@@ -1,35 +1,48 @@
 ﻿using Reviewing.Application.Contracts;
 using Reviewing.Domain.Common;
+using Microsoft.EntityFrameworkCore;
+using Reviewing.Infrastructure.Persistence;
 
 namespace Reviewing.Infrastructure.Repositories
 {
-    class RepositoryBase<T> : IAsyncRepository<T> where T : EntityBase
+    public class RepositoryBase<T> : IAsyncRepository<T> where T : EntityBase
     {
-        // protected readonly ReviewContext _dbContext; 
+        protected ReviewContext _context;
 
-        Task<T> IAsyncRepository<T>.AddNew(T entity)
+        public RepositoryBase(ReviewContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        Task<T> IAsyncRepository<T>.Delete(T entity)
+        public async Task<T> AddNew(T entity)
         {
-            throw new NotImplementedException();
+            await _context.Set<T>().AddAsync(entity);
+            await _context.SaveChangesAsync();
+            return entity;
         }
 
-        Task<T> IAsyncRepository<T>.GetAll()
+        public async Task<T> Delete(T entity)
         {
-            throw new NotImplementedException();
+            _context.Set<T>().Remove(entity);
+            await _context.SaveChangesAsync();
+            return entity;
         }
 
-        Task<T?> IAsyncRepository<T>.GetById(int id)
+        async public Task<IEnumerable<T>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().AsNoTracking().ToListAsync();
         }
 
-        Task<T> IAsyncRepository<T>.Update(T entity)
+        async public Task<T?> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
+        }
+
+        public async Task<T> Update(T entity)
+        {
+            _context.Set<T>().Update(entity);
+            await _context.SaveChangesAsync();
+            return entity;
         }
     }
 }

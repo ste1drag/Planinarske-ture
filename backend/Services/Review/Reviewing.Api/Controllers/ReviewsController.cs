@@ -1,20 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+using Reviewing.Application.Contracts;
 using Reviewing.Application.DTOs;
+using Reviewing.Infrastructure.Repositories;
 using Swashbuckle.AspNetCore.Annotations;
+using Reviewing.Domain.Entities;
 
 namespace Reviewing.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ReviewsController : ControllerBase
+    public class ReviewsController(ReviewRepository reviewRepository, IMapper mapper) : ControllerBase
     {
+        private readonly ILogger<ReviewsController> _logger;
+        private readonly ReviewRepository _reviewRepository = reviewRepository;
+        private readonly IMapper _mapper = mapper;
+
         [HttpGet]
         [SwaggerOperation(Summary = "Retrieve all reviews", Description = "Returns a list of all reviews.")]
         [SwaggerResponse(StatusCodes.Status200OK, "List of reviews returned", typeof(IEnumerable<ReadReviewDto>))]
         public async Task<ActionResult<IEnumerable<ReadReviewDto>>> GetAll()
         {
-            // TODO: Retrieve all reviews
-            throw new NotImplementedException();
+            var reviews = await _reviewRepository.GetAll();
+            var result = _mapper.Map<IEnumerable<ReadReviewDto>>(reviews);
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
@@ -23,8 +32,13 @@ namespace Reviewing.API.Controllers
         [SwaggerResponse(StatusCodes.Status404NotFound, "Review not found")]
         public async Task<ActionResult<ReadReviewDto>> GetById(int id)
         {
-            // TODO: Retrieve a review by ID
-            throw new NotImplementedException();
+            var review = await _reviewRepository.GetById(id);
+            if (review == null)
+            {
+                return NotFound();
+            }
+            var result = _mapper.Map<ReadReviewDto>(review);
+            return Ok(result);
         }
 
         [HttpPost]
@@ -33,29 +47,51 @@ namespace Reviewing.API.Controllers
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Invalid input")]
         public async Task<ActionResult<CreateReviewDto>> Create([FromBody] CreateReviewDto dto)
         {
-            // TODO: Create a new review
-            throw new NotImplementedException();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var review = _mapper.Map<Review>(dto);
+            var createdReview = await _reviewRepository.AddNew(review);
+            var result = _mapper.Map<ReadReviewDto>(createdReview);
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         [SwaggerOperation(Summary = "Update a review", Description = "Updates an existing review by its ID.")]
-        [SwaggerResponse(StatusCodes.Status204NoContent, "Review updated")]
+        [SwaggerResponse(StatusCodes.Status200OK, "Review updated", typeof(ReadReviewDto))]
         [SwaggerResponse(StatusCodes.Status404NotFound, "Review not found")]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Invalid input")]
-        public async Task<IActionResult> Update(int id, [FromBody] UpdateReviewDto dto)
+        public async Task<IActionResult> Update([FromBody] UpdateReviewDto dto)
         {
-            // TODO: Update an existing review
-            throw new NotImplementedException();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var review = await _reviewRepository.GetById(dto.Id);
+            if (review == null)
+            {
+                return NotFound();
+            }
+            _mapper.Map(dto, review);
+            var updatedReview = await _reviewRepository.Update(review);
+            var result = _mapper.Map<ReadReviewDto>(updatedReview);
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
         [SwaggerOperation(Summary = "Delete a review", Description = "Deletes a review by its unique ID.")]
-        [SwaggerResponse(StatusCodes.Status204NoContent, "Review deleted")]
+        [SwaggerResponse(StatusCodes.Status200OK, "Review deleted", typeof(int))]
         [SwaggerResponse(StatusCodes.Status404NotFound, "Review not found")]
         public async Task<IActionResult> Delete(int id)
         {
-            // TODO: Delete a review by ID
-            throw new NotImplementedException();
+            var review = await _reviewRepository.GetById(id);
+            if (review == null)
+            {
+                return NotFound();
+            }
+            await _reviewRepository.Delete(review);
+            return Ok(id);
         }
     }
 }
