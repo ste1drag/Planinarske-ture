@@ -10,6 +10,7 @@ namespace Reviewing.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [ServiceFilter(typeof(LoggingActionFilter))]
     public class ReviewsController(ReviewRepository reviewRepository, IMapper mapper) : ControllerBase
     {
         protected readonly ReviewRepository _reviewRepository = reviewRepository;

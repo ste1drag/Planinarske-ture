@@ -21,6 +21,7 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
         options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
     services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
     services.AddScoped<ReviewRepository>();
+    services.AddScoped<LoggingActionFilter>();
 }
 
 void ConfigureMiddleware(WebApplication app)
