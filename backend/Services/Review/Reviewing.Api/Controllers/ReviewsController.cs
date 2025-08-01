@@ -5,6 +5,7 @@ using Reviewing.Application.DTOs;
 using Reviewing.Infrastructure.Repositories;
 using Swashbuckle.AspNetCore.Annotations;
 using Reviewing.Domain.Entities;
+using Reviewing.Application.Pagination;
 
 namespace Reviewing.API.Controllers
 {
@@ -24,6 +25,31 @@ namespace Reviewing.API.Controllers
             var reviews = await _reviewRepository.GetAll();
             var result = _mapper.Map<IEnumerable<ReadReviewDto>>(reviews);
             return Ok(result);
+        }
+
+        [HttpGet("paged")]
+        [SwaggerOperation(
+            Summary = "Retrieve paged reviews",
+            Description = "Returns a paged list of reviews with pagination metadata."
+        )]
+        [SwaggerResponse(StatusCodes.Status200OK, "Paged list of reviews returned", typeof(PagedResponseDto<ReadReviewDto>))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "Invalid paging parameters")]
+        public async Task<ActionResult<object>> GetPaged([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            var pagedList = await _reviewRepository.GetPaged(pageNumber, pageSize);
+            var metadata = PaginationMetadataFactory.FromPagedList(
+                pagedList,
+                Url, // IUrlHelper from ControllerBase
+                nameof(GetPaged),
+                null, // or pass additional route values if needed
+                Request.Scheme
+            );
+            var result = _mapper.Map<IEnumerable<ReadReviewDto>>(pagedList);
+            return Ok(new
+            {
+                data = result,
+                pagination = metadata
+            });
         }
 
         [HttpGet("{id}")]
