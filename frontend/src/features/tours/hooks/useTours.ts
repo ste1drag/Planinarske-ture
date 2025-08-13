@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import axios, { AxiosResponse } from "axios";
-import { ITour } from "../types/ITour";
+import axios, { AxiosResponse } from 'axios';
+import { useEffect, useState } from 'react';
+import { ITour } from '../types/ITour';
 
 export const useTours = (): ITour[] => {
   const [tours, setTours] = useState<ITour[]>([]);
@@ -10,7 +10,7 @@ export const useTours = (): ITour[] => {
 
   const fetchTours = async () => {
     const toursData: ITour[] = await axios
-      .get("http://localhost:8080/Tours")
+      .get('http://localhost:8080/Tours')
       .then((response: AxiosResponse) => response.data);
 
     setTours(toursData);
@@ -40,4 +40,3 @@ export const useTour = (id: string): ITour | undefined => {
   };
   return tourInfo;
 };
-

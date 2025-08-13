@@ -1,5 +1,5 @@
 export interface IMountain {
-    id: string;
-    name: string;
-    height: number;
+  id: string;
+  name: string;
+  height: number;
 }

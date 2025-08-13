@@ -1,5 +1,5 @@
-import { useParams } from "react-router-dom";
-import { useTour } from "../hooks/useTours";
+import { useParams } from 'react-router-dom';
+import { useTour } from '../hooks/useTours';
 
 type TourParam = {
   id: string;
@@ -29,4 +29,3 @@ const TourInfo = () => {
 };
 
 export default TourInfo;
-

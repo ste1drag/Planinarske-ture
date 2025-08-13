@@ -1,11 +1,11 @@
-import { NavLink } from "react-router-dom";
-import { toursEndpoint } from "../api/apiEndpoints";
-import { ITour } from "../types/ITour";
+import { NavLink } from 'react-router-dom';
+import { toursEndpoint } from '../api/apiEndpoints';
+import { ITour } from '../types/ITour';
 
 const TourCard = (tourProps: ITour) => {
   return (
     <div className="bg-white rounded-xl shadow-lg p-6 m-4 w-80 hover:shadow-xl transition-shadow duration-300">
-      <NavLink to={toursEndpoint + "/" + tourProps.id}>
+      <NavLink to={toursEndpoint + '/' + tourProps.id}>
         <h1 className="text-2xl font-bold text-blue-600 hover:text-blue-800 mb-2">
           {tourProps.name}
         </h1>
@@ -21,4 +21,3 @@ const TourCard = (tourProps: ITour) => {
 };
 
 export default TourCard;
-

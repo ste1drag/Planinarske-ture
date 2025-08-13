@@ -1,16 +1,16 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { IMountain } from "../types/IMountain";
-import { IAddTour } from "../types/ITour";
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { IMountain } from '../types/IMountain';
+import { IAddTour } from '../types/ITour';
 
 const AddTour = () => {
   const initialTourState: IAddTour = {
-    name: "",
+    name: '',
     maxNumberOfPeople: 0,
     minNumberOfPeople: 0,
-    description: "",
-    mountainId: "",
-    date: "",
+    description: '',
+    mountainId: '',
+    date: '',
   };
 
   const [tour, setTour] = useState<IAddTour>(initialTourState);
@@ -18,7 +18,7 @@ const AddTour = () => {
 
   useEffect(() => {
     const fetchMountains = async () => {
-      const response = await axios.get("http://localhost:8080/api/Mountains");
+      const response = await axios.get('http://localhost:8080/api/Mountains');
       setMountains(response.data);
     };
     fetchMountains();
@@ -27,17 +27,17 @@ const AddTour = () => {
   const onAddTour = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     debugger;
-    await axios.post("http://localhost:8080/tours", { addTourDTO: tour });
+    await axios.post('http://localhost:8080/tours', { addTourDTO: tour });
   };
 
   const handleNumberChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    field: "minNumberOfPeople" | "maxNumberOfPeople",
+    field: 'minNumberOfPeople' | 'maxNumberOfPeople'
   ) => {
     const value = e.target.value;
     setTour({
       ...tour,
-      [field]: value === "" ? 0 : parseInt(value),
+      [field]: value === '' ? 0 : parseInt(value),
     });
   };
 
@@ -56,7 +56,7 @@ const AddTour = () => {
             type="text"
             id="name"
             value={tour.name}
-            onChange={(e) => setTour({ ...tour, name: e.target.value })}
+            onChange={e => setTour({ ...tour, name: e.target.value })}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -71,11 +71,11 @@ const AddTour = () => {
           <select
             id="mountain"
             value={tour.mountainId}
-            onChange={(e) => setTour({ ...tour, mountainId: e.target.value })}
+            onChange={e => setTour({ ...tour, mountainId: e.target.value })}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">Select a mountain</option>
-            {mountains.map((mountain) => (
+            {mountains.map(mountain => (
               <option key={mountain.id} value={mountain.id}>
                 {mountain.name} ({mountain.height}m)
               </option>
@@ -94,7 +94,7 @@ const AddTour = () => {
             type="number"
             id="minNumberOfPeople"
             value={tour.minNumberOfPeople}
-            onChange={(e) => handleNumberChange(e, "minNumberOfPeople")}
+            onChange={e => handleNumberChange(e, 'minNumberOfPeople')}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             min="0"
           />
@@ -111,7 +111,7 @@ const AddTour = () => {
             type="number"
             id="maxNumberOfPeople"
             value={tour.maxNumberOfPeople}
-            onChange={(e) => handleNumberChange(e, "maxNumberOfPeople")}
+            onChange={e => handleNumberChange(e, 'maxNumberOfPeople')}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             min="0"
           />
@@ -127,7 +127,7 @@ const AddTour = () => {
           <textarea
             id="description"
             value={tour.description}
-            onChange={(e) => setTour({ ...tour, description: e.target.value })}
+            onChange={e => setTour({ ...tour, description: e.target.value })}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             rows={4}
           />
@@ -144,7 +144,7 @@ const AddTour = () => {
             type="date"
             id="date"
             value={tour.date}
-            onChange={(e) => setTour({ ...tour, date: e.target.value })}
+            onChange={e => setTour({ ...tour, date: e.target.value })}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -161,4 +161,3 @@ const AddTour = () => {
 };
 
 export default AddTour;
-

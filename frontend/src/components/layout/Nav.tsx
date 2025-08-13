@@ -1,9 +1,9 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 import {
   homeEndpoint,
   toursEndpoint,
   addTourEndpoint,
-} from "../../features/tours";
+} from '../../features/tours';
 
 const Nav = () => {
   return (
@@ -14,8 +14,8 @@ const Nav = () => {
             to={homeEndpoint}
             className={({ isActive }) =>
               isActive
-                ? "text-white font-bold px-3 py-2 rounded-lg bg-blue-700"
-                : "text-blue-100 hover:text-white px-3 py-2 rounded-lg hover:bg-blue-700"
+                ? 'text-white font-bold px-3 py-2 rounded-lg bg-blue-700'
+                : 'text-blue-100 hover:text-white px-3 py-2 rounded-lg hover:bg-blue-700'
             }
           >
             Home
@@ -26,8 +26,8 @@ const Nav = () => {
             to={toursEndpoint}
             className={({ isActive }) =>
               isActive
-                ? "text-white font-bold px-3 py-2 rounded-lg bg-blue-700"
-                : "text-blue-100 hover:text-white px-3 py-2 rounded-lg hover:bg-blue-700"
+                ? 'text-white font-bold px-3 py-2 rounded-lg bg-blue-700'
+                : 'text-blue-100 hover:text-white px-3 py-2 rounded-lg hover:bg-blue-700'
             }
           >
             Tours
@@ -38,8 +38,8 @@ const Nav = () => {
             to={addTourEndpoint}
             className={({ isActive }) =>
               isActive
-                ? "text-white font-bold px-3 py-2 rounded-lg bg-blue-700"
-                : "text-blue-100 hover:text-white px-3 py-2 rounded-lg hover:bg-blue-700"
+                ? 'text-white font-bold px-3 py-2 rounded-lg bg-blue-700'
+                : 'text-blue-100 hover:text-white px-3 py-2 rounded-lg hover:bg-blue-700'
             }
           >
             Add Tour

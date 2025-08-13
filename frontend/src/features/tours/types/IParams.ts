@@ -1,3 +1,3 @@
 export interface ITourParams {
-    id: string;
+  id: string;
 }

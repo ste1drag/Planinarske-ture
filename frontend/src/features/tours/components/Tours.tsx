@@ -1,12 +1,12 @@
-import { useTours } from "../hooks/useTours";
-import { ITour } from "../types/ITour";
-import TourCard from "./TourCard";
+import TourCard from './TourCard';
+import { useTours } from '../hooks/useTours';
+import { ITour } from '../types/ITour';
 
 const Tours = () => {
   const tours = useTours();
 
   return (
-    <div className={"container"}>
+    <div className={'container'}>
       {tours.map((tour: ITour) => (
         <TourCard
           key={tour.id}
@@ -23,4 +23,3 @@ const Tours = () => {
 };
 
 export default Tours;
-

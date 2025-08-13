@@ -1,5 +1,6 @@
-import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Nav from './components/layout/Nav';
 import {
   Tours,
   AddTour,
@@ -7,9 +8,8 @@ import {
   addTourEndpoint,
   homeEndpoint,
   toursEndpoint,
-} from "./features/tours";
-import Home from "./pages/Home";
-import Nav from "./components/layout/Nav";
+} from './features/tours';
+import Home from './pages/Home';
 
 function App() {
   return (

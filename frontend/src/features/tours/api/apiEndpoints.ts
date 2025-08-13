@@ -1,4 +1,4 @@
-export const homeEndpoint: string = "/";
-export const toursEndpoint: string = "/tours";
-export const tourEndpoint: string = "/tours/:id";
-export const addTourEndpoint: string = "/addTour";
+export const homeEndpoint = '/';
+export const toursEndpoint = '/tours';
+export const tourEndpoint = '/tours/:id';
+export const addTourEndpoint = '/addTour';
