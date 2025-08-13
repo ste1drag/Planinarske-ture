@@ -9,6 +9,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:prettier/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -22,11 +23,26 @@ module.exports = {
     'react',
     '@typescript-eslint',
     'react-hooks',
+    'import',
   ],
   rules: {
     'react/react-in-jsx-scope': 'off', // Not needed in React 17+
     '@typescript-eslint/no-unused-vars': 'error',
     'prefer-const': 'error',
+    'import/order': [
+      'error',
+      {
+        groups: [
+          'builtin',   // Node built-ins (fs, path)
+          'external',  // npm packages (react, axios)
+          'internal',  // Your absolute imports
+          ['parent', 'sibling'], // Relative imports (../, ./)
+          'index',     // ./index imports
+        ],
+        'newlines-between': 'never',
+        alphabetize: { order: 'asc', caseInsensitive: true },
+      },
+    ],
   },
   settings: {
     react: {
