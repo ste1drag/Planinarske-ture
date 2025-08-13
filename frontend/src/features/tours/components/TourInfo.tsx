@@ -7,10 +7,8 @@ type TourParam = {
 
 const TourInfo = () => {
   const { id } = useParams<TourParam>();
-  debugger;
   const tourInfo = useTour(id as string);
 
-  debugger;
   return (
     <div className="max-w-2xl mx-auto p-6">
       <div className="bg-white rounded-xl shadow-lg p-8">

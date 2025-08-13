@@ -26,7 +26,6 @@ const AddTour = () => {
 
   const onAddTour = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    debugger;
     await axios.post('http://localhost:8080/tours', { addTourDTO: tour });
   };
 

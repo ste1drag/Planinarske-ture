@@ -25,15 +25,11 @@ export const useTour = (id: string): ITour | undefined => {
   }, [id]);
 
   const fetchTour = async (id?: string) => {
-    debugger;
     if (!id) return;
-
-    debugger;
 
     const tourInfoData = await axios
       .get(`http://localhost:8080/Tours/${id}`)
       .then((response: AxiosResponse) => response.data);
-    debugger;
     if (!tourInfoData) return;
 
     setTourInfo(tourInfoData);
