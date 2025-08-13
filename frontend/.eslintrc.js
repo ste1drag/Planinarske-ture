@@ -18,6 +18,7 @@ module.exports = {
     },
     ecmaVersion: 'latest',
     sourceType: 'module',
+    project: './tsconfig.json',
   },
   plugins: [
     'react',
@@ -28,6 +29,8 @@ module.exports = {
   rules: {
     'react/react-in-jsx-scope': 'off', // Not needed in React 17+
     '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/prefer-optional-chain': 'error', // Use obj?.prop instead of obj && obj.prop
+    '@typescript-eslint/prefer-nullish-coalescing': 'error', // Use value ?? 'default' instead of value || 'default'
     'prefer-const': 'error',
     'import/order': [
       'error',
