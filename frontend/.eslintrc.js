@@ -25,13 +25,18 @@ module.exports = {
     '@typescript-eslint',
     'react-hooks',
     'import',
+    'unused-imports',
   ],
   rules: {
     'react/react-in-jsx-scope': 'off', // Not needed in React 17+
-    '@typescript-eslint/no-unused-vars': 'error',
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
+    'unused-imports/no-unused-imports': 'error',
+    'unused-imports/no-unused-vars': 'warn',
     '@typescript-eslint/prefer-optional-chain': 'error', // Use obj?.prop instead of obj && obj.prop
     '@typescript-eslint/prefer-nullish-coalescing': 'error', // Use value ?? 'default' instead of value || 'default'
     'prefer-const': 'error',
+    'eol-last': 'off',
     'import/order': [
       'error',
       {
