@@ -21,6 +21,14 @@ export const en = {
   // Page titles
   addNewTour: 'Add New Tour',
 
+  // Hero Section
+  heroTitle: 'Discover',
+  heroTitleGradient: 'Mountain Adventures',
+  heroSubtitle:
+    'Join fellow hikers on unforgettable journeys through most beautiful peaks. From gentle family trails to challenging summit conquests.',
+  exploreTours: 'Explore Tours',
+  viewMountains: 'View Mountains',
+
   // Buttons
   addTourButton: 'Add Tour',
 } as const;
