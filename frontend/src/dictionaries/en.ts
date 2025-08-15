@@ -2,7 +2,12 @@ export const en = {
   // Navigation
   home: 'Home',
   tours: 'Tours',
+  mountains: 'Mountains',
+  reviews: 'Reviews',
+  notifications: 'Notifications',
+  profile: 'Profile',
   addTour: 'Add Tour',
+  mountainTours: 'Mountain Tours',
 
   // Form labels
   name: 'Name',

@@ -41,6 +41,27 @@ module.exports = {
             DEFAULT: "hsl(var(--card))",
             foreground: "hsl(var(--card-foreground))",
           },
+          // Nature-inspired theme colors
+          forest: {
+            DEFAULT: "hsl(var(--forest))",
+            light: "hsl(var(--forest-light))",
+            dark: "hsl(var(--forest-dark))",
+          },
+          mountain: {
+            DEFAULT: "hsl(var(--mountain))",
+            light: "hsl(var(--mountain-light))",
+            dark: "hsl(var(--mountain-dark))",
+          },
+          sky: {
+            DEFAULT: "hsl(var(--sky))",
+            light: "hsl(var(--sky-light))",
+            dark: "hsl(var(--sky-dark))",
+          },
+          earth: {
+            DEFAULT: "hsl(var(--earth))",
+            light: "hsl(var(--earth-light))",
+            dark: "hsl(var(--earth-dark))",
+          },
         },
         borderRadius: {
           lg: "var(--radius)",
