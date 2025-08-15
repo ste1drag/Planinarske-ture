@@ -29,6 +29,13 @@ export const en = {
   exploreTours: 'Explore Tours',
   viewMountains: 'View Mountains',
 
+  // CTA Section
+  readyForAdventure: 'Ready for Your Next Adventure?',
+  joinCommunity:
+    'Join our community of mountain enthusiasts and discover the beauty of peaks',
+  joinTour: 'Join a Tour',
+  readReviews: 'Read Reviews',
+
   // Buttons
   addTourButton: 'Add Tour',
 } as const;
