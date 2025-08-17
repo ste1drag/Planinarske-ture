@@ -1,6 +1,6 @@
-import { Weather } from '../../src/features/mountains/enums/weather';
-import { TourStatus } from '../../src/features/tour/enums/tour-status';
-import { TourViewModel } from '../../src/features/tour/types/tour-dto';
+import { Weather } from '../../features/mountains/enums/weather';
+import { TourStatus } from '../../features/tour/enums/tour-status';
+import { TourViewModel } from '../../features/tour/types/tour-dto';
 
 export const tourMocks: TourViewModel[] = [
   {
@@ -59,4 +59,3 @@ export const tourMocks: TourViewModel[] = [
 export const generateTourId = () => {
   return `123e4567-e89b-12d3-a456-${Date.now().toString().slice(-12)}`;
 };
-

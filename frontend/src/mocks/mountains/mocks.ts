@@ -1,4 +1,4 @@
-import { MountainDto } from '../src/features/mountains/types/mountain-dto';
+import { MountainDto } from '../../features/mountains/types/mountain-dto';
 
 export const mountainMocks: MountainDto[] = [
   {
