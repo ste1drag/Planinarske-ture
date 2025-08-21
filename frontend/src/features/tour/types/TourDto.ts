@@ -1,5 +1,5 @@
 import { Weather } from '../../mountains/enums/weather';
-import { TourStatus } from '../enums/tour-status';
+import { TourStatus } from '../enums/TourStatus';
 
 export interface TourViewModel {
   id: string;

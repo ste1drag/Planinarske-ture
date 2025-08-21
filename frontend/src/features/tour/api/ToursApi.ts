@@ -1,8 +1,8 @@
-import { TOURS_ENDPOINTS } from './endpoints';
+import { TOURS_ENDPOINTS } from './TourEndpoints';
 import { axios_instance } from '../../../lib/root-api';
-import { AddTourDto } from '../types/add-tour-dto';
-import { DeleteTourDto } from '../types/delete-tour-dto';
-import { TourViewModel } from '../types/tour-dto';
+import { AddTourDto } from '../types/AddTourDto';
+import { DeleteTourDto } from '../types/DeleteTourDto';
+import { TourViewModel } from '../types/TourDto';
 
 export const getAllTours = async (): Promise<TourViewModel[]> => {
   const response = await axios_instance.get<TourViewModel[]>(
@@ -38,4 +38,3 @@ export const addTour = async (tourData: AddTourDto): Promise<TourViewModel> => {
 export const deleteTour = async (tourData: DeleteTourDto): Promise<void> => {
   await axios_instance.delete(TOURS_ENDPOINTS.DELETE_TOUR, { data: tourData });
 };
-
