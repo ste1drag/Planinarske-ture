@@ -1,8 +1,8 @@
 import { TOURS_ENDPOINTS } from './TourEndpoints';
-import { axios_instance } from '@/lib/root-api';
 import { AddTourDto } from '../types/AddTourDto';
 import { DeleteTourDto } from '../types/DeleteTourDto';
 import { TourViewModel } from '../types/TourDto';
+import { axios_instance } from '@/lib/root-api';
 
 export const getAllTours = async (): Promise<TourViewModel[]> => {
   const response = await axios_instance.get<TourViewModel[]>(
