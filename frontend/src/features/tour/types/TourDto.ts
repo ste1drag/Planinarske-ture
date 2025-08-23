@@ -1,4 +1,4 @@
-import { Weather } from '../../mountains/enums/weather';
+import { Weather } from '@/features/mountains/enums/weather';
 import { TourStatus } from '../enums/TourStatus';
 
 export interface TourViewModel {

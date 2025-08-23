@@ -1,7 +1,7 @@
 import { Mountain, Calendar, MessageSquare, Bell, User } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import { useTranslation } from '../../contexts/TranslationContext';
-import { cn } from '../../lib/utils';
+import { useTranslation } from '@/contexts/TranslationContext';
+import { cn } from '@/lib/utils';
 
 const Nav = () => {
   const location = useLocation();

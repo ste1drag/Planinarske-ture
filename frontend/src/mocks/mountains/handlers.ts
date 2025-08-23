@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw';
 import { mountainMocks } from './mocks';
-import { MOUNTAINS_ENDPOINTS } from '../../features/mountains/api/mountain-endpoints';
+import { MOUNTAINS_ENDPOINTS } from '@/features/mountains/api/mountain-endpoints';
 
 export const mountainsHandlers = [
   http.get(MOUNTAINS_ENDPOINTS.GET_ALL_MOUNTAINS, () => {

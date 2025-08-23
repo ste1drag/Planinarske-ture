@@ -1,5 +1,5 @@
 import { createContext, useContext, ReactNode } from 'react';
-import { en, Dictionary } from '../dictionaries/en';
+import { en, Dictionary } from '@/dictionaries/en';
 
 const TranslationContext = createContext<Dictionary>(en);
 

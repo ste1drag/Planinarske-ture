@@ -1,4 +1,4 @@
-import TourCard from '../features/tour/components/TourCard';
+import TourCard from '@/features/tour/components/TourCard';
 
 const Tours = () => {
   return (

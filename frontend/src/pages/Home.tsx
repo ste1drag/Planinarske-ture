@@ -1,8 +1,8 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import heroImage from '../assets/hero-mountain.jpg';
-import { Button } from '../components/ui/Button';
-import { useTranslation } from '../contexts/TranslationContext';
+import heroImage from '@/assets/hero-mountain.jpg';
+import { Button } from '@/components/ui/Button';
+import { useTranslation } from '@/contexts/TranslationContext';
 
 const Home = () => {
   const t = useTranslation();

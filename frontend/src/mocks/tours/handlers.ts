@@ -1,11 +1,11 @@
 import { http, HttpResponse } from 'msw';
 import { tourMocks, generateTourId } from './mocks';
-import { Weather } from '../../features/mountains/enums/weather';
-import { TOURS_ENDPOINTS } from '../../features/tour/api/TourEndpoints';
-import { TourStatus } from '../../features/tour/enums/TourStatus';
-import { AddTourDto } from '../../features/tour/types/AddTourDto';
-import { DeleteTourDto } from '../../features/tour/types/DeleteTourDto';
-import { TourViewModel } from '../../features/tour/types/TourDto';
+import { Weather } from '@/features/mountains/enums/weather';
+import { TOURS_ENDPOINTS } from '@/features/tour/api/TourEndpoints';
+import { TourStatus } from '@/features/tour/enums/TourStatus';
+import { AddTourDto } from '@/features/tour/types/AddTourDto';
+import { DeleteTourDto } from '@/features/tour/types/DeleteTourDto';
+import { TourViewModel } from '@/features/tour/types/TourDto';
 
 // In-memory storage for runtime changes
 const tours = [...tourMocks];

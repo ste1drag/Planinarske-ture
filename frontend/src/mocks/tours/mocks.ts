@@ -1,6 +1,6 @@
-import { Weather } from '../../features/mountains/enums/weather';
-import { TourStatus } from '../../features/tour/enums/TourStatus';
-import { TourViewModel } from '../../features/tour/types/TourDto';
+import { Weather } from '@/features/mountains/enums/weather';
+import { TourStatus } from '@/features/tour/enums/TourStatus';
+import { TourViewModel } from '@/features/tour/types/TourDto';
 
 export const tourMocks: TourViewModel[] = [
   {
