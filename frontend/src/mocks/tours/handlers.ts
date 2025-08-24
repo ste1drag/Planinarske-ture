@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw';
 import { tourMocks, generateTourId } from './mocks';
-import { Weather } from '@/features/mountains/enums/weather';
+import { Weather } from '@/features/mountain/enums/weather';
 import { TOURS_ENDPOINTS } from '@/features/tour/api/TourEndpoints';
 import { TourStatus } from '@/features/tour/enums/TourStatus';
 import { AddTourDto } from '@/features/tour/types/AddTourDto';

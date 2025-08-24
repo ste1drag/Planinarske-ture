@@ -3,7 +3,7 @@ import {
   Weather,
   WeatherColoring,
   WeatherIcons,
-} from '@/features/mountains/enums/weather';
+} from '@/features/mountain/enums/weather';
 
 interface WeatherBadgeProps {
   weather: Weather;

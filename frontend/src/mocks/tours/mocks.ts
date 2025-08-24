@@ -1,4 +1,4 @@
-import { Weather } from '@/features/mountains/enums/weather';
+import { Weather } from '@/features/mountain/enums/weather';
 import { TourStatus } from '@/features/tour/enums/TourStatus';
 import { TourViewModel } from '@/features/tour/types/TourDto';
 
