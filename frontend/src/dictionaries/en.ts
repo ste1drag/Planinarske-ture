@@ -33,7 +33,7 @@ export const en = {
   readyForAdventure: 'Ready for Your Next Adventure?',
   joinCommunity:
     'Join our community of mountain enthusiasts and discover the beauty of peaks',
-  joinTour: 'Join a Tour',
+  joinTour: 'Join Tour',
   readReviews: 'Read Reviews',
 
   // Buttons
