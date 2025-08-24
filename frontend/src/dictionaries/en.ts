@@ -38,6 +38,10 @@ export const en = {
 
   // Buttons
   addTourButton: 'Add Tour',
+
+  // Mountain
+  totalHours: 'Total hours',
+  upcoming: 'Upcoming',
 } as const;
 
 export type Dictionary = typeof en;

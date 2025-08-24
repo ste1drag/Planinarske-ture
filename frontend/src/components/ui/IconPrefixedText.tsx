@@ -10,6 +10,7 @@ interface IconPrefixedTextProps {
   textColor?: string;
   gap?: 'sm' | 'md' | 'lg';
   className?: string;
+  textClassName?: string;
   style?: React.CSSProperties;
 }
 
@@ -27,6 +28,7 @@ export default function IconPrefixedText({
   textColor,
   gap = 'sm',
   className,
+  textClassName,
   style,
 }: IconPrefixedTextProps) {
   return (
@@ -35,7 +37,10 @@ export default function IconPrefixedText({
       style={style}
     >
       <Icon size={iconSize} color={iconColor} className="shrink-0" />
-      <span style={{ color: textColor }} className="text-sm">
+      <span
+        style={{ color: textColor }}
+        className={cn('text-sm', textClassName)}
+      >
         {text}
       </span>
     </div>
