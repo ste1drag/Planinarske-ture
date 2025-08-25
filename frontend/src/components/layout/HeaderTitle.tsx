@@ -10,7 +10,7 @@ export default function HeaderTitle({
   button,
 }: HeaderTitleProps) {
   return (
-    <div className="flex h-[10vh] bg-forest/10 justify-between p-4">
+    <div className="flex h-[10vh] bg-forest/10 justify-between p-4 w-screen">
       <div className="flex justify-center flex-col">
         <h1 className="text-3xl">{title}</h1>
         <h2 className="text-xl text-black/50">{subTitle}</h2>

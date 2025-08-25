@@ -6,8 +6,8 @@ export const en = {
   reviews: 'Reviews',
   notifications: 'Notifications',
   profile: 'Profile',
-  addTour: 'Add Tour',
   mountainTours: 'Mountain Tours',
+  hikingTours: 'Hiking Tours',
 
   // Form labels
   name: 'Name',
@@ -18,8 +18,10 @@ export const en = {
   tourDescription: 'Tour Description',
   tourDate: 'Tour Date',
 
-  // Page titles
+  // Tours
   addNewTour: 'Add New Tour',
+  addTour: 'Add Tour',
+  tourPageTitle: 'Discover amazing mountain adventures and join fellow hikers',
 
   // Hero Section
   heroTitle: 'Discover',
@@ -38,10 +40,12 @@ export const en = {
 
   // Buttons
   addTourButton: 'Add Tour',
+  addMountainButton: 'Add Mountain',
 
   // Mountain
   totalHours: 'Total hours',
   upcoming: 'Upcoming',
+  mountainsSubTitle: 'Explore the majestic peaks waiting to be conquered',
 } as const;
 
 export type Dictionary = typeof en;

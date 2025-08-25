@@ -16,7 +16,7 @@ const Nav = () => {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
+    <nav className="sticky top-0 px-3 z-50 w-full border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
       <div className="flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center space-x-2">
           <Mountain className="h-8 w-8 text-forest" />
