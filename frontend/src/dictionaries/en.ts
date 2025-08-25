@@ -20,6 +20,8 @@ export const en = {
 
   // Tours
   addNewTour: 'Add New Tour',
+  upcomingTours: 'Upcoming Tours',
+  totalTours: 'Total Tours',
   addTour: 'Add Tour',
   tourPageTitle: 'Discover amazing mountain adventures and join fellow hikers',
 
@@ -44,6 +46,7 @@ export const en = {
 
   // Mountain
   totalHours: 'Total hours',
+  totalMountains: 'Total mountains',
   upcoming: 'Upcoming',
   mountainsSubTitle: 'Explore the majestic peaks waiting to be conquered',
 } as const;

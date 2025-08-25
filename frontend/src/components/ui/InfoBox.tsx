@@ -6,12 +6,12 @@ export interface InfoBoxProps {
 
 export default function InfoBox({ title, subTitle, icon }: InfoBoxProps) {
   return (
-    <div className="flex h-[10vh]  justify-between p-4">
+    <div className="flex flex-1 m-[1vh] h-[10vh] justify-between p-4 border border-gray-200 rounded shadow-lg">
       <div className="flex justify-center flex-col">
-        <h1 className="text-3xl">{title}</h1>
-        <h2 className="text-xl text-black/50">{subTitle}</h2>
+        <h1 className="text-xl">{title}</h1>
+        <h2 className="text text-black/50">{subTitle}</h2>
       </div>
-      <div className="flex items-start">{icon}</div>
+      <div className="flex items-baseline pt-[1vh]">{icon}</div>
     </div>
   );
 }
