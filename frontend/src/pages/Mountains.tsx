@@ -1,6 +1,7 @@
 import { Mountain, Plus, TrendingUp } from 'lucide-react';
 import HeaderTitle from '@/components/layout/HeaderTitle';
 import InfoBox from '@/components/ui/InfoBox';
+import SearchBar from '@/components/ui/SearchBar';
 import { useTranslation } from '@/contexts/TranslationContext';
 
 const Mountains = () => {
@@ -37,6 +38,7 @@ const Mountains = () => {
           icon={<TrendingUp />}
         />
       </div>
+      <SearchBar placeholder={t.searchMountains} />
     </div>
   );
 };

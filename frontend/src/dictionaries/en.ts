@@ -49,6 +49,10 @@ export const en = {
   totalMountains: 'Total mountains',
   upcoming: 'Upcoming',
   mountainsSubTitle: 'Explore the majestic peaks waiting to be conquered',
+
+  // Misc
+  searchTours: 'Search tours or mountains ...',
+  searchMountains: 'Search mountains ...',
 } as const;
 
 export type Dictionary = typeof en;
