@@ -33,6 +33,11 @@ export const en = {
   exploreTours: 'Explore Tours',
   viewMountains: 'View Mountains',
 
+  // App summary
+  activeTours: 'Active Tours',
+  happyHikers: 'Happy Hikers',
+  avgRating: 'Average Rating',
+
   // CTA Section
   readyForAdventure: 'Ready for Your Next Adventure?',
   joinCommunity:

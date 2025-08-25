@@ -1,4 +1,4 @@
-import { Mountain, Plus, TrendingUp } from 'lucide-react';
+import { Mountain, Plus, TrendingUp, Star } from 'lucide-react';
 import HeaderTitle from '@/components/layout/HeaderTitle';
 import InfoBox from '@/components/ui/InfoBox';
 import SearchBar from '@/components/ui/SearchBar';
@@ -25,17 +25,17 @@ const Mountains = () => {
         <InfoBox
           title={t.totalMountains}
           subTitle="TODO - number"
-          icon={<Mountain />}
+          icon={<Mountain className="text-forest" />}
         />
         <InfoBox
           title={t.totalTours}
           subTitle="TODO - number"
-          icon={<TrendingUp />}
+          icon={<TrendingUp className="text-blue-600" />}
         />
         <InfoBox
           title={t.upcomingTours}
           subTitle="TODO - number"
-          icon={<TrendingUp />}
+          icon={<Star className="text-yellow-500" />}
         />
       </div>
       <SearchBar placeholder={t.searchMountains} />
