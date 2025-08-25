@@ -1,7 +1,15 @@
 import { Plus } from 'lucide-react';
 import HeaderTitle from '@/components/layout/HeaderTitle';
 import SearchBar from '@/components/ui/SearchBar';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/Select';
 import { useTranslation } from '@/contexts/TranslationContext';
+import { TourStatus } from '@/features/tour/enums/TourStatus';
 
 const Tours = () => {
   const t = useTranslation();
@@ -20,7 +28,19 @@ const Tours = () => {
         subTitle={t.tourPageTitle}
         button={addTourButton}
       />
-      <SearchBar placeholder={t.searchTours} />
+      <div className="flex justify-between items-center">
+        <SearchBar containerClassName="flex-1" placeholder={t.searchTours} />
+        <Select>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder={t.selectStatus} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value={TourStatus.ACTIVE}>{t.active}</SelectItem>
+            <SelectItem value={TourStatus.RESERVED}>{t.reserved}</SelectItem>
+            <SelectItem value={TourStatus.CANCELED}>{t.canceled}</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
     </div>
   );
 };

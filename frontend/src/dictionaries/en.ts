@@ -50,6 +50,12 @@ export const en = {
   upcoming: 'Upcoming',
   mountainsSubTitle: 'Explore the majestic peaks waiting to be conquered',
 
+  // Status
+  selectStatus: 'Select status',
+  active: 'Active',
+  reserved: 'Reserved',
+  canceled: 'Canceled',
+
   // Misc
   searchTours: 'Search tours or mountains ...',
   searchMountains: 'Search mountains ...',
