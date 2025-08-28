@@ -1,0 +1,9 @@
+namespace Notifications.Infrastructure.Configuration;
+
+public class MongoDbConfiguration
+{
+    public const string SectionName = "MongoDB";
+
+    public string ConnectionString { get; set; } = string.Empty;
+    public string DatabaseName { get; set; } = string.Empty;
+}

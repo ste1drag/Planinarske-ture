@@ -1,6 +1,6 @@
-using Application;
-using Infrastructure;
-using Presentation;
+using Notifications.Infrastructure;
+using Notifications.Application;
+using Notifications.Presentation;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,12 +14,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 Console.WriteLine("🔧 Adding Application services...");
-builder.Services.AddApplication();
+builder.Services.AddApplicationServices(services =>
+{
+    Console.WriteLine("🔧 Adding Infrastructure services...");
+    services.AddInfrastructure(builder.Configuration);
+    Console.WriteLine("✅ Infrastructure services added");
+});
 Console.WriteLine("✅ Application services added");
-
-Console.WriteLine("🔧 Adding Infrastructure services...");
-builder.Services.AddInfrastructure();
-Console.WriteLine("✅ Infrastructure services added");
 
 Console.WriteLine("🔧 Adding Presentation services...");
 builder.Services.AddPresentation();

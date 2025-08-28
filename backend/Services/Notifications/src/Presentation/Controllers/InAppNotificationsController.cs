@@ -1,7 +1,12 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Notifications.Domain.Interfaces;
-using Notifications.Domain.Entities;
-using Presentation.DTOs;
+using Notifications.Application.DTOs;
+using Notifications.Application.UseCases.InAppNotifications.Commands.CreateInAppNotification;
+using Notifications.Application.UseCases.InAppNotifications.Commands.DeleteInAppNotification;
+using Notifications.Application.UseCases.InAppNotifications.Commands.UpdateInAppNotification;
+using Notifications.Application.UseCases.InAppNotifications.Queries.GetAllInAppNotifications;
+using Notifications.Application.UseCases.InAppNotifications.Queries.GetInAppNotification;
+using Notifications.Application.UseCases.InAppNotifications.Queries.GetInAppNotificationsByUserId;
 
 namespace Notifications.Presentation.Controllers
 {
@@ -9,29 +14,31 @@ namespace Notifications.Presentation.Controllers
     [Route("api/[controller]")]
     public class InAppNotificationsController : ControllerBase
     {
-        private readonly IInAppNotificationRepository _repository;
+        private readonly IMediator _mediator;
 
-        public InAppNotificationsController(IInAppNotificationRepository repository)
+        public InAppNotificationsController(IMediator mediator)
         {
-            _repository = repository;
+            _mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<InAppNotificationResponse>>> GetAll()
         {
-            var notifications = await _repository.GetAllAsync();
-            var response = notifications.Select(MapToResponse);
-            return Ok(response);
+            var query = new GetAllInAppNotificationsQuery();
+            var notifications = await _mediator.Send(query);
+            return Ok(notifications);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<InAppNotificationResponse>> GetById(string id)
         {
-            var notification = await _repository.GetByIdAsync(id);
+            var query = new GetInAppNotificationQuery { Id = id };
+            var notification = await _mediator.Send(query);
+
             if (notification == null)
                 return NotFound();
 
-            return Ok(MapToResponse(notification));
+            return Ok(notification);
         }
 
         [HttpPost]
@@ -39,25 +46,47 @@ namespace Notifications.Presentation.Controllers
             CreateInAppNotificationRequest request
         )
         {
-            var notification = new InAppNotification(request.UserId, request.Type, request.Content);
-            var created = await _repository.CreateAsync(notification);
-            var response = MapToResponse(created);
+            var command = new CreateInAppNotificationCommand { Request = request };
+            var response = await _mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetById), new { id = created.Id }, response);
+            return CreatedAtAction(nameof(GetById), new { id = response.Id }, response);
         }
 
-        private static InAppNotificationResponse MapToResponse(InAppNotification notification)
+        [HttpGet("user/{userId}")]
+        public async Task<ActionResult<IEnumerable<InAppNotificationResponse>>> GetByUserId(
+            string userId
+        )
         {
-            return new InAppNotificationResponse
-            {
-                Id = notification.Id,
-                UserId = notification.UserId,
-                Type = notification.Type,
-                Content = notification.Content,
-                Status = notification.Status,
-                CreatedAt = notification.CreatedAt,
-                ReadAt = notification.ReadAt,
-            };
+            var query = new GetInAppNotificationsByUserIdQuery { UserId = userId };
+            var notifications = await _mediator.Send(query);
+            return Ok(notifications);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<InAppNotificationResponse>> Update(
+            string id,
+            UpdateInAppNotificationRequest request
+        )
+        {
+            var command = new UpdateInAppNotificationCommand { Id = id, Request = request };
+            var response = await _mediator.Send(command);
+
+            if (response == null)
+                return NotFound();
+
+            return Ok(response);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(string id)
+        {
+            var command = new DeleteInAppNotificationCommand { Id = id };
+            var success = await _mediator.Send(command);
+
+            if (!success)
+                return NotFound();
+
+            return NoContent();
         }
     }
 }

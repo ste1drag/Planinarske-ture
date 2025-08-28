@@ -6,9 +6,11 @@
   </PropertyGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="MediatR" Version="12.5.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.6" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="../Notifications.Application/Notifications.Application.csproj" />
     <ProjectReference Include="../Notifications.Domain/Notifications.Domain.csproj" />
   </ItemGroup>
 </Project>

@@ -5,13 +5,21 @@ namespace Notifications.Domain.Entities;
 
 public class InAppNotification : INotification
 {
-    public string Id { get; private set; }
-    public string UserId { get; private set; }
-    public NotificationTypeEnum Type { get; private set; }
-    public string Content { get; private set; }
-    public DeliveryStatusEnum Status { get; private set; }
-    public DateTime CreatedAt { get; private set; }
-    public DateTime? ReadAt { get; private set; }
+    public string Id { get; set; }
+    public string UserId { get; set; }
+    public NotificationTypeEnum Type { get; set; }
+    public string Content { get; set; }
+    public DeliveryStatusEnum Status { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime? ReadAt { get; set; }
+
+    // Parameterless constructor for MongoDB serialization
+    public InAppNotification()
+    {
+        Id = string.Empty;
+        UserId = string.Empty;
+        Content = string.Empty;
+    }
 
     public InAppNotification(string userId, NotificationTypeEnum type, string content)
     {
