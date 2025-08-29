@@ -1,10 +1,14 @@
 import { Calendar, Mountain, TrendingUp } from 'lucide-react';
-import { MountainDto } from '../types/mountain-dto';
+import { ViewMountainDto } from '../types/ViewMountainDto';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import IconPrefixedText from '@/components/ui/IconPrefixedText';
 import { useTranslation } from '@/contexts/TranslationContext';
 
-export default function MountainCard({ mountain }: { mountain: MountainDto }) {
+export default function MountainCard({
+  mountain,
+}: {
+  mountain: ViewMountainDto;
+}) {
   const t = useTranslation();
 
   return (

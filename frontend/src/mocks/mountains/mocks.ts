@@ -1,6 +1,6 @@
-import { MountainDto } from '@/features/mountain/types/mountain-dto';
+import { ViewMountainDto } from '@/features/mountain/types/ViewMountainDto';
 
-export const mountainMocks: MountainDto[] = [
+export const mountainMocks: ViewMountainDto[] = [
   {
     id: '550e8400-e29b-41d4-a716-446655440001',
     name: 'Kopaonik',

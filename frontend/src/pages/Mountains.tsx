@@ -1,25 +1,19 @@
-import { Mountain, Plus, TrendingUp, Star } from 'lucide-react';
+import { Mountain, TrendingUp, Star } from 'lucide-react';
 import HeaderTitle from '@/components/layout/HeaderTitle';
 import InfoBox from '@/components/ui/InfoBox';
 import SearchBar from '@/components/ui/SearchBar';
 import { useTranslation } from '@/contexts/TranslationContext';
+import AddNewMountainDialog from '@/features/mountain/components/AddNewMountainDialog';
 
 const Mountains = () => {
   const t = useTranslation();
-
-  const addMountainButton = (
-    <button className="bg-forest-light text-white font-bold py-2 px-4 rounded flex items-center gap-2">
-      <Plus size={16} />
-      {t.addMountainButton}
-    </button>
-  );
 
   return (
     <div className="flex flex-col">
       <HeaderTitle
         title={t.mountains}
         subTitle={t.mountainsSubTitle}
-        button={addMountainButton}
+        button={<AddNewMountainDialog />}
       />
       <div className="flex flex-row">
         <InfoBox

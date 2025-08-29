@@ -61,6 +61,19 @@ export const en = {
   reserved: 'Reserved',
   canceled: 'Canceled',
 
+  // Add Mountain Dialog
+  addNewMountain: 'Add New Mountain',
+  mountainName: 'Mountain Name',
+  mountainDescription: 'Mountain Description',
+  mountainHeight: 'Height (meters)',
+  mountainLocation: 'Location',
+  cancel: 'Cancel',
+  save: 'Save',
+  enterMountainName: 'Enter mountain name',
+  enterMountainDescription: 'Enter mountain description',
+  enterMountainHeight: 'Enter height in meters',
+  enterMountainLocation: 'Enter mountain location',
+
   // Misc
   searchTours: 'Search tours or mountains ...',
   searchMountains: 'Search mountains ...',
