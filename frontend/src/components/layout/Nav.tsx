@@ -33,7 +33,7 @@ const Nav = () => {
                 className={cn(
                   'flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors',
                   isActive
-                    ? 'bg-forest text-white'
+                    ? 'bg-forest-light text-white'
                     : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                 )}
               >
