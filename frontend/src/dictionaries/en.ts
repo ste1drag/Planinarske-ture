@@ -74,6 +74,15 @@ export const en = {
   enterMountainHeight: 'Enter height in meters',
   enterMountainLocation: 'Enter mountain location',
 
+  // Add Tour Dialog
+  tourName: 'Tour Name',
+  selectMountainForTour: 'Select Mountain',
+  enterTourName: 'Enter tour name',
+  enterTourDescription: 'Enter tour description',
+  enterMinPeople: 'Enter minimum number of people',
+  enterMaxPeople: 'Enter maximum number of people',
+  selectTourDate: 'Select tour date',
+
   // Misc
   searchTours: 'Search tours or mountains ...',
   searchMountains: 'Search mountains ...',
