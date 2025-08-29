@@ -1,4 +1,4 @@
-import { Mountain, Calendar, MessageSquare, Bell, User } from 'lucide-react';
+import { Mountain, Calendar, Bell, User } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from '@/contexts/TranslationContext';
 import { cn } from '@/lib/utils';
@@ -10,7 +10,6 @@ const Nav = () => {
   const navigationItems = [
     { name: t.tours, href: '/tours', icon: Calendar },
     { name: t.mountains, href: '/mountains', icon: Mountain },
-    { name: t.reviews, href: '/reviews', icon: MessageSquare },
     { name: t.notifications, href: '/notifications', icon: Bell },
     { name: t.profile, href: '/profile', icon: User },
   ];
