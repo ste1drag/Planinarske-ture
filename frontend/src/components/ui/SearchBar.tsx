@@ -1,5 +1,4 @@
 import { Search } from 'lucide-react';
-import { useTranslation } from '@/contexts/TranslationContext';
 
 interface SearchBarProps {
   placeholder?: string;
@@ -17,7 +16,6 @@ export default function SearchBar({
   iconClassName = '',
   containerClassName = '',
 }: SearchBarProps) {
-  const t = useTranslation();
   return (
     <div className={`relative flex items-center p-3 ${containerClassName}`}>
       <div className={`relative w-full ${className}`}>

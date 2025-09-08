@@ -5,7 +5,7 @@ export const en = {
   mountains: 'Mountains',
   reviews: 'Reviews',
   notifications: 'Notifications',
-  profile: 'Profile',
+  profile: 'My Profile',
   mountainTours: 'Mountain Tours',
   hikingTours: 'Hiking Tours',
 
@@ -32,6 +32,15 @@ export const en = {
     'Join fellow hikers on unforgettable journeys through most beautiful peaks. From gentle family trails to challenging summit conquests.',
   exploreTours: 'Explore Tours',
   viewMountains: 'View Mountains',
+
+  // Profile
+  profileSubTitle: 'Manage your account and view your hiking journey',
+  activityStats: 'Activity Stats',
+  toursJoined: 'Tours Joined',
+  reviewsWritten: 'Reviews Written',
+  mountainsVisited: 'Mountains Visited',
+  email: 'Email',
+  memberSince: 'Member since',
 
   // App summary
   activeTours: 'Active Tours',
