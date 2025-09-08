@@ -99,6 +99,28 @@ export const en = {
   enterMaxPeople: 'Enter maximum number of people',
   selectTourDate: 'Select tour date',
 
+  // Authentication
+  login: 'Login',
+  register: 'Register',
+  signIn: 'Sign In',
+  signUp: 'Sign Up',
+  emailAddress: 'Email Address',
+  password: 'Password',
+  confirmPassword: 'Confirm Password',
+  firstName: 'First Name',
+  lastName: 'Last Name',
+  dontHaveAccount: "Don't have an account?",
+  alreadyHaveAccount: 'Already have an account?',
+  signInToAccount: 'Sign in to your account',
+  createNewAccount: 'Create a new account',
+  enterEmail: 'Enter your email',
+  enterPassword: 'Enter your password',
+  enterFirstName: 'Enter your first name',
+  enterLastName: 'Enter your last name',
+  confirmYourPassword: 'Confirm your password',
+  appName: 'MountainTours',
+  appTagline: 'Discover amazing mountain adventures',
+
   // Misc
   searchTours: 'Search tours or mountains ...',
   searchMountains: 'Search mountains ...',
