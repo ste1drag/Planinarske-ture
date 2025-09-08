@@ -8,7 +8,7 @@ export default function ActivityStatsSummary({
 }) {
   const t = useTranslation();
   return (
-    <div className="flex flex-col border-[2px] border-black/20 max-w-[30vh] p-4 shadow-lg bg-white rounded-lg">
+    <div className="flex flex-col border-[2px] border-black/20 w-full p-4 shadow-lg bg-white rounded-lg">
       <h2 className="text-lg font-medium mb-4 text-gray-700">
         {t.activityStats}
       </h2>

@@ -3,4 +3,5 @@ export interface User {
   lastname: string;
   email: string;
   joinedOn: string;
+  favoriteMountains?: string[];
 }

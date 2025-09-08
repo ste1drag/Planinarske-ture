@@ -41,6 +41,14 @@ export const en = {
   mountainsVisited: 'Mountains Visited',
   email: 'Email',
   memberSince: 'Member since',
+  favoriteMountains: 'Favorite Mountains',
+  user: 'User',
+  myTours: 'My Tours',
+  myReviews: 'My Reviews',
+  noToursFound: 'No tours found',
+  noReviewsFound: 'No reviews found',
+  completed: 'Completed',
+  upcoming: 'Upcoming',
 
   // App summary
   activeTours: 'Active Tours',
@@ -61,7 +69,6 @@ export const en = {
   // Mountain
   totalHours: 'Total hours',
   totalMountains: 'Total mountains',
-  upcoming: 'Upcoming',
   mountainsSubTitle: 'Explore the majestic peaks waiting to be conquered',
 
   // Status
