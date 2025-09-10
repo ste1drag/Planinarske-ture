@@ -1,9 +1,8 @@
-// Tours endpoints (standardized)
 export const TOURS_ENDPOINTS = {
-  GET_ALL_TOURS: '/api/tours',
-  GET_TOUR_BY_ID: (tourId: string) => `/api/tours/${tourId}`,
+  GET_ALL_TOURS: '/Tours',
+  GET_TOUR_BY_ID: (tourId: string) => `/Tours/${tourId}`,
   GET_TOURS_BY_MOUNTAIN_ID: (mountainId: string) =>
-    `/api/tours/${mountainId}/tours`,
-  ADD_TOUR: '/api/tours',
-  DELETE_TOUR: '/api/tours',
+    `/Tours/${mountainId}/tours`,
+  ADD_TOUR: '/Tours',
+  DELETE_TOUR: '/Tours',
 } as const;

@@ -1,5 +1,5 @@
 import { TOURS_ENDPOINTS } from './TourEndpoints';
-import { AddTourDto } from '../types/AddTourDto';
+import { AddTourDto, AddTourCommand } from '../types/AddTourDto';
 import { DeleteTourDto } from '../types/DeleteTourDto';
 import { TourViewModel } from '../types/TourDto';
 import { axios_instance } from '@/lib/root-api';
@@ -27,12 +27,11 @@ export const getToursByMountainId = async (
   return response.data;
 };
 
-export const addTour = async (tourData: AddTourDto): Promise<TourViewModel> => {
-  const response = await axios_instance.post<TourViewModel>(
-    TOURS_ENDPOINTS.ADD_TOUR,
-    tourData
-  );
-  return response.data;
+export const addTour = async (tourData: AddTourDto): Promise<void> => {
+  const command: AddTourCommand = {
+    addTourDTO: tourData,
+  };
+  await axios_instance.post(TOURS_ENDPOINTS.ADD_TOUR, command);
 };
 
 export const deleteTour = async (tourData: DeleteTourDto): Promise<void> => {

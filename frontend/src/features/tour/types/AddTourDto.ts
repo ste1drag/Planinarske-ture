@@ -6,3 +6,7 @@ export interface AddTourDto {
   maxNumberOfPeople: number;
   date: string;
 }
+
+export interface AddTourCommand {
+  addTourDTO: AddTourDto;
+}
