@@ -1,5 +1,5 @@
 import { MOUNTAINS_ENDPOINTS } from './mountain-endpoints';
-import { ViewMountainDto } from '../types/ViewMountainDto';
+import { ViewMountainDto } from '../types';
 import { axios_instance } from '@/lib/root-api';
 
 export const getAllMountains = async (): Promise<ViewMountainDto[]> => {
