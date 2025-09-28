@@ -34,7 +34,13 @@ namespace Identity.Application.UseCases.Authentication.Commands.RegisterUser
 
             if (!result.Succeeded)
             {
-                return;
+                // Get error details from the result
+                var errors = ((ResultWrapper)result).Errors;
+                if (errors != null && errors.Any())
+                {
+                    throw new Exception($"Failed to register user: {string.Join(", ", errors.Select(e => e.Description))}");
+                }
+                throw new Exception("Failed to register user: Unknown error occurred.");
             }
 
             await _userService.AddToRoleAsync(user, Roles.User);

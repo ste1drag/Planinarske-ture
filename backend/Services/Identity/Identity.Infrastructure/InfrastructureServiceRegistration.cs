@@ -9,6 +9,7 @@ using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Identity.Infrastructure.Services;
 using Identity.Application.Contracts;
+using Identity.Application.Mapper;
 
 namespace Identity.Infrastructure
 {
@@ -71,7 +72,7 @@ namespace Identity.Infrastructure
         private static IServiceCollection ConfigureMiscellaneousServices(this IServiceCollection services)
         {
             services.AddScoped<IAuthenticationService, AuthenticationService>();
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(typeof(IdentityProfile));
 
             services.AddCors(options =>
             {

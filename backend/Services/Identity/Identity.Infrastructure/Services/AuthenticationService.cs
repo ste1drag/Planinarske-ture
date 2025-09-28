@@ -31,10 +31,26 @@ namespace Identity.Infrastructure.Services
 
         public async Task<User> ValidateUser(UserCredentialsDTO userCredentials)
         {
-            var user = await _userManager.FindByNameAsync(userCredentials.UserName);
-            if (user is null || !await _userManager.CheckPasswordAsync(user, userCredentials.Password))
+            if (string.IsNullOrWhiteSpace(userCredentials.UserName))
             {
-                return null;
+                throw new Exception("Username cannot be empty.");
+            }
+
+            var user = await _userManager.FindByNameAsync(userCredentials.UserName);
+            if (user is null)
+            {
+                // Check if user exists with a normalized version of the username
+                var normalizedUsername = _userManager.NormalizeName(userCredentials.UserName);
+                user = await _userManager.FindByNameAsync(normalizedUsername);
+                if (user is null)
+                {
+                    throw new Exception($"User '{userCredentials.UserName}' not found. Please check if you've registered with this username.");
+                }
+            }
+
+            if (!await _userManager.CheckPasswordAsync(user, userCredentials.Password))
+            {
+                throw new Exception("Invalid password. Please check your password and try again.");
             }
             return user;
         }

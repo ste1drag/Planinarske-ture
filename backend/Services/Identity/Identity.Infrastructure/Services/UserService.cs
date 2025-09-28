@@ -28,8 +28,28 @@ namespace Identity.Infrastructure.Services
 
         public async Task<IResult> CreateAsync(User user, string password)
         {
-            var result = await _userManager.CreateAsync(user, password);
-            return new ResultWrapper(result);
+            // Normalize username first
+            user.UserName = _userManager.NormalizeName(user.UserName);
+            user.NormalizedUserName = user.UserName;
+            user.NormalizedEmail = _userManager.NormalizeEmail(user.Email);
+
+            // Check if user already exists
+            var existingUser = await _userManager.FindByNameAsync(user.UserName);
+            if (existingUser != null)
+            {
+                var result = IdentityResult.Failed(new IdentityError { Code = "DuplicateUserName", Description = $"Username '{user.UserName}' is already taken." });
+                return new ResultWrapper(result);
+            }
+
+            // Try to create the user
+            var createResult = await _userManager.CreateAsync(user, password);
+            if (!createResult.Succeeded)
+            {
+                return new ResultWrapper(createResult);
+            }
+
+            // Return success
+            return new ResultWrapper(createResult);
         }
 
         public async Task<User> FindNameByAsync(string username)

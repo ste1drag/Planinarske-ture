@@ -13,6 +13,7 @@ services:
       - ConnectionStrings__ToursDB=Server=tours_db;Initial Catalog=ToursDb;User Id=sa;Password=PlaninarskeTureToursDB*1;TrustServerCertificate=True;
     depends_on:
       - tours_db
+        
   identity-api:
     image: identity-api:latest
     build:
@@ -30,17 +31,21 @@ services:
 
 
   tours_db:
-    image: mcr.microsoft.com/mssql/server:latest
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: tours_db
     environment:
-      SA_PASSWORD: "PlaninarskeTureToursDB*1"
       ACCEPT_EULA: "Y"
-    ports:
-      - "1433:1433"
-
-  identity_db:
-    image: mcr.microsoft.com/mssql/server:latest
-    environment:
-      SA_PASSWORD: "IdentityDB*1"
-      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "PlaninarskeTureToursDB*1"
+      MSSQL_PID: "Developer"
     ports:
       - "1434:1433"
+
+  identity_db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: identity_db
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "IdentityDB*1"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1435:1433"
