@@ -29,6 +29,23 @@ services:
     depends_on:
       - identity_db
 
+  reviewing-api:
+    image: reviewing-api:latest
+    build:
+      context: .
+      dockerfile: Services/Review/Reviewing.API/Dockerfile
+    ports:
+      - "8082:8082"
+    environment:
+      - ASPNETCORE_URLS=http://+:8082
+      - ASPNETCORE_HTTP_PORTS=8082
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__ReviewingDB=Host=reviewing-db;Database=reviewing;Username=postgres;Password=postgres;SSL Mode=Disable
+    depends_on:
+      reviewing-db:
+        condition: service_healthy
+    restart: on-failure
+
 
   tours_db:
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -49,3 +66,18 @@ services:
       MSSQL_PID: "Developer"
     ports:
       - "1435:1433"
+
+  reviewing-db:
+    image: postgres:16
+    container_name: reviewing-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: reviewing
+    ports:
+      - "6543:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
