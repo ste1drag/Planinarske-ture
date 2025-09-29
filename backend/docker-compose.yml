@@ -40,7 +40,7 @@ services:
       - ASPNETCORE_URLS=http://+:8082
       - ASPNETCORE_HTTP_PORTS=8082
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__ReviewingDB=Host=reviewing-db;Database=reviewing;Username=postgres;Password=postgres
+      - ConnectionStrings__ReviewingDB=Host=reviewing-db;Database=reviewing;Username=postgres;Password=postgres;SSL Mode=Disable
     depends_on:
       reviewing-db:
         condition: service_healthy
