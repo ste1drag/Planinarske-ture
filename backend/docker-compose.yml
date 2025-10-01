@@ -14,20 +14,20 @@ services:
     depends_on:
       - tours_db
         
-  identity-api:
-    image: identity-api:latest
-    build:
-      context: .
-      dockerfile: Services/Identity/Identity.API/Dockerfile
-    ports:
-      - "8081:8081"
-    environment:
-      - ASPNETCORE_URLS=http://+:8081
-      - ASPNETCORE_HTTP_PORTS=8081
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__IdentityDB=Server=identity_db;Initial Catalog=IdentityDb;User Id=sa;Password=IdentityDB*1;TrustServerCertificate=True;
-    depends_on:
-      - identity_db
+#  identity-api:
+#    image: identity-api:latest
+#    build:
+#      context: .
+#      dockerfile: Services/Identity/Identity.API/Dockerfile
+#    ports:
+#      - "8081:8081"
+#    environment:
+#      - ASPNETCORE_URLS=http://+:8081
+#      - ASPNETCORE_HTTP_PORTS=8081
+#      - ASPNETCORE_ENVIRONMENT=Development
+#      - ConnectionStrings__IdentityDB=Server=identity_db;Initial Catalog=IdentityDb;User Id=sa;Password=IdentityDB*1;TrustServerCertificate=True;
+#    depends_on:
+#      - identity_db
 
   reviewing-api:
     image: reviewing-api:latest
@@ -45,6 +45,43 @@ services:
       reviewing-db:
         condition: service_healthy
     restart: on-failure
+  
+  # yaml
+  notifications-api:
+    image: notifications-api:latest
+    build:
+      context: .
+      dockerfile: Services/Notifications/src/WebApi/Dockerfile
+    ports:
+      - "8083:8083"
+    environment:
+      - ASPNETCORE_URLS=http://+:8083
+      - ASPNETCORE_HTTP_PORTS=8083
+      - ASPNETCORE_ENVIRONMENT=Development
+      - MongoDb__ConnectionString=mongodb://root:notificationspwd@notifications-mongo:27017/?authSource=admin
+      - MongoDb__Database=notifications
+    depends_on:
+       notifications-mongo:
+         condition: service_healthy
+    restart: on-failure
+
+
+  notifications-mongo:
+    image: mongo:7
+    container_name: notifications-mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "root"
+      MONGO_INITDB_ROOT_PASSWORD: "notificationspwd"
+      MONGO_INITDB_DATABASE: notifications
+    ports:
+      - "27018:27017"
+    healthcheck:
+      test: ["CMD-SHELL", "mongosh --username $$MONGO_INITDB_ROOT_USERNAME --password $$MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase admin --eval 'db.adminCommand({ ping: 1 })' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
 
 
   tours_db:
@@ -57,15 +94,15 @@ services:
     ports:
       - "1434:1433"
 
-  identity_db:
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: identity_db
-    environment:
-      ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: "IdentityDB*1"
-      MSSQL_PID: "Developer"
-    ports:
-      - "1435:1433"
+#  identity_db:
+#    image: mcr.microsoft.com/mssql/server:2022-latest
+#    container_name: identity_db
+#    environment:
+#      ACCEPT_EULA: "Y"
+#      MSSQL_SA_PASSWORD: "IdentityDB*1"
+#      MSSQL_PID: "Developer"
+#    ports:
+#      - "1435:1433"
 
   reviewing-db:
     image: postgres:16
