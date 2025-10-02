@@ -38,7 +38,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       set({ user: authData, isLoading: false });
     } catch (error) {
       set({
-        error: error instanceof Error ? error.message : 'Login failed',
+        error: 'Login failed',
         isLoading: false,
       });
     }

@@ -81,7 +81,7 @@ export default function LoginForm({ onToggleToRegister }: LoginFormProps) {
           </div>
         </CardContent>
         <CardFooter className="flex flex-col space-y-4">
-          <Button type="submit" className="w-full" disabled={isLoading}>
+          <Button type="submit" className="w-full m-5" disabled={isLoading}>
             {isLoading ? 'Signing in...' : t.signIn}
           </Button>
           <p className="text-center text-sm text-gray-600">
@@ -89,7 +89,7 @@ export default function LoginForm({ onToggleToRegister }: LoginFormProps) {
             <button
               type="button"
               onClick={onToggleToRegister}
-              className="font-medium text-forest-light hover:text-forest-dark"
+              className="font-medium ,text-forest-light hover:text-forest-dark"
             >
               {t.signUp}
             </button>

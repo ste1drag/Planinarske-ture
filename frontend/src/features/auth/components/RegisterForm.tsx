@@ -87,6 +87,7 @@ export default function RegisterForm({ onToggleToLogin }: RegisterFormProps) {
                 onChange={e => setFirstName(e.target.value)}
                 required
                 disabled={isLoading}
+                className="min-w-fit"
               />
             </div>
             <div className="space-y-2">
@@ -99,6 +100,7 @@ export default function RegisterForm({ onToggleToLogin }: RegisterFormProps) {
                 onChange={e => setLastName(e.target.value)}
                 required
                 disabled={isLoading}
+                className="min-w-fit"
               />
             </div>
           </div>
@@ -167,7 +169,7 @@ export default function RegisterForm({ onToggleToLogin }: RegisterFormProps) {
           </div>
         </CardContent>
         <CardFooter className="flex flex-col space-y-4">
-          <Button type="submit" className="w-full" disabled={isLoading}>
+          <Button type="submit" className="w-full m-5" disabled={isLoading}>
             {isLoading ? 'Creating account...' : t.signUp}
           </Button>
           <p className="text-center text-sm text-gray-600">
