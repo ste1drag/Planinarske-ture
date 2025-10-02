@@ -7,6 +7,7 @@ interface SearchBarProps {
   iconClassName?: string;
   containerClassName?: string;
   value?: string;
+  onChange?: (value: string) => void;
 }
 
 export default function SearchBar({
@@ -15,6 +16,8 @@ export default function SearchBar({
   inputClassName = '',
   iconClassName = '',
   containerClassName = '',
+  value = '',
+  onChange,
 }: SearchBarProps) {
   return (
     <div className={`relative flex items-center p-3 ${containerClassName}`}>
@@ -26,6 +29,8 @@ export default function SearchBar({
         <input
           type="text"
           placeholder={placeholder}
+          value={value}
+          onChange={e => onChange?.(e.target.value)}
           className={`w-full text-sm pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-light focus:border-transparent ${inputClassName}`}
         />
       </div>

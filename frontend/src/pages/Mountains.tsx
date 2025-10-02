@@ -1,5 +1,5 @@
 import { Mountain, TrendingUp, Star } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import HeaderTitle from '@/components/layout/HeaderTitle';
 import InfoBox from '@/components/ui/InfoBox';
 import SearchBar from '@/components/ui/SearchBar';
@@ -11,10 +11,20 @@ import { useMountainStore } from '@/features/mountain/store/mountain-store';
 const Mountains = () => {
   const t = useTranslation();
   const { mountains, isLoading, error, fetchMountains } = useMountainStore();
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     fetchMountains();
   }, [fetchMountains]);
+
+  const filteredMountains = useMemo(() => {
+    if (!searchQuery.trim()) {
+      return mountains;
+    }
+    return mountains.filter(mountain =>
+      mountain.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [mountains, searchQuery]);
 
   return (
     <div className="flex flex-col">
@@ -40,14 +50,23 @@ const Mountains = () => {
           icon={<Star className="text-yellow-500" />}
         />
       </div>
-      <SearchBar placeholder={t.searchMountains} />
+      <SearchBar
+        placeholder={t.searchMountains}
+        value={searchQuery}
+        onChange={setSearchQuery}
+      />
 
       <div className="p-4 flex flex-wrap gap-4">
         {isLoading && <p>Loading mountains...</p>}
         {error && <p className="text-red-600">Error: {error}</p>}
+        {!isLoading && !error && filteredMountains.length === 0 && (
+          <p className="text-muted-foreground">
+            No mountains found matching `{searchQuery}`
+          </p>
+        )}
         {!isLoading &&
           !error &&
-          mountains.map(mountain => (
+          filteredMountains.map(mountain => (
             <MountainCard key={mountain.id} mountain={mountain} />
           ))}
       </div>
