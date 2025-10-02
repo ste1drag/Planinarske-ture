@@ -1,13 +1,7 @@
 ﻿using AutoMapper;
 using Identity.Application.Contracts;
-using Identity.Application.UseCases.Authentication.Commands.RegisterAdministrator;
 using Identity.Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Identity.Application.UseCases.Authentication.Commands.RegisterUser
 {
@@ -34,13 +28,7 @@ namespace Identity.Application.UseCases.Authentication.Commands.RegisterUser
 
             if (!result.Succeeded)
             {
-                // Get error details from the result
-                var errors = ((ResultWrapper)result).Errors;
-                if (errors != null && errors.Any())
-                {
-                    throw new Exception($"Failed to register user: {string.Join(", ", errors.Select(e => e.Description))}");
-                }
-                throw new Exception("Failed to register user: Unknown error occurred.");
+                throw new Exception("Failed to register user");
             }
 
             await _userService.AddToRoleAsync(user, Roles.User);
