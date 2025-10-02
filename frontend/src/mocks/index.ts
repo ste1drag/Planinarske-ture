@@ -1,11 +1,9 @@
 import { setupWorker } from 'msw/browser';
-import { mountainsHandlers } from './mountains/handlers';
 import { toursHandlers } from './tours/handlers';
 // import { toursHandlers } from './tours/handlers'; // Uncomment when you create tours handlers
 
 // Combine all handlers
 export const handlers = [
-  ...mountainsHandlers,
   ...toursHandlers, // Uncomment when ready
 ];
 

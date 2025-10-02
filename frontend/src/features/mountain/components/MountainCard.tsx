@@ -1,52 +1,24 @@
-import { Calendar, Mountain, TrendingUp } from 'lucide-react';
+import { Mountain } from 'lucide-react';
 import { ViewMountainDto } from '../types/ViewMountainDto';
-import { Card, CardContent, CardHeader } from '@/components/ui/Card';
-import IconPrefixedText from '@/components/ui/IconPrefixedText';
-import { useTranslation } from '@/contexts/TranslationContext';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 
 export default function MountainCard({
   mountain,
 }: {
   mountain: ViewMountainDto;
 }) {
-  const t = useTranslation();
-
   return (
-    <Card className="w-full min-w-[30vw] max-w-[40vw] min-h-fit">
+    <Card className="w-full max-w-sm hover:shadow-lg transition-shadow">
       <CardHeader>
-        <IconPrefixedText
-          icon={Mountain}
-          text={mountain.name}
-          textClassName="text-xl"
-          gap="md"
-          iconSize={22}
-        />
-        <hr />
+        <CardTitle className="flex items-center gap-2 text-forest">
+          <Mountain className="h-5 w-5" />
+          {mountain.name}
+        </CardTitle>
       </CardHeader>
       <CardContent>
-        <h1 className="text-xl text-black/40 pb-5">
-          {mountain?.height && mountain.height + 'm'}
-        </h1>
-        <div className="flex justify-between pb-2">
-          <IconPrefixedText
-            icon={TrendingUp}
-            text={t.totalHours}
-            textClassName="text-xl"
-            gap="md"
-            iconSize={22}
-          />
-          TODO
-        </div>
-        <div className="flex justify-between b-2 ">
-          <IconPrefixedText
-            icon={Calendar}
-            text={t.upcoming}
-            textClassName="text-xl"
-            gap="md"
-            iconSize={22}
-          />
-          <text className="text-green-300">TODO</text>
-        </div>
+        <p className="text-2xl font-bold text-muted-foreground">
+          {mountain.height}m
+        </p>
       </CardContent>
     </Card>
   );
