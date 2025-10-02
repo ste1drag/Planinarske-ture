@@ -4,7 +4,7 @@ export interface NewUserDTO {
   UserName: string;
   Password: string;
   Email: string;
-  PhoneNumber?: string;
+  PhoneNumber: string;
 }
 
 export interface UserCredentialsDTO {

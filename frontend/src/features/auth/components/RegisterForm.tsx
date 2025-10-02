@@ -24,6 +24,7 @@ export default function RegisterForm({ onToggleToLogin }: RegisterFormProps) {
   const [lastName, setLastName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [validationError, setValidationError] = useState('');
@@ -38,11 +39,19 @@ export default function RegisterForm({ onToggleToLogin }: RegisterFormProps) {
       return;
     }
 
+    if (!phoneNumber.startsWith('+')) {
+      setValidationError(
+        'Phone number must start with country code (e.g., +1, +381)'
+      );
+      return;
+    }
+
     await register({
       FirstName: firstName,
       LastName: lastName,
       UserName: username,
       Email: email,
+      PhoneNumber: phoneNumber,
       Password: password,
     });
 
@@ -116,6 +125,21 @@ export default function RegisterForm({ onToggleToLogin }: RegisterFormProps) {
               required
               disabled={isLoading}
             />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="phoneNumber">Phone Number</Label>
+            <Input
+              id="phoneNumber"
+              type="tel"
+              placeholder="Enter your phone number"
+              value={phoneNumber}
+              onChange={e => setPhoneNumber(e.target.value)}
+              required
+              disabled={isLoading}
+            />
+            <p className="text-xs text-muted-foreground">
+              Must include country code (e.g., +1, +381, +44)
+            </p>
           </div>
           <div className="space-y-2">
             <Label htmlFor="password">{t.password}</Label>
