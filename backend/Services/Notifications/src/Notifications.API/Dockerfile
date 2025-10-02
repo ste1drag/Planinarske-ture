@@ -1,5 +1,5 @@
 ﻿# Dockerfile
-# Multi-stage build for Notifications Web API (.\Services\Notifications\src\WebApi)
+# Multi-stage build for Notifications Web API (.\Services\Notifications\src\Notifications.API)
 
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 WORKDIR /app
@@ -15,8 +15,8 @@ COPY . .
 # Restore the Notifications solution
 RUN dotnet restore Services/Notifications/Notifications.sln
 
-# Publish the WebApi project by its .csproj; do not override AssemblyName
-RUN dotnet publish Services/Notifications/src/WebApi/Notifications.API.csproj -c Release -o /app/publish /p:UseAppHost=false
+# Publish the Notifications.API project by its .csproj; do not override AssemblyName
+RUN dotnet publish Services/Notifications/src/Notifications.API/Notifications.API.csproj -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

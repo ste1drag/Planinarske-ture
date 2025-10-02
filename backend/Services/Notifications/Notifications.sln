@@ -17,9 +17,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.IntegrationTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.ArchitectureTests", "tests\Notifications.ArchitectureTests\Notifications.ArchitectureTests.csproj", "{CA57EAC2-4D94-485B-861D-C2377C52891E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.Presentation", "src\Presentation\Notifications.Presentation.csproj", "{D8120B0F-4A32-4890-8876-8C817FEAFDB3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.Presentation", "src\Notifications.Presentation\Notifications.Presentation.csproj", "{D8120B0F-4A32-4890-8876-8C817FEAFDB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.API", "src\WebApi\Notifications.API.csproj", "{BEB68C37-5400-42EC-B854-85B5EBD0D441}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.API", "src\Notifications.API\Notifications.API.csproj", "{BEB68C37-5400-42EC-B854-85B5EBD0D441}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
