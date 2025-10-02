@@ -31,9 +31,10 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     set({ isLoading: true, error: null });
     try {
       const authData = await loginUser(credentials);
-      localStorage.setItem('auth_token', authData.accessToken);
-      localStorage.setItem('refresh_token', authData.refreshToken);
-      localStorage.setItem('user_name', credentials.userName);
+      console.log(authData);
+      localStorage.setItem('auth_token', authData.AccessToken);
+      localStorage.setItem('refresh_token', authData.RefreshToken);
+      localStorage.setItem('user_name', credentials.UserName);
       set({ user: authData, isLoading: false });
     } catch (error) {
       set({
@@ -63,8 +64,8 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       if (userName) {
         try {
           await logoutUser({
-            userName,
-            refreshToken: user.refreshToken,
+            UserName: userName,
+            RefreshToken: user.RefreshToken,
           });
         } catch (error) {
           console.error('Logout API call failed:', error);
@@ -87,11 +88,11 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     }
     try {
       const authData = await refreshToken({
-        userName,
-        refreshToken: refreshTokenValue,
+        UserName: userName,
+        RefreshToken: refreshTokenValue,
       });
-      localStorage.setItem('auth_token', authData.accessToken);
-      localStorage.setItem('refresh_token', authData.refreshToken);
+      localStorage.setItem('auth_token', authData.AccessToken);
+      localStorage.setItem('refresh_token', authData.RefreshToken);
       set({ user: authData });
     } catch (error) {
       localStorage.removeItem('auth_token');
@@ -108,8 +109,8 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     if (token && refreshTokenValue) {
       set({
         user: {
-          accessToken: token,
-          refreshToken: refreshTokenValue,
+          AccessToken: token,
+          RefreshToken: refreshTokenValue,
           isAuthorized: true,
         },
       });

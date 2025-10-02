@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useAuthStore } from '../store/auth-store';
 import { Button } from '@/components/ui/Button';
 import {
   Card,
@@ -18,27 +19,37 @@ interface RegisterFormProps {
 
 export default function RegisterForm({ onToggleToLogin }: RegisterFormProps) {
   const t = useTranslation();
+  const { register, isLoading, error, clearError } = useAuthStore();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [validationError, setValidationError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    clearError();
+    setValidationError('');
 
     if (password !== confirmPassword) {
-      alert('Passwords do not match');
+      setValidationError('Passwords do not match');
       return;
     }
 
-    // Handle registration logic here
-    console.log('Registration attempt:', {
-      firstName,
-      lastName,
-      email,
-      password,
+    await register({
+      FirstName: firstName,
+      LastName: lastName,
+      UserName: username,
+      Email: email,
+      Password: password,
     });
+
+    // Switch to login form on successful registration
+    if (!error) {
+      onToggleToLogin();
+    }
   };
 
   return (
@@ -51,6 +62,11 @@ export default function RegisterForm({ onToggleToLogin }: RegisterFormProps) {
       </CardHeader>
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
+          {(error || validationError) && (
+            <div className="p-3 bg-red-50 border border-red-200 rounded-md">
+              <p className="text-sm text-red-600">{error ?? validationError}</p>
+            </div>
+          )}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="firstName">{t.firstName}</Label>
@@ -61,6 +77,7 @@ export default function RegisterForm({ onToggleToLogin }: RegisterFormProps) {
                 value={firstName}
                 onChange={e => setFirstName(e.target.value)}
                 required
+                disabled={isLoading}
               />
             </div>
             <div className="space-y-2">
@@ -72,8 +89,21 @@ export default function RegisterForm({ onToggleToLogin }: RegisterFormProps) {
                 value={lastName}
                 onChange={e => setLastName(e.target.value)}
                 required
+                disabled={isLoading}
               />
             </div>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="username">Username</Label>
+            <Input
+              id="username"
+              type="text"
+              placeholder="Enter username"
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+              required
+              disabled={isLoading}
+            />
           </div>
           <div className="space-y-2">
             <Label htmlFor="email">{t.emailAddress}</Label>
@@ -84,6 +114,7 @@ export default function RegisterForm({ onToggleToLogin }: RegisterFormProps) {
               value={email}
               onChange={e => setEmail(e.target.value)}
               required
+              disabled={isLoading}
             />
           </div>
           <div className="space-y-2">
@@ -95,6 +126,7 @@ export default function RegisterForm({ onToggleToLogin }: RegisterFormProps) {
               value={password}
               onChange={e => setPassword(e.target.value)}
               required
+              disabled={isLoading}
             />
           </div>
           <div className="space-y-2">
@@ -106,12 +138,13 @@ export default function RegisterForm({ onToggleToLogin }: RegisterFormProps) {
               value={confirmPassword}
               onChange={e => setConfirmPassword(e.target.value)}
               required
+              disabled={isLoading}
             />
           </div>
         </CardContent>
         <CardFooter className="flex flex-col space-y-4">
-          <Button type="submit" className="w-full">
-            {t.signUp}
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? 'Creating account...' : t.signUp}
           </Button>
           <p className="text-center text-sm text-gray-600">
             {t.alreadyHaveAccount}{' '}

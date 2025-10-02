@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../store/auth-store';
 import { Button } from '@/components/ui/Button';
 import {
   Card,
@@ -18,13 +20,24 @@ interface LoginFormProps {
 
 export default function LoginForm({ onToggleToRegister }: LoginFormProps) {
   const t = useTranslation();
-  const [email, setEmail] = useState('');
+  const navigate = useNavigate();
+  const { login, isLoading, error, clearError } = useAuthStore();
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log('Login attempt:', { email, password });
+    clearError();
+
+    await login({
+      UserName: username,
+      Password: password,
+    });
+
+    // Navigate to home on successful login
+    if (!error) {
+      navigate('/home');
+    }
   };
 
   return (
@@ -37,15 +50,21 @@ export default function LoginForm({ onToggleToRegister }: LoginFormProps) {
       </CardHeader>
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
+          {error && (
+            <div className="p-3 bg-red-50 border border-red-200 rounded-md">
+              <p className="text-sm text-red-600">{error}</p>
+            </div>
+          )}
           <div className="space-y-2">
-            <Label htmlFor="email">{t.emailAddress}</Label>
+            <Label htmlFor="username">Username</Label>
             <Input
-              id="email"
-              type="email"
-              placeholder={t.enterEmail}
-              value={email}
-              onChange={e => setEmail(e.target.value)}
+              id="username"
+              type="text"
+              placeholder="Enter username"
+              value={username}
+              onChange={e => setUsername(e.target.value)}
               required
+              disabled={isLoading}
             />
           </div>
           <div className="space-y-2">
@@ -57,12 +76,13 @@ export default function LoginForm({ onToggleToRegister }: LoginFormProps) {
               value={password}
               onChange={e => setPassword(e.target.value)}
               required
+              disabled={isLoading}
             />
           </div>
         </CardContent>
         <CardFooter className="flex flex-col space-y-4">
-          <Button type="submit" className="w-full">
-            {t.signIn}
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? 'Signing in...' : t.signIn}
           </Button>
           <p className="text-center text-sm text-gray-600">
             {t.dontHaveAccount}{' '}
