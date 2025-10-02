@@ -17,8 +17,8 @@ function AppContent() {
     <div className="min-h-screen bg-background">
       {!hideNav && <Nav />}
       <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Landing />} />
         <Route path="/tours" element={<Tours />} />
         <Route path="/mountains" element={<Mountains />} />
         <Route path="/notifications" element={<Notifications />} />

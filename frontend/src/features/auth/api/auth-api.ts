@@ -11,6 +11,10 @@ export const registerUser = async (userData: NewUserDTO): Promise<void> => {
   await axios_instance.post(AUTH_ENDPOINTS.REGISTER_USER, userData);
 };
 
+export const registerAdmin = async (userData: NewUserDTO): Promise<void> => {
+  await axios_instance.post(AUTH_ENDPOINTS.REGISTER_ADMIN, userData);
+};
+
 export const loginUser = async (
   credentials: UserCredentialsDTO
 ): Promise<AuthenticationModel> => {
