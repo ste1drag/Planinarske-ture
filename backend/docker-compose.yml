@@ -13,7 +13,7 @@ services:
       - ConnectionStrings__ToursDB=Server=tours_db;Initial Catalog=ToursDb;User Id=sa;Password=PlaninarskeTureToursDB*1;TrustServerCertificate=True;
     depends_on:
       - tours_db
-        
+
   identity-api:
     image: identity-api:latest
     build:
@@ -29,6 +29,26 @@ services:
     depends_on:
       - identity_db
 
+<<<<<<< HEAD
+=======
+  reviewing-api:
+    image: reviewing-api:latest
+    build:
+      context: .
+      dockerfile: Services/Review/Reviewing.Api/Dockerfile
+    ports:
+      - "8082:8082"
+    environment:
+      - ASPNETCORE_URLS=http://+:8082
+      - ASPNETCORE_HTTP_PORTS=8082
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__ReviewingDB=Host=reviewing-db;Database=reviewing;Username=postgres;Password=postgres;SSL Mode=Disable
+    depends_on:
+      reviewing-db:
+        condition: service_healthy
+    restart: on-failure
+
+>>>>>>> 950194d7e966ef62a2d72e28e143e4d547264f36
   tours_db:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: tours_db
