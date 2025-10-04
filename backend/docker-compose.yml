@@ -29,9 +29,6 @@ services:
     depends_on:
       - identity_db
 
-  
-
-
   tours_db:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: tours_db
