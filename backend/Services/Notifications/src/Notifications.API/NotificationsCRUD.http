@@ -1,0 +1,74 @@
+### Variables
+@baseUrl = https://localhost:7001/api/InAppNotifications
+@notificationId = {{createNotification.response.body.id}}
+@userId = user123
+
+### Create a new notification (POST)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "userId": "{{userId}}",
+  "type": 0,
+  "content": "Welcome to our platform! This is your first notification."
+}
+
+### Get all notifications (GET)
+GET {{baseUrl}}
+
+### Get notification by ID (GET)
+GET {{baseUrl}}/{{notificationId}}
+
+### Get notifications by User ID (GET)
+GET {{baseUrl}}/user/{{userId}}
+
+### Update notification (PUT)
+PUT {{baseUrl}}/{{notificationId}}
+Content-Type: application/json
+
+{
+  "type": 1,
+  "content": "Updated notification content - Tour has been cancelled.",
+  "status": 2,
+  "readAt": "2025-08-23T13:00:00.000Z"
+}
+
+### Mark notification as read by updating ReadAt (PUT)
+PUT {{baseUrl}}/{{notificationId}}
+Content-Type: application/json
+
+{
+  "type": 0,
+  "content": "Welcome to our platform! This notification has been read.",
+  "status": 2,
+  "readAt": "{{$datetime iso8601}}"
+}
+
+### Delete notification (DELETE)
+DELETE {{baseUrl}}/{{notificationId}}
+
+### Test with multiple users - Create notification for another user
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "userId": "user456",
+  "type": 2,
+  "content": "Tour has been updated with new information."
+}
+
+### Get notifications for specific user
+GET {{baseUrl}}/user/user456
+
+### Notification Types Reference:
+# 0 = TourCreated
+# 1 = TourCancelled
+# 2 = TourUpdated
+# 3 = Welcome
+# 4 = PasswordReset
+
+### Status Reference:
+# 0 = Pending
+# 1 = Sent
+# 2 = Read
+# 3 = Failed
