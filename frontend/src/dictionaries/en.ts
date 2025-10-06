@@ -126,4 +126,4 @@ export const en = {
   searchMountains: 'Search mountains ...',
 } as const;
 
-export type Dictionary = typeof en;
+export type Dictionary = Record<keyof typeof en, string>;;
