@@ -1,27 +1,96 @@
-import React from 'react';
 import './App.css';
-import Nav from "./components/Nav/Nav";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {addTourEndpoint, homeEndpoint, tourEndpoint, toursEndpoint} from "./utils/apiEndpoints";
-import Home from "./components/Home/Home";
-import Tours from "./components/Tours/Tours";
-import TourInfo from "./components/TourInfo/TourInfo";
-import AddTour from "./components/AddTour/AddTour";
+import { useEffect } from 'react';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+  Navigate,
+} from 'react-router-dom';
+import Nav from './components/layout/Nav';
+import { TranslationProvider } from './contexts/TranslationContext';
+import { useAuthStore } from './features/auth/store/auth-store';
+import Landing from './pages/Landing';
+import Login from './pages/Login';
+import Mountains from './pages/Mountains';
+import Notifications from './pages/Notifications';
+import Profile from './pages/Profile';
+import Tours from './pages/Tours';
 
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  const user = useAuthStore(state => state.user);
+  if (!user) {
+    return <Navigate to="/" replace />;
+  }
+  return <>{children}</>;
+}
+
+function AppContent() {
+  const location = useLocation();
+  const hideNav = location.pathname === '/';
+  const initializeAuth = useAuthStore(state => state.initializeAuth);
+
+  useEffect(() => {
+    initializeAuth();
+  }, [initializeAuth]);
+
+  return (
+    <div className="min-h-screen bg-background">
+      {!hideNav && <Nav />}
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <Landing />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/tours"
+          element={
+            <ProtectedRoute>
+              <Tours />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/mountains"
+          element={
+            <ProtectedRoute>
+              <Mountains />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/notifications"
+          element={
+            <ProtectedRoute>
+              <Notifications />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </div>
+  );
+}
 
 function App() {
   return (
+    <TranslationProvider>
       <BrowserRouter>
-        <div className="App">
-                <Nav/>
-                <Routes>
-                    <Route path={homeEndpoint} element={<Home/>} />
-                    <Route path={toursEndpoint} element={<Tours/>} />
-                    <Route path={toursEndpoint} element={<TourInfo/>} />
-                    <Route path={addTourEndpoint} element={<AddTour/>} />
-                </Routes>
-        </div>
+        <AppContent />
       </BrowserRouter>
+    </TranslationProvider>
   );
 }
 

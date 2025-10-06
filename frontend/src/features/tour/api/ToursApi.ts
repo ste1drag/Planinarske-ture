@@ -1,0 +1,39 @@
+import { TOURS_ENDPOINTS } from './TourEndpoints';
+import { AddTourDto, AddTourCommand } from '../types/AddTourDto';
+import { DeleteTourDto } from '../types/DeleteTourDto';
+import { TourViewModel } from '../types/TourDto';
+import { axios_instance } from '@/lib/root-api';
+
+export const getAllTours = async (): Promise<TourViewModel[]> => {
+  const response = await axios_instance.get<TourViewModel[]>(
+    TOURS_ENDPOINTS.GET_ALL_TOURS
+  );
+  return response.data;
+};
+
+export const getTourById = async (tourId: string): Promise<TourViewModel> => {
+  const response = await axios_instance.get<TourViewModel>(
+    TOURS_ENDPOINTS.GET_TOUR_BY_ID(tourId)
+  );
+  return response.data;
+};
+
+export const getToursByMountainId = async (
+  mountainId: string
+): Promise<TourViewModel[]> => {
+  const response = await axios_instance.get<TourViewModel[]>(
+    TOURS_ENDPOINTS.GET_TOURS_BY_MOUNTAIN_ID(mountainId)
+  );
+  return response.data;
+};
+
+export const addTour = async (tourData: AddTourDto): Promise<void> => {
+  const command: AddTourCommand = {
+    addTourDTO: tourData,
+  };
+  await axios_instance.post(TOURS_ENDPOINTS.ADD_TOUR, command);
+};
+
+export const deleteTour = async (tourData: DeleteTourDto): Promise<void> => {
+  await axios_instance.delete(TOURS_ENDPOINTS.DELETE_TOUR, { data: tourData });
+};
