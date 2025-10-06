@@ -29,8 +29,6 @@ services:
     depends_on:
       - identity_db
 
-<<<<<<< HEAD
-=======
   reviewing-api:
     image: reviewing-api:latest
     build:
@@ -83,7 +81,6 @@ services:
       timeout: 5s
       retries: 5
 
->>>>>>> 950194d7e966ef62a2d72e28e143e4d547264f36
   tours_db:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: tours_db
