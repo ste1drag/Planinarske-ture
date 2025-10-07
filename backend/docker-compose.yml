@@ -1,4 +1,30 @@
 services:
+  mountaintoursgateway.api:
+    image: ${DOCKER_REGISTRY-}moutaintoursgatewayapi
+    build:
+      context: ./MountainToursGateway
+      dockerfile: MoutainToursGateway.API/Dockerfile
+    ports:
+      - "8084:8084"
+    environment:
+      - ASPNETCORE_URLS=http://+:8084
+      - ASPNETCORE_HTTP_PORTS=8084
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - gateway_keys:/home/app/.aspnet/DataProtection-Keys
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8084/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+    depends_on:
+      - tours-api
+      - identity-api
+      - reviewing-api
+      - notifications-api
+
   tours-api:
     image: tours-api:latest
     build:
@@ -33,7 +59,7 @@ services:
     image: reviewing-api:latest
     build:
       context: .
-      dockerfile: Services/Review/Reviewing.API/Dockerfile
+      dockerfile: Services/Review/Reviewing.Api/Dockerfile
     ports:
       - "8082:8082"
     environment:
@@ -115,3 +141,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 3
+
+volumes:
+  gateway_keys:
