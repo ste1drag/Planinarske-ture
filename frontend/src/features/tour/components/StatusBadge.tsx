@@ -1,4 +1,8 @@
-import { TourStatus, TourStatusColoring } from '../enums/TourStatus';
+import {
+  TourStatus,
+  TourStatusColoring,
+  TourStatusLabels,
+} from '../enums/TourStatus';
 import GenericBadge from '@/components/ui/GenericCardBadge';
 
 export default function StatusBadge({
@@ -11,7 +15,7 @@ export default function StatusBadge({
   return (
     <GenericBadge
       value={tourStatus}
-      label={TourStatus[tourStatus]}
+      label={TourStatusLabels[tourStatus]}
       colorMap={TourStatusColoring}
       style={{
         backgroundColor,

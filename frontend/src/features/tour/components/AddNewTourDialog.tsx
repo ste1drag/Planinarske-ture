@@ -1,5 +1,5 @@
 import { Plus } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '../../../components/ui/Button';
 import {
   Dialog,
@@ -10,7 +10,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '../../../components/ui/Dialog';
+import { useTourStore } from '../store/tour-store';
 import { useTranslation } from '@/contexts/TranslationContext';
+import { useMountainStore } from '@/features/mountain/store/mountain-store';
 
 interface AddTourFormData {
   name: string;
@@ -33,6 +35,15 @@ export default function AddNewTourDialog() {
     date: '',
   });
 
+  const { createTour, isLoading } = useTourStore();
+  const { mountains, fetchMountains } = useMountainStore();
+
+  useEffect(() => {
+    if (open) {
+      fetchMountains();
+    }
+  }, [open, fetchMountains]);
+
   const handleInputChange = (field: keyof AddTourFormData, value: string) => {
     setFormData(prev => ({
       ...prev,
@@ -40,17 +51,47 @@ export default function AddNewTourDialog() {
     }));
   };
 
-  const handleSave = () => {
-    console.log('Saving tour:', formData);
-    setOpen(false);
-    setFormData({
-      name: '',
-      mountainId: '',
-      description: '',
-      minNumberOfPeople: '',
-      maxNumberOfPeople: '',
-      date: '',
-    });
+  const handleSave = async () => {
+    // Validate required fields
+    if (
+      !formData.name ||
+      !formData.mountainId ||
+      !formData.description ||
+      !formData.minNumberOfPeople ||
+      !formData.maxNumberOfPeople ||
+      !formData.date
+    ) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    try {
+      const tourDto = {
+        name: formData.name,
+        mountainId: formData.mountainId,
+        description: formData.description,
+        minNumberOfPeople: parseInt(formData.minNumberOfPeople, 10),
+        maxNumberOfPeople: parseInt(formData.maxNumberOfPeople, 10),
+        date: new Date(formData.date).toISOString(),
+      };
+
+      console.log('Saving tour:', tourDto);
+      await createTour(tourDto);
+      setOpen(false);
+      setFormData({
+        name: '',
+        mountainId: '',
+        description: '',
+        minNumberOfPeople: '',
+        maxNumberOfPeople: '',
+        date: '',
+      });
+    } catch (error) {
+      console.error('Failed to create tour:', error);
+      alert(
+        `Failed to create tour: ${error instanceof Error ? error.message : 'Unknown error'}`
+      );
+    }
   };
 
   const handleCancel = () => {
@@ -116,9 +157,11 @@ export default function AddNewTourDialog() {
               className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
             >
               <option value="">{t.selectMountainForTour}</option>
-              {/* TODO: Add dynamic mountain options */}
-              <option value="mountain1">Sample Mountain 1</option>
-              <option value="mountain2">Sample Mountain 2</option>
+              {mountains.map(mountain => (
+                <option key={mountain.id} value={mountain.id}>
+                  {mountain.name} ({mountain.height}m)
+                </option>
+              ))}
             </select>
           </div>
 
@@ -196,14 +239,15 @@ export default function AddNewTourDialog() {
         </div>
 
         <DialogFooter className="flex gap-2">
-          <Button variant="outline" onClick={handleCancel}>
+          <Button variant="outline" onClick={handleCancel} disabled={isLoading}>
             {t.cancel}
           </Button>
           <Button
             onClick={handleSave}
             className="bg-forest text-white hover:bg-forest-dark"
+            disabled={isLoading}
           >
-            {t.save}
+            {isLoading ? t.saving || 'Saving...' : t.save}
           </Button>
         </DialogFooter>
       </DialogContent>

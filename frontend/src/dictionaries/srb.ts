@@ -70,6 +70,7 @@ export const srb: Dictionary = {
 
   // Status
   selectStatus: 'Izaberi status',
+  allTours: 'Sve ture',
   active: 'Aktivna',
   reserved: 'Rezervisana',
   canceled: 'Otkazana',
@@ -123,4 +124,5 @@ export const srb: Dictionary = {
   searchMountains: 'Pretražite planine ...',
   loading: 'Ucitavanje',
   error: 'Greska',
+  saving: 'Cuvanje',
 };

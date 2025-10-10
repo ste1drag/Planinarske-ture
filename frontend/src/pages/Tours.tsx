@@ -28,9 +28,10 @@ const Tours = () => {
     const matchesSearch = tour.name
       .toLowerCase()
       .includes(searchQuery.toLowerCase());
-    const matchesStatus = statusFilter
-      ? tour.status.toString() === statusFilter
-      : true;
+    const matchesStatus =
+      !statusFilter || statusFilter === 'all'
+        ? true
+        : tour.status === Number(statusFilter);
     return matchesSearch && matchesStatus;
   });
 
@@ -53,9 +54,16 @@ const Tours = () => {
             <SelectValue placeholder={t.selectStatus} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value={TourStatus.ACTIVE}>{t.active}</SelectItem>
-            <SelectItem value={TourStatus.RESERVED}>{t.reserved}</SelectItem>
-            <SelectItem value={TourStatus.CANCELED}>{t.canceled}</SelectItem>
+            <SelectItem value="all">{t.allTours}</SelectItem>
+            <SelectItem value={TourStatus.ACTIVE.toString()}>
+              {t.active}
+            </SelectItem>
+            <SelectItem value={TourStatus.RESERVED.toString()}>
+              {t.reserved}
+            </SelectItem>
+            <SelectItem value={TourStatus.CANCELED.toString()}>
+              {t.canceled}
+            </SelectItem>
           </SelectContent>
         </Select>
       </div>

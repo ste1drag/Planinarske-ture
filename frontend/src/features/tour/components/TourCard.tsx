@@ -31,15 +31,16 @@ export default function TourCard({ tour }: { tour: TourViewModel }) {
 
   return (
     <Card className="w-full h-full flex flex-col">
-      <CardHeader className="flex justify-between items-start">
-        <StatusBadge tourStatus={tour.status} />
-        <WeatherBadge weather={tour.weather} />
+      <CardHeader className="pb-3">
+        <div className="flex justify-between items-center gap-2 mb-3">
+          <StatusBadge tourStatus={tour.status} />
+          <WeatherBadge weather={tour.weather} />
+        </div>
+        <CardTitle>{tour.name}</CardTitle>
       </CardHeader>
       <CardContent className="flex-grow flex flex-col">
         <div>
-          <CardTitle className="pb-3">{tour.name}</CardTitle>
-          <hr />
-          <p className="pt-3">{tour.description}</p>
+          <p className="text-sm text-muted-foreground">{tour.description}</p>
         </div>
         <IconPrefixedText
           icon={Calendar}
