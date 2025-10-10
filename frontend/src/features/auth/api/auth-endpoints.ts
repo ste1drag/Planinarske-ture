@@ -1,4 +1,4 @@
-const IDENTITY_API_BASE_URL = 'http://localhost:8081';
+const IDENTITY_API_BASE_URL = '/identity-api';
 
 export const AUTH_ENDPOINTS = {
   LOGIN: `${IDENTITY_API_BASE_URL}/Authentication/Login`,
