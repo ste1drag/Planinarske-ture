@@ -4,11 +4,11 @@ using Reviewing.Domain.ValueObjects;
 
 namespace Reviewing.Domain.Entities
 {
-    public class Review(int userId, int tourId, string title, string? comment, Difficulty? difficulty, Score? score) : EntityBase
+    public class Review(int userId, Guid tourId, string title, string? comment, Difficulty? difficulty, Score? score) : EntityBase
     (0, DateTime.UtcNow, DateTime.UtcNow)
     {
         public int UserId { get; } = userId;
-        public int TourId { get; } = tourId;
+        public Guid TourId { get; } = tourId;
         public string Title { get; set; } = title;
         public string? Comment { get; set; } = comment;
         public Difficulty? Difficulty { get; set; } = difficulty;
