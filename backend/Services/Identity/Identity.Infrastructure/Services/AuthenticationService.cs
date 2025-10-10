@@ -61,7 +61,7 @@ namespace Identity.Infrastructure.Services
             var refreshToken = await CreateRefreshToken();
             user.RefreshTokens.Add(refreshToken);
             await _userManager.UpdateAsync(user);
-            return new AuthenticationModel { AccessToken = accessToken, RefreshToken = refreshToken.Token };
+            return new AuthenticationModel {UserName = user.UserName, Name = user.FirstName + " " +user.LastName, AccessToken = accessToken, RefreshToken = refreshToken.Token };
         }
 
         public async Task RemoveRefreshToken(User user, string refreshToken)

@@ -211,3 +211,4 @@ StyleCopReport.xml
 .DS_Store
 
 _NCrunch*
+frontend/msw/mockServiceWorker.js
