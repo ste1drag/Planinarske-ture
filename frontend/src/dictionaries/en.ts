@@ -124,6 +124,8 @@ export const en = {
   // Misc
   searchTours: 'Search tours or mountains ...',
   searchMountains: 'Search mountains ...',
+  error: 'error',
+  loading: 'loading',
 } as const;
 
-export type Dictionary = Record<keyof typeof en, string>;;
+export type Dictionary = Record<keyof typeof en, string>;
