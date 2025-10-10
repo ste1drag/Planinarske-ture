@@ -43,13 +43,11 @@ namespace Notifications.Presentation.Controllers
 
         [HttpPost]
         public async Task<ActionResult<InAppNotificationResponse>> Create(
-            CreateInAppNotificationRequest request
-        )
+            CreateInAppNotificationRequest request)
         {
-            var command = new CreateInAppNotificationCommand { Request = request };
-            var response = await _mediator.Send(command);
-
-            return CreatedAtAction(nameof(GetById), new { id = response.Id }, response);
+            var command = new CreateInAppNotificationCommand(request);
+            var result = await _mediator.Send(command);
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
         }
 
         [HttpGet("user/{userId}")]

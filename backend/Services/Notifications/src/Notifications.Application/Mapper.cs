@@ -10,7 +10,7 @@ namespace Notifications.Application
         {
             CreateMap<InAppNotification, InAppNotificationResponse>().ReverseMap();
             CreateMap<CreateInAppNotificationRequest, InAppNotification>()
-                .ConstructUsing(src => new InAppNotification(src.UserId, src.Type, src.Content));
+                .ConstructUsing(src => new InAppNotification(src.UserId, src.Type, src.Title, src.Message, src.Content));
             CreateMap<UpdateInAppNotificationRequest, InAppNotification>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.UserId, opt => opt.Ignore())

@@ -5,39 +5,42 @@ using Notifications.Application.DTOs;
 using Notifications.Domain.Entities;
 using Notifications.Domain.Interfaces;
 
-namespace Notifications.Application.UseCases.InAppNotifications.Commands.CreateInAppNotification
+namespace Notifications.Application.UseCases.InAppNotifications.Commands.CreateInAppNotification;
+
+public class CreateInAppNotificationCommandHandler
+    : IRequestHandler<CreateInAppNotificationCommand, InAppNotificationResponse>
 {
-    public class CreateInAppNotificationCommandHandler
-        : IRequestHandler<CreateInAppNotificationCommand, InAppNotificationResponse>
+    private readonly IInAppNotificationRepository _repository;
+    private readonly IMapper _mapper;
+
+    public CreateInAppNotificationCommandHandler(
+        IInAppNotificationRepository repository,
+        IMapper mapper)
     {
-        private readonly IInAppNotificationRepository _repository;
-        private readonly IMapper _mapper;
+        _repository = repository;
+        _mapper = mapper;
+    }
 
-        public CreateInAppNotificationCommandHandler(
-            IInAppNotificationRepository repository,
-            IMapper mapper
+    public async Task<InAppNotificationResponse> Handle(
+        CreateInAppNotificationCommand request,
+        CancellationToken cancellationToken)
+    {
+        var notification = new InAppNotification(
+            request.Request.UserId,
+            request.Request.Type,
+            request.Request.Title,
+            request.Request.Message,
+            request.Request.Content
         )
         {
-            _repository = repository;
-            _mapper = mapper;
-        }
+            RelatedEntityId = request.Request.RelatedEntityId,
+            RelatedEntityType = request.Request.RelatedEntityType
+        };
 
-        public async Task<InAppNotificationResponse> Handle(
-            CreateInAppNotificationCommand request,
-            CancellationToken cancellationToken
-        )
-        {
-            var notification = new InAppNotification(
-                request.Request.UserId,
-                request.Request.Type,
-                request.Request.Content
-            );
+        // Apply business rules for creation
+        NotificationDeliveryRules.ApplyCreationRules(notification);
 
-            // Apply business rules for creation
-            NotificationDeliveryRules.ApplyCreationRules(notification);
-
-            var created = await _repository.CreateAsync(notification);
-            return _mapper.Map<InAppNotificationResponse>(created);
-        }
+        var created = await _repository.CreateAsync(notification);
+        return _mapper.Map<InAppNotificationResponse>(created);
     }
 }
