@@ -11,8 +11,12 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__ToursDB=Server=tours_db;Initial Catalog=ToursDb;User Id=sa;Password=PlaninarskeTureToursDB*1;TrustServerCertificate=True;
+      - RabbitMq__Host=rabbitmq
+      - RabbitMq__Username=guest
+      - RabbitMq__Password=guest
     depends_on:
       - tours_db
+      - rabbitmq
 
   identity-api:
     image: identity-api:latest
@@ -45,7 +49,7 @@ services:
       reviewing-db:
         condition: service_healthy
     restart: on-failure
-  
+
   notifications-api:
     image: notifications-api:latest
     build:
@@ -59,11 +63,33 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - MongoDb__ConnectionString=mongodb://root:notificationspwd@notifications-mongo:27017/?authSource=admin
       - MongoDb__Database=notifications
+      - RabbitMq__Host=rabbitmq
+      - RabbitMq__Username=guest
+      - RabbitMq__Password=guest
     depends_on:
-       notifications-mongo:
-         condition: service_healthy
+      notifications-mongo:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
     restart: on-failure
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    restart: unless-stopped
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
 
   notifications-mongo:
     image: mongo:7
@@ -76,10 +102,12 @@ services:
     ports:
       - "27018:27017"
     healthcheck:
-      test: ["CMD-SHELL", "mongosh --username $$MONGO_INITDB_ROOT_USERNAME --password $$MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase admin --eval 'db.adminCommand({ ping: 1 })' || exit 1"]
+      test: [ "CMD-SHELL", "mongosh --username $$MONGO_INITDB_ROOT_USERNAME --password $$MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase admin --eval 'db.adminCommand({ ping: 1 })' || exit 1" ]
       interval: 10s
       timeout: 5s
       retries: 5
+    volumes:
+      - notifications_mongo_data:/data/db
 
   tours_db:
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -90,6 +118,8 @@ services:
       MSSQL_PID: "Developer"
     ports:
       - "1434:1433"
+    volumes:
+      - tours_db_data:/var/opt/mssql
 
   identity_db:
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -100,6 +130,8 @@ services:
       MSSQL_PID: "Developer"
     ports:
       - "1435:1433"
+    volumes:
+      - identity_db_data:/var/opt/mssql
 
   reviewing-db:
     image: postgres:16
@@ -111,7 +143,16 @@ services:
     ports:
       - "6543:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 5s
       timeout: 5s
       retries: 3
+    volumes:
+      - reviewing_db_data:/var/lib/postgresql/data
+
+volumes:
+  rabbitmq_data:
+  notifications_mongo_data:
+  tours_db_data:
+  identity_db_data:
+  reviewing_db_data:
