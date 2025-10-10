@@ -4,7 +4,6 @@ import HeaderTitle from '@/components/layout/HeaderTitle';
 import InfoBox from '@/components/ui/InfoBox';
 import SearchBar from '@/components/ui/SearchBar';
 import { useTranslation } from '@/contexts/TranslationContext';
-import AddNewMountainDialog from '@/features/mountain/components/AddNewMountainDialog';
 import MountainCard from '@/features/mountain/components/MountainCard';
 import { useMountainStore } from '@/features/mountain/store/mountain-store';
 import { TourStatus } from '@/features/tour/enums/TourStatus';
@@ -41,11 +40,7 @@ const Mountains = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      <HeaderTitle
-        title={t.mountains}
-        subTitle={t.mountainsSubTitle}
-        button={<AddNewMountainDialog />}
-      />
+      <HeaderTitle title={t.mountains} subTitle={t.mountainsSubTitle} />
       <div className="flex flex-row gap-4">
         <InfoBox
           title={t.totalMountains}
