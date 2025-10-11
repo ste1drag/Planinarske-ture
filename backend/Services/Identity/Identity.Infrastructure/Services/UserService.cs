@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Identity.Application.Contracts;
 using Identity.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
+using System.Linq;
 
 namespace Identity.Infrastructure.Services
 {
@@ -38,14 +39,16 @@ namespace Identity.Infrastructure.Services
             if (existingUser != null)
             {
                 var result = IdentityResult.Failed(new IdentityError { Code = "DuplicateUserName", Description = $"Username '{user.UserName}' is already taken." });
-                return new ResultWrapper(result);
+                var errors = string.Join("; ", result.Errors.Select(e => e.Description));
+                throw new Exception(errors);
             }
 
             // Try to create the user
             var createResult = await _userManager.CreateAsync(user, password);
             if (!createResult.Succeeded)
             {
-                return new ResultWrapper(createResult);
+                var errors = string.Join("; ", createResult.Errors.Select(e => e.Description));
+                throw new Exception(errors);
             }
 
             // Return success
