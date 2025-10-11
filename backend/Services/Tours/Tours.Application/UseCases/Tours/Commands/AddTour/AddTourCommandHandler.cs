@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using MassTransit;
 using MediatR;
+using Shared.Events.Events.Tours;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +18,13 @@ namespace Tours.Application.UseCases.Tours.Commands.AddTour
     {
         private readonly IToursRepository _toursRepository;
         private readonly IMapper _mapper;
+        private readonly IPublishEndpoint _publishEndpoint;
 
-        public AddTourCommandHandler(IToursRepository toursRepository, IMapper mapper)
+        public AddTourCommandHandler(IToursRepository toursRepository, IMapper mapper, IPublishEndpoint publishEndpoint)
         {
             _toursRepository = toursRepository;
             _mapper = mapper;
+            _publishEndpoint = publishEndpoint;
         }
 
         public async Task Handle(AddTourCommand request, CancellationToken cancellationToken)
@@ -28,6 +32,22 @@ namespace Tours.Application.UseCases.Tours.Commands.AddTour
             Tour tour = _mapper.Map<Tour>(request.AddTourDTO);
             tour.HikerRange = new HikerRange(request.AddTourDTO.MinNumberOfPeople, request.AddTourDTO.MaxNumberOfPeople);
             await _toursRepository.AddNew(tour);
+
+            var tourCreatedEvent = new TourCreateEvent.TourCreatedEvent
+            {
+                Id = Guid.NewGuid(),
+                OccuredOn = DateTime.UtcNow,
+                TourId = tour.Id.ToString(),
+                Name = tour.Name,
+                Description = tour.Description,
+                DateOfTour = tour.Date,
+                MountainId = tour.MountainId.ToString()
+
+            };
+
+            await _publishEndpoint.Publish(tourCreatedEvent, cancellationToken);
+
+
         }
     }
 }

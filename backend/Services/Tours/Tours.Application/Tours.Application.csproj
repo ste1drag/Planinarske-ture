@@ -8,11 +8,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tours.Domain\Tours.Domain.csproj" />
+ <ProjectReference Include="..\..\Shared.Events\src\Shared.Events\Shared.Events.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="MediatR" Version="12.4.0" />
+    <PackageReference Include="MassTransit.Abstractions" Version="8.2.0" />
   </ItemGroup>
 
 </Project>

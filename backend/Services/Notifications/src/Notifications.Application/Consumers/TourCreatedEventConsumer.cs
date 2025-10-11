@@ -34,13 +34,15 @@ public class TourCreatedEventConsumer : IConsumer<TourCreateEvent.TourCreatedEve
         {
             var request = new CreateInAppNotificationRequest
             {
-                UserId = message.CreateByUserId,
+                Id = message.Id.ToString(),
+                OccuredOn = message.OccuredOn,
+                TourId = message.TourId,
                 Type = NotificationTypeEnum.TourCreated,
-                Title = "New Tour Created",
-                Message = $"Tour '{message.Title}' has been created successfully.",
-                Content = $"A new tour '{message.Title}' has been created.",
-                RelatedEntityId = message.TourId,
-                RelatedEntityType = "Tour"
+                Name = message.Name,
+                Description = message.Description,
+                DateOfTour = message.DateOfTour,
+                MountainId = message.MountainId
+
             };
 
             var command = new CreateInAppNotificationCommand(request);

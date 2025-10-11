@@ -25,22 +25,15 @@ public class CreateInAppNotificationCommandHandler
         CreateInAppNotificationCommand request,
         CancellationToken cancellationToken)
     {
-        var notification = new InAppNotification(
-            request.Request.UserId,
-            request.Request.Type,
-            request.Request.Title,
-            request.Request.Message,
-            request.Request.Content
-        )
-        {
-            RelatedEntityId = request.Request.RelatedEntityId,
-            RelatedEntityType = request.Request.RelatedEntityType
-        };
+        // Use AutoMapper to create the entity from the request
+        var notification = _mapper.Map<InAppNotification>(request.Request);
 
         // Apply business rules for creation
         NotificationDeliveryRules.ApplyCreationRules(notification);
 
         var created = await _repository.CreateAsync(notification);
+
+        //->Rabbit MQ -> GW consumes -> SignalR notify user
         return _mapper.Map<InAppNotificationResponse>(created);
     }
 }

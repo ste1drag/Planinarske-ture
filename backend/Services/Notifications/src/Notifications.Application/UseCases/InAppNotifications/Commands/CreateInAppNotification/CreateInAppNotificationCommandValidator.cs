@@ -1,5 +1,5 @@
 using FluentValidation;
-using Notifications.Domain.Enums;
+
 
 namespace Notifications.Application.UseCases.InAppNotifications.Commands.CreateInAppNotification
 {
@@ -10,21 +10,16 @@ namespace Notifications.Application.UseCases.InAppNotifications.Commands.CreateI
         {
             RuleFor(x => x.Request).NotNull().WithMessage("Request cannot be null");
 
-            RuleFor(x => x.Request.UserId)
+            RuleFor(x => x.Request.TourId)
                 .NotEmpty()
-                .WithMessage("UserId is required")
+                .WithMessage("TourId is required")
                 .MaximumLength(100)
-                .WithMessage("UserId cannot exceed 100 characters");
+                .WithMessage("TourId cannot exceed 100 characters");
 
             RuleFor(x => x.Request.Type)
                 .IsInEnum()
                 .WithMessage("Type must be a valid notification type");
 
-            RuleFor(x => x.Request.Content)
-                .NotEmpty()
-                .WithMessage("Content is required")
-                .MaximumLength(1000)
-                .WithMessage("Content cannot exceed 1000 characters");
         }
     }
 }
