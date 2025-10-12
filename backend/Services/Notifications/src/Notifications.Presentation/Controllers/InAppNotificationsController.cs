@@ -6,7 +6,7 @@ using Notifications.Application.UseCases.InAppNotifications.Commands.DeleteInApp
 using Notifications.Application.UseCases.InAppNotifications.Commands.UpdateInAppNotification;
 using Notifications.Application.UseCases.InAppNotifications.Queries.GetAllInAppNotifications;
 using Notifications.Application.UseCases.InAppNotifications.Queries.GetInAppNotification;
-using Notifications.Application.UseCases.InAppNotifications.Queries.GetInAppNotificationsByUserId;
+using Notifications.Application.UseCases.InAppNotifications.Queries.GetInAppNotificationsByTourId;
 
 namespace Notifications.Presentation.Controllers
 {
@@ -43,21 +43,19 @@ namespace Notifications.Presentation.Controllers
 
         [HttpPost]
         public async Task<ActionResult<InAppNotificationResponse>> Create(
-            CreateInAppNotificationRequest request
-        )
+            CreateInAppNotificationRequest request)
         {
-            var command = new CreateInAppNotificationCommand { Request = request };
-            var response = await _mediator.Send(command);
-
-            return CreatedAtAction(nameof(GetById), new { id = response.Id }, response);
+            var command = new CreateInAppNotificationCommand(request);
+            var result = await _mediator.Send(command);
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
         }
 
-        [HttpGet("user/{userId}")]
-        public async Task<ActionResult<IEnumerable<InAppNotificationResponse>>> GetByUserId(
-            string userId
+        [HttpGet("tour/{tourId}")]
+        public async Task<ActionResult<IEnumerable<InAppNotificationResponse>>> GetByTourId(
+            string tourId
         )
         {
-            var query = new GetInAppNotificationsByUserIdQuery { UserId = userId };
+            var query = new GetInAppNotificationsByTourIdQuery { TourId = tourId };
             var notifications = await _mediator.Send(query);
             return Ok(notifications);
         }

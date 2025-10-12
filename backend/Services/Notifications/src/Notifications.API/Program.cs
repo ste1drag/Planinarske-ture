@@ -2,52 +2,76 @@ using Notifications.Infrastructure;
 using Notifications.Application;
 using Notifications.Presentation;
 using Serilog;
+using System.Text.Json.Serialization;
+
+// Configure Serilog FIRST, before anything else
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.File("logs/notifications-.txt", rollingInterval: RollingInterval.Day)
+    .CreateBootstrapLogger();
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllers();
+// Now configure Serilog with full configuration
+builder.Host.UseSerilog((context, configuration) =>
+    configuration
+        .ReadFrom.Configuration(context.Configuration)
+        .Enrich.FromLogContext()
+        .WriteTo.Console()
+        .WriteTo.File("logs/notifications-.txt", rollingInterval: RollingInterval.Day));
 
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+// Add services to the container.
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // Configure JSON to serialize enums as strings instead of numbers
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-Console.WriteLine("🔧 Adding Application services...");
+Log.Information("🔧 Adding Application services...");
 builder.Services.AddApplicationServices(services =>
 {
-    Console.WriteLine("🔧 Adding Infrastructure services...");
+    Log.Information("🔧 Adding Infrastructure services...");
     services.AddInfrastructure(builder.Configuration);
-    Console.WriteLine("✅ Infrastructure services added");
+    Log.Information("✅ Infrastructure services added");
 });
-Console.WriteLine("✅ Application services added");
+Log.Information("✅ Application services added");
 
-Console.WriteLine("🔧 Adding Presentation services...");
+Log.Information("🔧 Adding Presentation services...");
 builder.Services.AddPresentation();
-Console.WriteLine("✅ Presentation services added");
+Log.Information("✅ Presentation services added");
 
-builder.Host.UseSerilog(
-    (context, services, configuration) =>
-        configuration.ReadFrom.Configuration(context.Configuration)
-);
-
-Console.WriteLine("🏗️ Building application...");
+Log.Information("🏗️ Building application...");
 var app = builder.Build();
-Console.WriteLine("✅ Application built successfully");
+Log.Information("✅ Application built successfully");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    Console.WriteLine("🔧 Configuring development environment...");
-    app.MapOpenApi();
+    Log.Information("🔧 Configuring development environment...");
     app.UseSwagger();
     app.UseSwaggerUI();
-    Console.WriteLine("✅ Development environment configured");
+    Log.Information("✅ Development environment configured");
 }
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+app.UseSerilogRequestLogging();
 
-Console.WriteLine("🚀 Starting application...");
-app.Run();
+try
+{
+    Log.Information("🚀 Starting Notifications API...");
+    app.Run();
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "❌ Application terminated unexpectedly");
+}
+finally
+{
+    Log.CloseAndFlush();
+}

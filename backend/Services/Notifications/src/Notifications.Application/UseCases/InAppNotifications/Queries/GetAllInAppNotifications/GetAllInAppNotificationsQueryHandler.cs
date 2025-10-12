@@ -1,6 +1,6 @@
 using AutoMapper;
 using MediatR;
-using Notifications.Domain.Interfaces;
+using Notifications.Application.Contracts;
 using Notifications.Application.DTOs;
 
 namespace Notifications.Application.UseCases.InAppNotifications.Queries.GetAllInAppNotifications

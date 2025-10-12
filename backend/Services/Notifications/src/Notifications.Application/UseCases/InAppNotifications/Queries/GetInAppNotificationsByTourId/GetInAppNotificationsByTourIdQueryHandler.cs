@@ -1,20 +1,20 @@
 using AutoMapper;
 using MediatR;
-using Notifications.Domain.Interfaces;
+using Notifications.Application.Contracts;
 using Notifications.Application.DTOs;
 
-namespace Notifications.Application.UseCases.InAppNotifications.Queries.GetInAppNotificationsByUserId
+namespace Notifications.Application.UseCases.InAppNotifications.Queries.GetInAppNotificationsByTourId
 {
-    public class GetInAppNotificationsByUserIdQueryHandler
+    public class GetInAppNotificationsByTourIdQueryHandler
         : IRequestHandler<
-            GetInAppNotificationsByUserIdQuery,
+            GetInAppNotificationsByTourIdQuery,
             IEnumerable<InAppNotificationResponse>
         >
     {
         private readonly IInAppNotificationRepository _repository;
         private readonly IMapper _mapper;
 
-        public GetInAppNotificationsByUserIdQueryHandler(
+        public GetInAppNotificationsByTourIdQueryHandler(
             IInAppNotificationRepository repository,
             IMapper mapper
         )
@@ -24,11 +24,11 @@ namespace Notifications.Application.UseCases.InAppNotifications.Queries.GetInApp
         }
 
         public async Task<IEnumerable<InAppNotificationResponse>> Handle(
-            GetInAppNotificationsByUserIdQuery request,
+            GetInAppNotificationsByTourIdQuery request,
             CancellationToken cancellationToken
         )
         {
-            var notifications = await _repository.GetByUserIdAsync(request.UserId);
+            var notifications = await _repository.GetByTourIdAsync(request.TourId);
             return _mapper.Map<IEnumerable<InAppNotificationResponse>>(notifications);
         }
     }
