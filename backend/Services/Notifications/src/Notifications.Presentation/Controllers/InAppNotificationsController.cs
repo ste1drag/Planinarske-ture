@@ -6,7 +6,7 @@ using Notifications.Application.UseCases.InAppNotifications.Commands.DeleteInApp
 using Notifications.Application.UseCases.InAppNotifications.Commands.UpdateInAppNotification;
 using Notifications.Application.UseCases.InAppNotifications.Queries.GetAllInAppNotifications;
 using Notifications.Application.UseCases.InAppNotifications.Queries.GetInAppNotification;
-using Notifications.Application.UseCases.InAppNotifications.Queries.GetInAppNotificationsByUserId;
+using Notifications.Application.UseCases.InAppNotifications.Queries.GetInAppNotificationsByMountainId;
 
 namespace Notifications.Presentation.Controllers
 {
@@ -50,12 +50,12 @@ namespace Notifications.Presentation.Controllers
             return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
         }
 
-        [HttpGet("user/{userId}")]
-        public async Task<ActionResult<IEnumerable<InAppNotificationResponse>>> GetByUserId(
-            string userId
+        [HttpGet("mountain/{mountainId}")]
+        public async Task<ActionResult<IEnumerable<InAppNotificationResponse>>> GetByMountainId(
+            string mountainId
         )
         {
-            var query = new GetInAppNotificationsByUserIdQuery { UserId = userId };
+            var query = new GetInAppNotificationsByMountainIdQuery { MountainId = mountainId };
             var notifications = await _mediator.Send(query);
             return Ok(notifications);
         }

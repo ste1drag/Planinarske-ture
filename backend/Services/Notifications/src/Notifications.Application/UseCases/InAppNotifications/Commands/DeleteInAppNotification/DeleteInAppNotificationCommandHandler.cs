@@ -1,5 +1,5 @@
 using MediatR;
-using Notifications.Domain.Interfaces;
+using Notifications.Application.Contracts;
 
 namespace Notifications.Application.UseCases.InAppNotifications.Commands.DeleteInAppNotification
 {
@@ -18,7 +18,8 @@ namespace Notifications.Application.UseCases.InAppNotifications.Commands.DeleteI
             CancellationToken cancellationToken
         )
         {
-            return await _repository.DeleteAsync(request.Id);
+            await _repository.DeleteAsync(request.Id);
+            return true;
         }
     }
 }

@@ -1,9 +1,8 @@
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Notifications.Application.Consumers;
-using Notifications.Domain.Interfaces;
+using Notifications.Application.Contracts;
 using Notifications.Infrastructure.Configuration;
 using Notifications.Infrastructure.Repositories;
 

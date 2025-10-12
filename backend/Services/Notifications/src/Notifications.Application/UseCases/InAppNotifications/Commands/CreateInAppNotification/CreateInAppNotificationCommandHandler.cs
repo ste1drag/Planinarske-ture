@@ -3,7 +3,7 @@ using MediatR;
 using Notifications.Application.Business;
 using Notifications.Application.DTOs;
 using Notifications.Domain.Entities;
-using Notifications.Domain.Interfaces;
+using Notifications.Application.Contracts;
 
 namespace Notifications.Application.UseCases.InAppNotifications.Commands.CreateInAppNotification;
 
@@ -31,7 +31,7 @@ public class CreateInAppNotificationCommandHandler
         // Apply business rules for creation
         NotificationDeliveryRules.ApplyCreationRules(notification);
 
-        var created = await _repository.CreateAsync(notification);
+        var created = await _repository.AddAsync(notification);
 
         //->Rabbit MQ -> GW consumes -> SignalR notify user
         return _mapper.Map<InAppNotificationResponse>(created);

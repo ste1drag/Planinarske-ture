@@ -23,7 +23,7 @@ namespace Notifications.Application
 
             CreateMap<UpdateInAppNotificationRequest, InAppNotification>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
-                .ForMember(dest => dest.UserId, opt => opt.Ignore())
+                .ForMember(dest => dest.MountainId, opt => opt.Ignore())
                 .ForMember(dest => dest.Type, opt => opt.Ignore())
                 .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
                 .ForMember(dest => dest.Status, opt => opt.Ignore())

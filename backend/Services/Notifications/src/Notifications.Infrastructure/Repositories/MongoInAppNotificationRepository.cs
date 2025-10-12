@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using Notifications.Domain.Entities;
-using Notifications.Domain.Interfaces;
+using Notifications.Application.Contracts;
 using Notifications.Infrastructure.Configuration;
 
 namespace Notifications.Infrastructure.Repositories;
@@ -23,18 +23,18 @@ public class MongoInAppNotificationRepository : IInAppNotificationRepository
         return await _notifications.Find(filter).FirstOrDefaultAsync();
     }
 
-    public async Task<IEnumerable<InAppNotification>> GetByUserIdAsync(string userId)
+    public async Task<IReadOnlyList<InAppNotification>> GetByMountainIdAsync(string mountainId)
     {
-        var filter = Builders<InAppNotification>.Filter.Eq(n => n.UserId, userId);
+        var filter = Builders<InAppNotification>.Filter.Eq(n => n.MountainId, mountainId);
         return await _notifications.Find(filter).ToListAsync();
     }
 
-    public async Task<IEnumerable<InAppNotification>> GetAllAsync()
+    public async Task<IReadOnlyList<InAppNotification>> GetAllAsync()
     {
         return await _notifications.Find(_ => true).ToListAsync();
     }
 
-    public async Task<InAppNotification> CreateAsync(InAppNotification notification)
+    public async Task<InAppNotification> AddAsync(InAppNotification notification)
     {
         await _notifications.InsertOneAsync(notification);
         return notification;

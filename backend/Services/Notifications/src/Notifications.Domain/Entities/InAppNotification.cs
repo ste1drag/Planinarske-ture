@@ -7,7 +7,7 @@ namespace Notifications.Domain.Entities;
 public class InAppNotification : INotification
 {
     public string Id { get; set; }
-    public string UserId { get; set; }
+    public string MountainId { get; set; }
     public NotificationTypeEnum Type { get; set; }
     public string Title { get; set; } // NEW
     public string Message { get; set; } // NEW
@@ -24,14 +24,14 @@ public class InAppNotification : INotification
         Id = string.Empty;
         Title = string.Empty;
         Message = string.Empty;
-        UserId = string.Empty;
+        MountainId = string.Empty;
         Content = string.Empty;
     }
 
-    public InAppNotification(string userId, NotificationTypeEnum type, string title, string message, string content = "")
+    public InAppNotification(string mountainId, NotificationTypeEnum type, string title, string message, string content = "")
     {
         Id = Guid.NewGuid().ToString();
-        UserId = userId ?? throw new ArgumentNullException(nameof(userId));
+        MountainId = mountainId ?? throw new ArgumentNullException(nameof(mountainId));
         Type = type;
         Title = title ?? throw new ArgumentNullException(nameof(title));
         Message = message ?? throw new ArgumentNullException(nameof(message));
