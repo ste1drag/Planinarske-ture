@@ -45,22 +45,39 @@ public class CreateInAppNotificationCommandHandler
 
         _logger.LogInformation("In-app notification created: {@Notification}", created);
 
-        var notificationEvent = new InAppNotificationCreatedTourEvent
+        try
         {
-            Id = Guid.NewGuid(),
-            Timestamp = DateTime.UtcNow,
-            Title = created.Title,
-            DescriptionOfTour = created.DescriptionOfTour,
-            Content = created.Content
-        };
+            var notificationEvent = new InAppNotificationCreatedTourEvent
+            {
+                Id = Guid.NewGuid(),
+                Timestamp = DateTime.UtcNow,
+                Title = created.Title,
+                DescriptionOfTour = created.DescriptionOfTour,
+                Content = created.Content
+            };
 
-        await _publishEndpoint.Publish(notificationEvent, cancellationToken);
-        _logger.LogInformation("Published notification event to RabbitMQ: {@Event}", notificationEvent);
+            await _publishEndpoint.Publish(notificationEvent, cancellationToken);
+            _logger.LogInformation("Published notification event to RabbitMQ: {@Event}", notificationEvent);
 
 
-        NotificationDeliveryRules.ApplyDeliveryRules(created, true);
-        _logger.LogInformation("In-app notification sent: {@Notification}", created);
-        await _repository.UpdateAsync(created);
+            NotificationDeliveryRules.ApplyDeliveryRules(created, true);
+            _logger.LogInformation("In-app notification sent: {@Notification}", created);
+
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to publish notification event for {NotificationId}", created.Id);
+
+            // Mark as failed using your existing rule
+            NotificationDeliveryRules.ApplyDeliveryRules(created, false);
+            _logger.LogWarning("In-app notification marked as failed: {@Notification}", created);
+        }
+        finally
+        {
+            // Update the notification status (sent or failed)
+            await _repository.UpdateAsync(created);
+        }
+
         return _mapper.Map<InAppNotificationResponse>(created);
     }
 }
