@@ -1,4 +1,4 @@
-import { Calendar, Star } from 'lucide-react';
+import { Calendar, Star, Plus } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import StatusBadge from './StatusBadge';
 import WeatherBadge from './WeatherBadge';
@@ -9,9 +9,14 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/Dialog';
+import { Button } from '@/components/ui/Button';
 import { useTranslation } from '@/contexts/TranslationContext';
-import { getReviewsByTourId } from '@/features/review/api/review-api';
-import { ReadReviewDto } from '@/features/review/types/ReviewDto';
+import {
+  getReviewsByTourId,
+  createReview,
+} from '@/features/review/api/review-api';
+import { ReadReviewDto, CreateReviewDto } from '@/features/review/types/ReviewDto';
+import CreateReviewForm from '@/features/review/components/CreateReviewForm';
 
 interface TourDetailsDialogProps {
   tour: TourViewModel | null;
@@ -27,9 +32,11 @@ export default function TourDetailsDialog({
   const t = useTranslation();
   const [reviews, setReviews] = useState<ReadReviewDto[]>([]);
   const [isLoadingReviews, setIsLoadingReviews] = useState(false);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [currentUserId] = useState(1); // TODO: Get from auth context
 
-  useEffect(() => {
-    if (open && tour) {
+  const loadReviews = () => {
+    if (tour) {
       setIsLoadingReviews(true);
       getReviewsByTourId(tour.id)
         .then(data => {
@@ -43,7 +50,25 @@ export default function TourDetailsDialog({
           setIsLoadingReviews(false);
         });
     }
+  };
+
+  useEffect(() => {
+    if (open && tour) {
+      loadReviews();
+      setShowReviewForm(false);
+    }
   }, [open, tour]);
+
+  const handleSubmitReview = async (reviewData: CreateReviewDto) => {
+    try {
+      await createReview(reviewData);
+      setShowReviewForm(false);
+      loadReviews();
+    } catch (error) {
+      console.error('Failed to create review:', error);
+      throw error;
+    }
+  };
 
   if (!tour) return null;
 
@@ -109,16 +134,42 @@ export default function TourDetailsDialog({
               <h3 className="text-lg font-semibold">
                 Reviews ({reviews.length})
               </h3>
-              {reviews.length > 0 && (
-                <div className="flex items-center gap-2">
-                  <Star className="h-5 w-5 fill-yellow-500 text-yellow-500" />
-                  <span className="font-semibold">
-                    {averageRating.toFixed(1)}
-                  </span>
-                  <span className="text-muted-foreground text-sm">/ 5.0</span>
-                </div>
-              )}
+              <div className="flex items-center gap-3">
+                {reviews.length > 0 && (
+                  <div className="flex items-center gap-2">
+                    <Star className="h-5 w-5 fill-yellow-500 text-yellow-500" />
+                    <span className="font-semibold">
+                      {averageRating.toFixed(1)}
+                    </span>
+                    <span className="text-muted-foreground text-sm">
+                      / 5.0
+                    </span>
+                  </div>
+                )}
+                {!showReviewForm && (
+                  <Button
+                    size="sm"
+                    onClick={() => setShowReviewForm(true)}
+                    className="flex items-center gap-2"
+                  >
+                    <Plus className="h-4 w-4" />
+                    Write Review
+                  </Button>
+                )}
+              </div>
             </div>
+
+            {showReviewForm && (
+              <div className="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50">
+                <h4 className="text-md font-semibold mb-4">Write a Review</h4>
+                <CreateReviewForm
+                  tourId={tour.id}
+                  userId={currentUserId}
+                  onSubmit={handleSubmitReview}
+                  onCancel={() => setShowReviewForm(false)}
+                />
+              </div>
+            )}
 
             <div className="space-y-4">
               {isLoadingReviews ? (

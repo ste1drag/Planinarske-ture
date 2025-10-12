@@ -21,7 +21,7 @@ export interface AuthenticationModel {
 }
 
 export interface RefreshTokenModel {
-  UserName: string;
-  RefreshToken: string;
+  userName: string;
+  refreshToken: string;
 }
 
