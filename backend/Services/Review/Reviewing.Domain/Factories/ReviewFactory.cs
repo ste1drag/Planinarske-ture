@@ -1,4 +1,5 @@
-﻿using Reviewing.Domain.Entities;
+﻿using System;
+using Reviewing.Domain.Entities;
 using Reviewing.Domain.Enums;
 using Reviewing.Domain.ValueObjects;
 
@@ -14,7 +15,7 @@ namespace Reviewing.domain.Factories
         public class ReviewBuilder
         {
             private int _userId = 0;
-            private int _tourId = 0;
+            private Guid _tourId = Guid.NewGuid();
             private string _title = string.Empty;
             private string? _comment = null;
             private Difficulty? _difficulty = null;
@@ -26,7 +27,7 @@ namespace Reviewing.domain.Factories
                 return this;
             }
 
-            public ReviewBuilder WithTourId(int tourId)
+            public ReviewBuilder WithTourId(Guid tourId)
             {
                 _tourId = tourId;
                 return this;

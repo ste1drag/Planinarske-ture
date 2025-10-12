@@ -8,7 +8,7 @@ export default function MountainCard({
   mountain: ViewMountainDto;
 }) {
   return (
-    <Card className="w-full max-w-sm hover:shadow-lg transition-shadow">
+    <Card className="w-full hover:shadow-lg transition-shadow">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-forest">
           <Mountain className="h-5 w-5" />

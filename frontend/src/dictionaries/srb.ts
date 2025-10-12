@@ -1,6 +1,6 @@
-import { Dictionary } from "./en";
+import { Dictionary } from './en';
 
-export const srb : Dictionary = {
+export const srb: Dictionary = {
   home: 'Početna',
   tours: 'Ture',
   mountains: 'Planine',
@@ -22,7 +22,8 @@ export const srb : Dictionary = {
   upcomingTours: 'Predstojeće ture',
   totalTours: 'Sve ture',
   addTour: 'Dodaj turu',
-  tourPageTitle: 'Otkrijte vrhunske ture i pridružite se ostalim ljubiteljima hike-a',
+  tourPageTitle:
+    'Otkrijte vrhunske ture i pridružite se ostalim ljubiteljima hike-a',
 
   heroTitle: 'Istrazite',
   heroTitleGradient: 'Planinarske avanture',
@@ -54,8 +55,7 @@ export const srb : Dictionary = {
 
   // CTA Section
   readyForAdventure: 'Spremni za vašu sledeću avanturu?',
-  joinCommunity:
-    'Pridružite se našoj zajednici',
+  joinCommunity: 'Pridružite se našoj zajednici',
   joinTour: 'Pridružite turi',
   readReviews: 'Recenzije',
 
@@ -70,6 +70,7 @@ export const srb : Dictionary = {
 
   // Status
   selectStatus: 'Izaberi status',
+  allTours: 'Sve ture',
   active: 'Aktivna',
   reserved: 'Rezervisana',
   canceled: 'Otkazana',
@@ -106,7 +107,7 @@ export const srb : Dictionary = {
   confirmPassword: 'Potvrdi šifru',
   firstName: 'Ime',
   lastName: 'Prezime',
-  dontHaveAccount: "Nemate nalog?",
+  dontHaveAccount: 'Nemate nalog?',
   alreadyHaveAccount: 'Posedujete nalog?',
   signInToAccount: 'Registrujte se na vaš nalog',
   createNewAccount: 'Kreirajte novi nalog',
@@ -121,4 +122,7 @@ export const srb : Dictionary = {
   // Misc
   searchTours: 'Pretražite ture ili planine ...',
   searchMountains: 'Pretražite planine ...',
-}
+  loading: 'Ucitavanje',
+  error: 'Greska',
+  saving: 'Cuvanje',
+};

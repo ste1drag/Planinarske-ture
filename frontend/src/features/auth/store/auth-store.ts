@@ -32,13 +32,16 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     try {
       const authData = await loginUser(credentials);
       console.log(authData);
-      localStorage.setItem('auth_token', authData.AccessToken);
-      localStorage.setItem('refresh_token', authData.RefreshToken);
-      localStorage.setItem('user_name', credentials.UserName);
+      localStorage.setItem('name', authData.userName);
+      localStorage.setItem('auth_token', authData.accessToken);
+      localStorage.setItem('refresh_token', authData.refreshToken);
+      localStorage.setItem('user_name', authData.userName);
       set({ user: authData, isLoading: false });
     } catch (error) {
+      // prefer server message when available
+      const serverMessage = (error as any)?.response?.data?.message;
       set({
-        error: 'Login failed',
+        error: serverMessage ?? 'Login failed',
         isLoading: false,
       });
     }
@@ -50,8 +53,9 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       await registerUser(userData);
       set({ isLoading: false });
     } catch (error) {
+      const serverMessage = (error as any)?.response?.data?.message;
       set({
-        error: error instanceof Error ? error.message : 'Registration failed',
+        error: serverMessage ?? (error instanceof Error ? error.message : 'Registration failed'),
         isLoading: false,
       });
     }
@@ -64,8 +68,8 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       if (userName) {
         try {
           await logoutUser({
-            UserName: userName,
-            RefreshToken: user.RefreshToken,
+            userName: userName,
+            refreshToken: user.refreshToken,
           });
         } catch (error) {
           console.error('Logout API call failed:', error);
@@ -88,16 +92,17 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     }
     try {
       const authData = await refreshToken({
-        UserName: userName,
-        RefreshToken: refreshTokenValue,
+        userName: userName,
+        refreshToken: refreshTokenValue,
       });
-      localStorage.setItem('auth_token', authData.AccessToken);
-      localStorage.setItem('refresh_token', authData.RefreshToken);
+      localStorage.setItem('auth_token', authData.accessToken);
+      localStorage.setItem('refresh_token', authData.refreshToken);
       set({ user: authData });
     } catch (error) {
       localStorage.removeItem('auth_token');
       localStorage.removeItem('refresh_token');
       localStorage.removeItem('user_name');
+      localStorage.removeItem('name');
       set({ user: null });
     }
   },
@@ -106,12 +111,16 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
   initializeAuth: () => {
     const token = localStorage.getItem('auth_token');
     const refreshTokenValue = localStorage.getItem('refresh_token');
-    if (token && refreshTokenValue) {
+    const name = localStorage.getItem('name');
+    const username = localStorage.getItem('user_name');
+    if (token && refreshTokenValue && name && username) {
       set({
         user: {
-          AccessToken: token,
-          RefreshToken: refreshTokenValue,
+          accessToken: token,
+          refreshToken: refreshTokenValue,
           isAuthorized: true,
+          name: name,
+          userName: username
         },
       });
     }

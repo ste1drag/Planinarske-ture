@@ -47,12 +47,12 @@ export default function RegisterForm({ onToggleToLogin }: RegisterFormProps) {
     }
 
     await register({
-      FirstName: firstName,
-      LastName: lastName,
-      UserName: username,
-      Email: email,
-      PhoneNumber: phoneNumber,
-      Password: password,
+      firstName: firstName,
+      lastName: lastName,
+      userName: username,
+      email: email,
+      phoneNumber: phoneNumber,
+      password: password,
     });
 
     // Switch to login form on successful registration

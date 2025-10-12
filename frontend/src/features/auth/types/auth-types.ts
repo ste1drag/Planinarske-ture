@@ -1,20 +1,22 @@
 export interface NewUserDTO {
-  FirstName: string;
-  LastName: string;
-  UserName: string;
-  Password: string;
-  Email: string;
-  PhoneNumber: string;
+  firstName: string;
+  lastName: string;
+  userName: string;
+  password: string;
+  email: string;
+  phoneNumber: string;
 }
 
 export interface UserCredentialsDTO {
-  UserName: string;
-  Password: string;
+  userName: string;
+  password: string;
 }
 
 export interface AuthenticationModel {
-  AccessToken: string;
-  RefreshToken: string;
+  name: string;
+  userName: string;
+  accessToken: string;
+  refreshToken: string;
   isAuthorized: boolean;
 }
 
