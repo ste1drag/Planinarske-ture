@@ -30,8 +30,8 @@ export default function LoginForm({ onToggleToRegister }: LoginFormProps) {
     clearError();
 
     await login({
-      UserName: username,
-      Password: password,
+      userName: username,
+      password: password,
     });
 
     // Navigate to home on successful login

@@ -1,4 +1,30 @@
 services:
+  mountaintoursgateway.api:
+    image: ${DOCKER_REGISTRY-}moutaintoursgatewayapi
+    build:
+      context: ./MountainToursGateway
+      dockerfile: MoutainToursGateway.API/Dockerfile
+    ports:
+      - "8084:8084"
+    environment:
+      - ASPNETCORE_URLS=http://+:8084
+      - ASPNETCORE_HTTP_PORTS=8084
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - gateway_keys:/home/app/.aspnet/DataProtection-Keys
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8084/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+    depends_on:
+      - tours-api
+      - identity-api
+      - reviewing-api
+      - notifications-api
+
   tours-api:
     image: tours-api:latest
     build:
@@ -37,7 +63,7 @@ services:
     image: reviewing-api:latest
     build:
       context: .
-      dockerfile: Services/Review/Reviewing.API/Dockerfile
+      dockerfile: Services/Review/Reviewing.Api/Dockerfile
     ports:
       - "8082:8082"
     environment:
@@ -142,13 +168,13 @@ services:
       POSTGRES_DB: reviewing
     ports:
       - "6543:5432"
+    volumes:
+      - reviewing_db_data:/var/lib/postgresql/data
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 5s
       timeout: 5s
       retries: 3
-    volumes:
-      - reviewing_db_data:/var/lib/postgresql/data
 
 volumes:
   rabbitmq_data:
@@ -156,3 +182,4 @@ volumes:
   tours_db_data:
   identity_db_data:
   reviewing_db_data:
+  gateway_keys:

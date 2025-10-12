@@ -73,6 +73,7 @@ export const en = {
 
   // Status
   selectStatus: 'Select status',
+  allTours: 'All Tours',
   active: 'Active',
   reserved: 'Reserved',
   canceled: 'Canceled',
@@ -124,6 +125,9 @@ export const en = {
   // Misc
   searchTours: 'Search tours or mountains ...',
   searchMountains: 'Search mountains ...',
+  error: 'error',
+  loading: 'loading',
+  saving: 'Saving',
 } as const;
 
-export type Dictionary = Record<keyof typeof en, string>;;
+export type Dictionary = Record<keyof typeof en, string>;

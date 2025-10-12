@@ -1,0 +1,6 @@
+@MoutainToursGateway.API_HostAddress = http://localhost:5012
+
+GET {{MoutainToursGateway.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

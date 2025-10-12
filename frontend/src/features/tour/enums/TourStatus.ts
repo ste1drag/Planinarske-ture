@@ -1,8 +1,14 @@
 export enum TourStatus {
-  ACTIVE = 'ACTIVE',
-  RESERVED = 'RESERVED',
-  CANCELED = 'CANCELED',
+  ACTIVE = 0,
+  RESERVED = 1,
+  CANCELED = 2,
 }
+
+export const TourStatusLabels: Record<TourStatus, string> = {
+  [TourStatus.ACTIVE]: 'ACTIVE',
+  [TourStatus.RESERVED]: 'RESERVED',
+  [TourStatus.CANCELED]: 'CANCELED',
+};
 
 export const TourStatusColoring: Record<TourStatus, string> = {
   [TourStatus.ACTIVE]: '#66FF66',
