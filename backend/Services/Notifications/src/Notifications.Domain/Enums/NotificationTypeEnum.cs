@@ -6,7 +6,10 @@ public enum NotificationTypeEnum
     TourCancelled,
     TourUpdated,
 
+
     // User-related (basic auth integration)
     Welcome,
     PasswordReset,
+
+    None
 }

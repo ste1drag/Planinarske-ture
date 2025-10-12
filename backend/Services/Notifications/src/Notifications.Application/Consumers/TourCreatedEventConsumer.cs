@@ -32,7 +32,7 @@ public class TourCreatedEventConsumer : IConsumer<TourCreateEvent.TourCreatedEve
 
         try
         {
-            var request = new CreateInAppNotificationRequest
+            var request = new CreateInAppNotificationRequest //TODO: this should be an interface because its used in multiple places for example TourCreatedEvent and ReviewCreatedEvent
             {
                 Id = message.Id.ToString(),
                 OccuredOn = message.OccuredOn,
@@ -41,7 +41,9 @@ public class TourCreatedEventConsumer : IConsumer<TourCreateEvent.TourCreatedEve
                 Name = message.Name,
                 Description = message.Description,
                 DateOfTour = message.DateOfTour,
-                MountainId = message.MountainId
+                MountainName = message.MountainName,
+                MinNumberOfPeople = message.MinNumberOfPeople,
+                MaxNumberOfPeople = message.MaxNumberOfPeople,
 
             };
 

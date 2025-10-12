@@ -2,6 +2,7 @@ using Notifications.Infrastructure;
 using Notifications.Application;
 using Notifications.Presentation;
 using Serilog;
+using System.Text.Json.Serialization;
 
 // Configure Serilog FIRST, before anything else
 Log.Logger = new LoggerConfiguration()
@@ -20,7 +21,13 @@ builder.Host.UseSerilog((context, configuration) =>
         .WriteTo.File("logs/notifications-.txt", rollingInterval: RollingInterval.Day));
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // Configure JSON to serialize enums as strings instead of numbers
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

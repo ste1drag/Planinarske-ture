@@ -12,24 +12,26 @@ namespace Notifications.Application
 
             CreateMap<CreateInAppNotificationRequest, InAppNotification>()
                 .ConstructUsing(src => new InAppNotification(
-                    "system",
                     src.Type,
-                    src.Name ?? "Untitled",
-                    $"Tour '{src.Name}' scheduled for {src.DateOfTour:yyyy-MM-dd}",
-                    src.Description ?? string.Empty
-                ))
-                .ForMember(dest => dest.RelatedEntityId, opt => opt.MapFrom(src => src.TourId))
-                .ForMember(dest => dest.RelatedEntityType, opt => opt.MapFrom(src => "Tour"));
+                    src.TourId,
+                    src.Name ?? "Untitled Tour",
+                    src.DateOfTour,
+                    src.MountainName ?? "Unknown Mountain",
+                    src.Description ?? string.Empty,
+                    src.MinNumberOfPeople,
+                    src.MaxNumberOfPeople
+                )
+                {
+                    TourId = src.TourId // Explicitly set required property
+                });
 
             CreateMap<UpdateInAppNotificationRequest, InAppNotification>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
-                .ForMember(dest => dest.MountainId, opt => opt.Ignore())
                 .ForMember(dest => dest.Type, opt => opt.Ignore())
                 .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
                 .ForMember(dest => dest.Status, opt => opt.Ignore())
                 .ForMember(dest => dest.ReadAt, opt => opt.Ignore())
-                .ForMember(dest => dest.RelatedEntityId, opt => opt.Ignore())
-                .ForMember(dest => dest.RelatedEntityType, opt => opt.Ignore());
+                .ForMember(dest => dest.TourId, opt => opt.Ignore());
         }
     }
 }

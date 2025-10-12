@@ -4,5 +4,5 @@ namespace Notifications.Application.Contracts;
 
 public interface IInAppNotificationRepository : IAsyncRepository<InAppNotification>
 {
-    Task<IReadOnlyList<InAppNotification>> GetByMountainIdAsync(string mountainId);
+    Task<IReadOnlyList<InAppNotification>> GetByTourIdAsync(string tourId);
 }

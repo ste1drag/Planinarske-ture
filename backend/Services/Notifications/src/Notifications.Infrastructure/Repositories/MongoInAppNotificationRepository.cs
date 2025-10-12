@@ -23,9 +23,9 @@ public class MongoInAppNotificationRepository : IInAppNotificationRepository
         return await _notifications.Find(filter).FirstOrDefaultAsync();
     }
 
-    public async Task<IReadOnlyList<InAppNotification>> GetByMountainIdAsync(string mountainId)
+    public async Task<IReadOnlyList<InAppNotification>> GetByTourIdAsync(string tourId)
     {
-        var filter = Builders<InAppNotification>.Filter.Eq(n => n.MountainId, mountainId);
+        var filter = Builders<InAppNotification>.Filter.Eq(n => n.TourId, tourId);
         return await _notifications.Find(filter).ToListAsync();
     }
 
