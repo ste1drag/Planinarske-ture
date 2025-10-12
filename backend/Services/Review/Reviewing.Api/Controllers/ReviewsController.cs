@@ -118,5 +118,15 @@ namespace Reviewing.API.Controllers
             await _reviewRepository.Delete(review);
             return Ok(id);
         }
+
+        [HttpGet("tour/{tourId}")]
+        [SwaggerOperation(Summary = "Retrieve reviews by tour ID", Description = "Returns all reviews for a specific tour.")]
+        [SwaggerResponse(StatusCodes.Status200OK, "Reviews found", typeof(IEnumerable<ReadReviewDto>))]
+        public async Task<ActionResult<IEnumerable<ReadReviewDto>>> GetByTourId(Guid tourId)
+        {
+            var reviews = await _reviewRepository.GetByTourId(tourId);
+            var result = _mapper.Map<IEnumerable<ReadReviewDto>>(reviews);
+            return Ok(result);
+        }
     }
 }
