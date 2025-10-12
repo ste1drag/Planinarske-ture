@@ -68,8 +68,8 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       if (userName) {
         try {
           await logoutUser({
-            UserName: userName,
-            RefreshToken: user.refreshToken,
+            userName: userName,
+            refreshToken: user.refreshToken,
           });
         } catch (error) {
           console.error('Logout API call failed:', error);
@@ -92,8 +92,8 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     }
     try {
       const authData = await refreshToken({
-        UserName: userName,
-        RefreshToken: refreshTokenValue,
+        userName: userName,
+        refreshToken: refreshTokenValue,
       });
       localStorage.setItem('auth_token', authData.accessToken);
       localStorage.setItem('refresh_token', authData.refreshToken);
