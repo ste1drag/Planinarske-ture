@@ -10,6 +10,7 @@ import {
 import Nav from './components/layout/Nav';
 import { TranslationProvider } from './contexts/TranslationContext';
 import { useAuthStore } from './features/auth/store/auth-store';
+import NotificationContainer from './features/notification/components/NotificationContainer';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Mountains from './pages/Mountains';
@@ -34,9 +35,12 @@ function AppContent() {
     initializeAuth();
   }, [initializeAuth]);
 
+  const user = useAuthStore(state => state.user);
+
   return (
     <div className="min-h-screen bg-background">
       {!hideNav && <Nav />}
+      {user && <NotificationContainer />}
       <Routes>
         <Route path="/" element={<Login />} />
         <Route
