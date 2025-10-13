@@ -10,10 +10,10 @@ import {
 import Nav from './components/layout/Nav';
 import { TranslationProvider } from './contexts/TranslationContext';
 import { useAuthStore } from './features/auth/store/auth-store';
+import { useNotificationHub } from './features/notifications';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Mountains from './pages/Mountains';
-import Notifications from './pages/Notifications';
 import Profile from './pages/Profile';
 import Tours from './pages/Tours';
 
@@ -33,6 +33,9 @@ function AppContent() {
   useEffect(() => {
     initializeAuth();
   }, [initializeAuth]);
+
+  // Initialize SignalR hub when user is authenticated
+  useNotificationHub();
 
   return (
     <div className="min-h-screen bg-background">
@@ -60,14 +63,6 @@ function AppContent() {
           element={
             <ProtectedRoute>
               <Mountains />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/notifications"
-          element={
-            <ProtectedRoute>
-              <Notifications />
             </ProtectedRoute>
           }
         />
