@@ -2,14 +2,17 @@ services:
   mountaintoursgateway.api:
     image: ${DOCKER_REGISTRY-}moutaintoursgatewayapi
     build:
-      context: ./MountainToursGateway
-      dockerfile: MoutainToursGateway.API/Dockerfile
+      context: .
+      dockerfile: MountainToursGateway/MoutainToursGateway.API/Dockerfile
     ports:
       - "8084:8084"
     environment:
       - ASPNETCORE_URLS=http://+:8084
       - ASPNETCORE_HTTP_PORTS=8084
       - ASPNETCORE_ENVIRONMENT=Development
+      - RabbitMq__Host=rabbitmq
+      - RabbitMq__Username=guest
+      - RabbitMq__Password=guest
     volumes:
       - gateway_keys:/home/app/.aspnet/DataProtection-Keys
     healthcheck:
@@ -24,6 +27,7 @@ services:
       - identity-api
       - reviewing-api
       - notifications-api
+      - rabbitmq
 
   tours-api:
     image: tours-api:latest

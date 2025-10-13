@@ -21,7 +21,7 @@ namespace Reviewing.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: false),
-                    TourId = table.Column<int>(type: "integer", nullable: false),
+                    TourId = table.Column<Guid>(type: "uuid", nullable: false),
                     Title = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Comment = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: true),
                     Difficulty = table.Column<int>(type: "integer", nullable: true),

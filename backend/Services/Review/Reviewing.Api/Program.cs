@@ -1,4 +1,7 @@
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using Reviewing.Application.Behaviors;
+using Reviewing.Application.Services;
 using Reviewing.Infrastructure.Persistence;
 using Reviewing.Infrastructure.Repositories;
 
@@ -17,11 +20,32 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
     services.AddControllers();
     services.AddEndpointsApiExplorer();
     services.AddSwaggerGen();
+
+    // Add CORS
+    services.AddCors(options =>
+    {
+        options.AddPolicy("AllowFrontend", policy =>
+        {
+            policy.WithOrigins("http://localhost:3000", "http://localhost:5173", "http://localhost:8084")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+    });
+
     services.AddDbContext<ReviewContext>(options =>
         options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
     services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
     services.AddScoped<ReviewRepository>();
     services.AddScoped<LoggingActionFilter>();
+
+    services.AddHttpClient<ITourService, TourService>(client =>
+    {
+        var toursApiUrl = configuration.GetValue<string>("ToursApiUrl") ?? "http://mountaintoursgateway.api:8084";
+        client.BaseAddress = new Uri(toursApiUrl);
+        client.Timeout = TimeSpan.FromSeconds(30);
+    });
+
+    services.AddValidatorsFromAssemblyContaining<CreateDtoValidator>();
 }
 
 void ConfigureMiddleware(WebApplication app)
@@ -47,6 +71,9 @@ void ConfigureMiddleware(WebApplication app)
             }
         }
     }
+
+    // Use CORS before authentication/authorization
+    app.UseCors("AllowFrontend");
 
     app.UseAuthorization();
     app.MapControllers();

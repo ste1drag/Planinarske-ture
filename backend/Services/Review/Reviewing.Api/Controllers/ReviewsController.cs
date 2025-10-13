@@ -70,12 +70,19 @@ namespace Reviewing.API.Controllers
         [SwaggerOperation(Summary = "Create a new review", Description = "Creates a new review and returns the created entity.")]
         [SwaggerResponse(StatusCodes.Status201Created, "Review created", typeof(ReadReviewDto))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Invalid input")]
-        public async Task<ActionResult<CreateReviewDto>> Create([FromBody] CreateReviewDto dto)
+        public async Task<ActionResult<CreateReviewDto>> Create([FromBody] CreateReviewDto dto, [FromServices] FluentValidation.IValidator<CreateReviewDto> validator)
         {
-            if (!ModelState.IsValid)
+            var validationResult = await validator.ValidateAsync(dto);
+
+            if (!validationResult.IsValid)
             {
+                foreach (var error in validationResult.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
                 return BadRequest(ModelState);
             }
+
             var review = _mapper.Map<Review>(dto);
             var createdReview = await _reviewRepository.AddNew(review);
             var result = _mapper.Map<ReadReviewDto>(createdReview);
@@ -117,6 +124,16 @@ namespace Reviewing.API.Controllers
             }
             await _reviewRepository.Delete(review);
             return Ok(id);
+        }
+
+        [HttpGet("tour/{tourId}")]
+        [SwaggerOperation(Summary = "Retrieve reviews by tour ID", Description = "Returns all reviews for a specific tour.")]
+        [SwaggerResponse(StatusCodes.Status200OK, "Reviews found", typeof(IEnumerable<ReadReviewDto>))]
+        public async Task<ActionResult<IEnumerable<ReadReviewDto>>> GetByTourId(Guid tourId)
+        {
+            var reviews = await _reviewRepository.GetByTourId(tourId);
+            var result = _mapper.Map<IEnumerable<ReadReviewDto>>(reviews);
+            return Ok(result);
         }
     }
 }

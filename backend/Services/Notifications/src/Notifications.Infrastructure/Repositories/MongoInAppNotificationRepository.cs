@@ -40,12 +40,15 @@ public class MongoInAppNotificationRepository : IInAppNotificationRepository
         return notification;
     }
 
-    public async Task<InAppNotification?> UpdateAsync(InAppNotification notification)
+    public async Task<InAppNotification> UpdateAsync(InAppNotification notification)
     {
         var filter = Builders<InAppNotification>.Filter.Eq(n => n.Id, notification.Id);
         var result = await _notifications.ReplaceOneAsync(filter, notification);
 
-        return result.ModifiedCount > 0 ? notification : null;
+        if (result.ModifiedCount > 0)
+            return notification;
+
+        throw new InvalidOperationException($"Update failed: notification with Id '{notification.Id}' was not found or not modified.");
     }
 
     public async Task<bool> DeleteAsync(string id)

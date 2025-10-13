@@ -10,6 +10,7 @@ namespace Tours.Domain.Enums
     {
         ACTIVE,
         RESERVED,
-        CANCELED
+        CANCELED,
+        COMPLETED
     }
 }

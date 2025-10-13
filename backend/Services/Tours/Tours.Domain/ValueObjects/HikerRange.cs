@@ -24,6 +24,22 @@ namespace Tours.Domain.ValueObjects
             MaxNumberOfPeople = maxNumberOfPeople;
             NumberOfRegisteredPeople = 0;
         }
+
+        public HikerRange(int minNumberOfPeople, int maxNumberOfPeople, int numberOfRegisteredPeople)
+        {
+            if (minNumberOfPeople > maxNumberOfPeople)
+                throw new ArgumentOutOfRangeException("Minimal number of people is bigger than maximum number of people");
+
+            if (numberOfRegisteredPeople > maxNumberOfPeople)
+                throw new ArgumentOutOfRangeException("Number of registered people exceeds maximum capacity");
+
+            if (numberOfRegisteredPeople < 0)
+                throw new ArgumentOutOfRangeException("Number of registered people cannot be negative");
+
+            MinNumberOfPeople = minNumberOfPeople;
+            MaxNumberOfPeople = maxNumberOfPeople;
+            NumberOfRegisteredPeople = numberOfRegisteredPeople;
+        }
         #endregion
     }
 }

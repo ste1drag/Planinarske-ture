@@ -10,6 +10,7 @@ namespace Tours.Domain.Enums
     {
         SUNNY,
         CLOUDY,
-        RAINY
+        RAINY,
+        SNOWY
     }
 }

@@ -61,6 +61,9 @@ const Tours = () => {
             <SelectItem value={TourStatus.RESERVED.toString()}>
               {t.reserved}
             </SelectItem>
+            <SelectItem value={TourStatus.COMPLETED.toString()}>
+              {t.completed}
+            </SelectItem>
             <SelectItem value={TourStatus.CANCELED.toString()}>
               {t.canceled}
             </SelectItem>
