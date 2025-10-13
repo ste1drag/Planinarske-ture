@@ -1,9 +1,9 @@
 import { Star } from 'lucide-react';
 import { useState } from 'react';
+import { CreateReviewDto } from '../types/ReviewDto';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import {
   Select,
   SelectContent,
@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/Select';
-import { CreateReviewDto } from '../types/ReviewDto';
+import { Textarea } from '@/components/ui/textarea';
 
 interface CreateReviewFormProps {
   tourId: string;

@@ -55,7 +55,9 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     } catch (error) {
       const serverMessage = (error as any)?.response?.data?.message;
       set({
-        error: serverMessage ?? (error instanceof Error ? error.message : 'Registration failed'),
+        error:
+          serverMessage ??
+          (error instanceof Error ? error.message : 'Registration failed'),
         isLoading: false,
       });
     }
@@ -120,7 +122,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
           refreshToken: refreshTokenValue,
           isAuthorized: true,
           name: name,
-          userName: username
+          userName: username,
         },
       });
     }

@@ -2,22 +2,25 @@ import { Calendar, Star, Plus } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import StatusBadge from './StatusBadge';
 import WeatherBadge from './WeatherBadge';
-import { TourViewModel } from '../types/TourDto';
 import { TourStatus } from '../enums/TourStatus';
+import { TourViewModel } from '../types/TourDto';
+import { Button } from '@/components/ui/Button';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/Dialog';
-import { Button } from '@/components/ui/Button';
 import { useTranslation } from '@/contexts/TranslationContext';
 import {
   getReviewsByTourId,
   createReview,
 } from '@/features/review/api/review-api';
-import { ReadReviewDto, CreateReviewDto } from '@/features/review/types/ReviewDto';
 import CreateReviewForm from '@/features/review/components/CreateReviewForm';
+import {
+  ReadReviewDto,
+  CreateReviewDto,
+} from '@/features/review/types/ReviewDto';
 
 interface TourDetailsDialogProps {
   tour: TourViewModel | null;
@@ -144,9 +147,7 @@ export default function TourDetailsDialog({
                     <span className="font-semibold">
                       {averageRating.toFixed(1)}
                     </span>
-                    <span className="text-muted-foreground text-sm">
-                      / 5.0
-                    </span>
+                    <span className="text-muted-foreground text-sm">/ 5.0</span>
                   </div>
                 )}
                 {!showReviewForm && canWriteReview && (
