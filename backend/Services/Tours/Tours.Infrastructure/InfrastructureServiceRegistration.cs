@@ -28,8 +28,17 @@ namespace Tours.Infrastructure
                 options.UseSqlServer(connectionString)
                         .UseSeeding((_context, _) =>
                         {
-                            _context.Set<Mountain>().AddRange(SeedData.AddMountains());
-                            _context.SaveChanges();
+                            if (!_context.Set<Mountain>().Any())
+                            {
+                                _context.Set<Mountain>().AddRange(SeedData.AddMountains());
+                                _context.SaveChanges();
+                            }
+
+                            if (!_context.Set<Tour>().Any())
+                            {
+                                _context.Set<Tour>().AddRange(SeedData.AddTours());
+                                _context.SaveChanges();
+                            }
                         }));
 
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseService<>));

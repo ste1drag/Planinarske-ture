@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Tours.Application;
+using Tours.Application.BackgroundServices;
 using Tours.Infrastructure;
 using Tours.API.Middleware;
 
@@ -18,12 +19,28 @@ builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
     builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
 }));
 
+// Add background service for updating tour statuses
+builder.Services.AddHostedService<TourStatusUpdateService>();
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<ToursDbContext>();
     dbContext.Database.Migrate();
+
+    // Seed data if database is empty
+    if (!dbContext.Mountains.Any())
+    {
+        dbContext.Mountains.AddRange(SeedData.AddMountains());
+        dbContext.SaveChanges();
+    }
+
+    if (!dbContext.Tours.Any())
+    {
+        dbContext.Tours.AddRange(SeedData.AddTours());
+        dbContext.SaveChanges();
+    }
 }
 
 if (app.Environment.IsDevelopment())
