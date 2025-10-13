@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/steva/Desktop/rs2/Planinarske-ture/backend/Services/Tours/Tours.Infrastructure/**)",
+      "Read(//c/Users/steva/Desktop/rs2/Planinarske-ture/backend/Services/Tours/Tours.API/Controllers/**)",
+      "Read(//c/Users/steva/Desktop/rs2/Planinarske-ture/backend/Services/Tours/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import StatusBadge from './StatusBadge';
 import WeatherBadge from './WeatherBadge';
 import { TourViewModel } from '../types/TourDto';
+import { TourStatus } from '../enums/TourStatus';
 import {
   Dialog,
   DialogContent,
@@ -100,6 +101,8 @@ export default function TourDetailsDialog({
         reviews.length
       : 0;
 
+  const canWriteReview = tour.status === TourStatus.COMPLETED;
+
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
@@ -146,7 +149,7 @@ export default function TourDetailsDialog({
                     </span>
                   </div>
                 )}
-                {!showReviewForm && (
+                {!showReviewForm && canWriteReview && (
                   <Button
                     size="sm"
                     onClick={() => setShowReviewForm(true)}
@@ -155,6 +158,11 @@ export default function TourDetailsDialog({
                     <Plus className="h-4 w-4" />
                     Write Review
                   </Button>
+                )}
+                {!canWriteReview && (
+                  <p className="text-sm text-muted-foreground italic">
+                    Reviews can only be written for completed tours
+                  </p>
                 )}
               </div>
             </div>

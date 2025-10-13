@@ -55,10 +55,20 @@ export default function CreateReviewForm({
       };
 
       await onSubmit(reviewData);
-    } catch (err) {
-      setError(
-        err instanceof Error ? err.message : 'Failed to submit review'
-      );
+    } catch (err: any) {
+      // Handle validation errors from backend
+      if (err?.response?.data?.errors) {
+        const errorMessages = Object.values(err.response.data.errors)
+          .flat()
+          .join(', ');
+        setError(errorMessages);
+      } else if (err?.response?.data?.title) {
+        setError(err.response.data.title);
+      } else {
+        setError(
+          err instanceof Error ? err.message : 'Failed to submit review'
+        );
+      }
       setIsSubmitting(false);
     }
   };

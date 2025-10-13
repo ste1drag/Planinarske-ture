@@ -1,4 +1,7 @@
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using Reviewing.Application.Behaviors;
+using Reviewing.Application.Services;
 using Reviewing.Infrastructure.Persistence;
 using Reviewing.Infrastructure.Repositories;
 
@@ -22,6 +25,15 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
     services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
     services.AddScoped<ReviewRepository>();
     services.AddScoped<LoggingActionFilter>();
+
+    services.AddHttpClient<ITourService, TourService>(client =>
+    {
+        var toursApiUrl = configuration.GetValue<string>("ToursApiUrl") ?? "http://mountaintoursgateway.api:8084/tours-api";
+        client.BaseAddress = new Uri(toursApiUrl);
+        client.Timeout = TimeSpan.FromSeconds(30);
+    });
+
+    services.AddValidatorsFromAssemblyContaining<CreateDtoValidator>();
 }
 
 void ConfigureMiddleware(WebApplication app)
