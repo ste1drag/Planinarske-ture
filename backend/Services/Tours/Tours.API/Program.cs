@@ -14,10 +14,15 @@ builder.Services.AddApplicationServices(services =>
 {
     InfrastructureServiceRegistration.AddInfrastructureService(services, builder.Configuration);
 });
-builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+builder.Services.AddCors(options =>
 {
-    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-}));
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000", "http://localhost:5173", "http://localhost:8084")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 // Add background service for updating tour statuses
 builder.Services.AddHostedService<TourStatusUpdateService>();
@@ -50,7 +55,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCustomExceptionHandler();
-app.UseCors("MyPolicy");
+app.UseCors("AllowFrontend");
 app.UseAuthorization();
 app.MapControllers();
 app.Urls.Add("http://0.0.0.0:8080");

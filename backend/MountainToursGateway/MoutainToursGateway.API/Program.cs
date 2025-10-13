@@ -13,21 +13,12 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddHealthChecks();
 
-<<<<<<< HEAD
 // Add CORS
-=======
-// Add CORS for frontend
->>>>>>> origin/features/notifications
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-<<<<<<< HEAD
-        policy.WithOrigins("http://localhost:3000")
-=======
-        policy.WithOrigins("http://localhost:5173",
-                             "https://gourav-d.github.io")
->>>>>>> origin/features/notifications
+        policy.WithOrigins("http://localhost:3000","http://localhost:5173")
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
@@ -80,23 +71,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-<<<<<<< HEAD
-// Use CORS before other middleware
-=======
-
->>>>>>> origin/features/notifications
-app.UseCors("AllowFrontend");
-
-app.MapReverseProxy();
-
-
-app.MapHub<NotificationHub>("/notificationHub");
-
 app.UseHttpsRedirection();
+
+// Use CORS before authentication/authorization
+app.UseCors("AllowFrontend");
 
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.MapReverseProxy();
+
+app.MapHub<NotificationHub>("/notificationHub");
 
 app.MapControllers();
 

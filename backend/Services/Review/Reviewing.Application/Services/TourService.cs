@@ -19,7 +19,7 @@ namespace Reviewing.Application.Services
         {
             try
             {
-                var response = await _httpClient.GetAsync($"api/Tours/{tourId}");
+                var response = await _httpClient.GetAsync($"tours-api/Tours/{tourId}");
 
                 if (!response.IsSuccessStatusCode)
                 {

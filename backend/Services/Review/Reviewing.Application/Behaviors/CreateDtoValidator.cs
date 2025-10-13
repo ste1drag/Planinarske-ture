@@ -20,6 +20,22 @@ namespace Reviewing.Application.Behaviors
             RuleFor(x => x.TourId)
                 .MustAsync(async (tourId, cancellation) => await IsTourPast(tourId))
                 .WithMessage("Reviews can only be created for tours that have already occurred.");
+
+            // Include base validation rules for Comment, Difficulty, and Score
+            RuleFor(x => x.Comment)
+                .MaximumLength(ReviewValidationConstants.MaxCommentLength)
+                .When(x => !string.IsNullOrEmpty(x.Comment))
+                .WithMessage($"Comment cannot exceed {ReviewValidationConstants.MaxCommentLength} characters.");
+
+            RuleFor(x => x.Difficulty)
+                .InclusiveBetween(ReviewValidationConstants.MinDifficulty, ReviewValidationConstants.MaxDifficulty)
+                .When(x => x.Difficulty.HasValue)
+                .WithMessage($"Difficulty must be between {ReviewValidationConstants.MinDifficulty} and {ReviewValidationConstants.MaxDifficulty}.");
+
+            RuleFor(x => x.Score)
+                .InclusiveBetween(ReviewValidationConstants.MinScore, ReviewValidationConstants.MaxScore)
+                .When(x => x.Score.HasValue)
+                .WithMessage($"Score must be between {ReviewValidationConstants.MinScore} and {ReviewValidationConstants.MaxScore}.");
         }
 
         private async Task<bool> IsTourPast(Guid tourId)
@@ -32,8 +48,13 @@ namespace Reviewing.Application.Behaviors
                 return false;
             }
 
+            // Ensure the date is treated as UTC if it's unspecified
+            var tourDate = tour.Date.Kind == DateTimeKind.Unspecified
+                ? DateTime.SpecifyKind(tour.Date, DateTimeKind.Utc)
+                : tour.Date.ToUniversalTime();
+
             // Tour date must be in the past (using UTC for consistency)
-            return tour.Date < DateTime.UtcNow;
+            return tourDate < DateTime.UtcNow;
         }
     }
 }

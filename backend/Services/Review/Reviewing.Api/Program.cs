@@ -20,6 +20,18 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
     services.AddControllers();
     services.AddEndpointsApiExplorer();
     services.AddSwaggerGen();
+
+    // Add CORS
+    services.AddCors(options =>
+    {
+        options.AddPolicy("AllowFrontend", policy =>
+        {
+            policy.WithOrigins("http://localhost:3000", "http://localhost:5173", "http://localhost:8084")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+    });
+
     services.AddDbContext<ReviewContext>(options =>
         options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
     services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -28,7 +40,7 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
 
     services.AddHttpClient<ITourService, TourService>(client =>
     {
-        var toursApiUrl = configuration.GetValue<string>("ToursApiUrl") ?? "http://mountaintoursgateway.api:8084/tours-api";
+        var toursApiUrl = configuration.GetValue<string>("ToursApiUrl") ?? "http://mountaintoursgateway.api:8084";
         client.BaseAddress = new Uri(toursApiUrl);
         client.Timeout = TimeSpan.FromSeconds(30);
     });
@@ -59,6 +71,9 @@ void ConfigureMiddleware(WebApplication app)
             }
         }
     }
+
+    // Use CORS before authentication/authorization
+    app.UseCors("AllowFrontend");
 
     app.UseAuthorization();
     app.MapControllers();
