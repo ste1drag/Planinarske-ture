@@ -29,12 +29,6 @@ builder.Services.AddCors(options =>
 builder.Services.AddReverseProxy()
     .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
 
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("authenticated", policy =>
-        policy.RequireAuthenticatedUser());
-});
-
 // Add MassTransit with RabbitMQ
 builder.Services.AddMassTransit(x =>
 {
@@ -78,12 +72,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
-// Use CORS before authentication/authorization
+// Use CORS before routing
 app.UseCors("AllowFrontend");
-
-app.UseAuthentication();
-
-app.UseAuthorization();
 
 app.MapReverseProxy();
 
