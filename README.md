@@ -204,18 +204,7 @@ All services use **CQRS** with MediatR:
 - **Queries**: Read operations
 - **Handlers**: Business logic execution
 
-## 🧪 Testing
 
-### Backend
-```bash
-# Run all tests
-cd backend
-dotnet test
-
-# Run specific service tests
-cd Services/Notifications/tests/Notifications.UnitTests
-dotnet test
-```
 
 ### Frontend
 ```bash
