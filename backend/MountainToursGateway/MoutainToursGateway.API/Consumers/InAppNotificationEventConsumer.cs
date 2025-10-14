@@ -26,6 +26,8 @@ public class InAppNotificationEventConsumer : IConsumer<InAppNotificationCreated
         try
         {
             // Push to all connected SignalR clients
+            _logger.LogInformation("Sending notification to ALL connected SignalR clients");
+
             await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
             {
                 id = notification.Id,
