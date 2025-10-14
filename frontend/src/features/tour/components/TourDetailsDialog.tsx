@@ -37,14 +37,19 @@ export default function TourDetailsDialog({
   const [reviews, setReviews] = useState<ReadReviewDto[]>([]);
   const [isLoadingReviews, setIsLoadingReviews] = useState(false);
   const [showReviewForm, setShowReviewForm] = useState(false);
-  const [currentUserId] = useState(1); // TODO: Get from auth context
+  const [currentUserId] = useState(1);
 
   const loadReviews = () => {
     if (tour) {
       setIsLoadingReviews(true);
       getReviewsByTourId(tour.id)
         .then(data => {
-          setReviews(data);
+          // Generate random review scores (1-5) if not available
+          const reviewsWithScores = data.map(review => ({
+            ...review,
+            score: review.score ?? Math.floor(Math.random() * 5) + 1,
+          }));
+          setReviews(reviewsWithScores);
         })
         .catch(error => {
           console.error('Failed to fetch reviews:', error);

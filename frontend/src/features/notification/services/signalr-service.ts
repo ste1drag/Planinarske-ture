@@ -26,6 +26,9 @@ class SignalRService {
       this.connection = null;
     }
 
+    // Get JWT token from localStorage
+    const token = localStorage.getItem('auth_token');
+
     this.connection = new signalR.HubConnectionBuilder()
       .withUrl('http://localhost:8084/notificationHub', {
         skipNegotiation: false,
@@ -33,13 +36,18 @@ class SignalRService {
           signalR.HttpTransportType.WebSockets |
           signalR.HttpTransportType.ServerSentEvents |
           signalR.HttpTransportType.LongPolling,
+        accessTokenFactory: () => token ?? '',
       })
       .withAutomaticReconnect([0, 2000, 5000, 10000, 30000])
       .configureLogging(signalR.LogLevel.Information)
       .build();
 
     this.connection.on('ReceiveNotification', (notification: any) => {
-      console.log('Raw notification received from SignalR:', notification);
+      console.log('🔔 Raw notification received from SignalR:', notification);
+      console.log(
+        '📍 Connection ID receiving notification:',
+        this.connection?.connectionId
+      );
 
       // Map lowercase properties to match our Notification interface
       const mappedNotification: Notification = {
@@ -50,7 +58,8 @@ class SignalRService {
         timestamp: notification.timestamp || notification.Timestamp,
       };
 
-      console.log('Mapped notification:', mappedNotification);
+      console.log('✨ Mapped notification:', mappedNotification);
+      console.log('👂 Number of listeners:', this.listeners.length);
       this.listeners.forEach(listener => listener(mappedNotification));
     });
 
@@ -87,11 +96,13 @@ class SignalRService {
 
     try {
       await this.connection.start();
-      console.log('SignalR connected successfully');
+      console.log('✅ SignalR connected successfully');
+      console.log('Connection ID:', this.connection.connectionId);
+      console.log('Connection State:', this.connection.state);
       this.reconnectAttempts = 0;
     } catch (error: any) {
       console.error(
-        'Error starting SignalR connection:',
+        '❌ Error starting SignalR connection:',
         error?.message || error
       );
       this.connection = null;
