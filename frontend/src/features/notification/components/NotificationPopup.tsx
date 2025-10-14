@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import { X, Bell } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { Notification } from '../types/notification';
 
 interface NotificationPopupProps {
@@ -32,9 +32,7 @@ const NotificationPopup = ({
   return (
     <div
       className={`fixed top-4 right-4 z-[100] w-96 bg-white dark:bg-gray-800 rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 ${
-        isVisible
-          ? 'translate-x-0 opacity-100'
-          : 'translate-x-full opacity-0'
+        isVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
       }`}
     >
       <div className="relative">

@@ -10,6 +10,7 @@ import {
   NewUserDTO,
   UserCredentialsDTO,
 } from '../types/auth-types';
+import { getRolesFromToken } from '../utils/jwt-utils';
 
 interface AuthStore {
   user: AuthenticationModel | null;
@@ -32,11 +33,13 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     try {
       const authData = await loginUser(credentials);
       console.log(authData);
+      const roles = getRolesFromToken(authData.accessToken);
+      const userWithRoles = { ...authData, roles };
       localStorage.setItem('name', authData.userName);
       localStorage.setItem('auth_token', authData.accessToken);
       localStorage.setItem('refresh_token', authData.refreshToken);
       localStorage.setItem('user_name', authData.userName);
-      set({ user: authData, isLoading: false });
+      set({ user: userWithRoles, isLoading: false });
     } catch (error) {
       // prefer server message when available
       const serverMessage = (error as any)?.response?.data?.message;
@@ -97,9 +100,11 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         userName: userName,
         refreshToken: refreshTokenValue,
       });
+      const roles = getRolesFromToken(authData.accessToken);
+      const userWithRoles = { ...authData, roles };
       localStorage.setItem('auth_token', authData.accessToken);
       localStorage.setItem('refresh_token', authData.refreshToken);
-      set({ user: authData });
+      set({ user: userWithRoles });
     } catch (error) {
       localStorage.removeItem('auth_token');
       localStorage.removeItem('refresh_token');
@@ -116,6 +121,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     const name = localStorage.getItem('name');
     const username = localStorage.getItem('user_name');
     if (token && refreshTokenValue && name && username) {
+      const roles = getRolesFromToken(token);
       set({
         user: {
           accessToken: token,
@@ -123,6 +129,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
           isAuthorized: true,
           name: name,
           userName: username,
+          roles,
         },
       });
     }

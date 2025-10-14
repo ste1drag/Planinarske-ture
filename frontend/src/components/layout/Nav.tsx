@@ -1,4 +1,4 @@
-import { Mountain, Calendar, Bell, User, LogOut } from 'lucide-react';
+import { Mountain, Calendar, Bell, User, LogOut, Shield } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from '@/contexts/TranslationContext';
 import { useAuthStore } from '@/features/auth/store/auth-store';
@@ -9,6 +9,7 @@ const Nav = () => {
   const navigate = useNavigate();
   const t = useTranslation();
   const logout = useAuthStore(state => state.logout);
+  const user = useAuthStore(state => state.user);
 
   const handleLogout = async () => {
     await logout();
@@ -21,6 +22,8 @@ const Nav = () => {
     { name: t.notifications, href: '/notifications', icon: Bell },
     { name: t.profile, href: '/profile', icon: User },
   ];
+
+  const isAdmin = user?.roles?.includes('Administrator');
 
   return (
     <nav className="sticky top-0 px-3 z-50 w-full border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
@@ -50,6 +53,20 @@ const Nav = () => {
               </Link>
             );
           })}
+          {isAdmin && (
+            <Link
+              to="/admin"
+              className={cn(
+                'flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors',
+                location.pathname === '/admin'
+                  ? 'bg-forest-light text-white'
+                  : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+              )}
+            >
+              <Shield className="h-4 w-4" />
+              <span>Admin</span>
+            </Link>
+          )}
           <button
             onClick={handleLogout}
             className="flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors text-muted-foreground hover:text-foreground hover:bg-muted"

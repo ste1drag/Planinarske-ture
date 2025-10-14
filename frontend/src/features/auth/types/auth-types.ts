@@ -18,6 +18,14 @@ export interface AuthenticationModel {
   accessToken: string;
   refreshToken: string;
   isAuthorized: boolean;
+  roles?: string[];
+}
+
+export interface UserDetailsDTO {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
 }
 
 export interface RefreshTokenModel {

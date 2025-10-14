@@ -11,6 +11,7 @@ import Nav from './components/layout/Nav';
 import { TranslationProvider } from './contexts/TranslationContext';
 import { useAuthStore } from './features/auth/store/auth-store';
 import NotificationContainer from './features/notification/components/NotificationContainer';
+import Admin from './pages/Admin';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Mountains from './pages/Mountains';
@@ -22,6 +23,17 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const user = useAuthStore(state => state.user);
   if (!user) {
     return <Navigate to="/" replace />;
+  }
+  return <>{children}</>;
+}
+
+function AdminRoute({ children }: { children: React.ReactNode }) {
+  const user = useAuthStore(state => state.user);
+  if (!user) {
+    return <Navigate to="/" replace />;
+  }
+  if (!user.roles?.includes('Administrator')) {
+    return <Navigate to="/home" replace />;
   }
   return <>{children}</>;
 }
@@ -81,6 +93,14 @@ function AppContent() {
             <ProtectedRoute>
               <Profile />
             </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <Admin />
+            </AdminRoute>
           }
         />
       </Routes>

@@ -1,8 +1,8 @@
+import { Loader2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { getAllNotifications } from '@/features/notification/api/notification-api';
-import { Notification } from '@/features/notification/types/notification';
 import NotificationCard from '@/features/notification/components/NotificationCard';
-import { Loader2 } from 'lucide-react';
+import { Notification } from '@/features/notification/types/notification';
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -51,13 +51,17 @@ const Notifications = () => {
       {notifications.length === 0 ? (
         <div className="text-center py-12">
           <p className="text-gray-500 dark:text-gray-400 text-lg">
-            No notifications yet. You'll see them here when you receive new notifications.
+            No notifications yet. You&apos;ll see them here when you receive new
+            notifications.
           </p>
         </div>
       ) : (
         <div className="space-y-4">
           {notifications.map(notification => (
-            <NotificationCard key={notification.id} notification={notification} />
+            <NotificationCard
+              key={notification.id}
+              notification={notification}
+            />
           ))}
         </div>
       )}
