@@ -100,8 +100,8 @@ export const srb: Dictionary = {
   // Authentication
   login: 'Prijavljivanje',
   register: 'Registracija',
-  signIn: 'Registruj se',
-  signUp: 'Uloguj se',
+  signUp: 'Registruj se',
+  signIn: 'Uloguj se',
   emailAddress: 'Email adresa',
   password: 'Šifra',
   confirmPassword: 'Potvrdi šifru',
