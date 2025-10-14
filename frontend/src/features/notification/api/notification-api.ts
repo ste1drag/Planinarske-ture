@@ -9,7 +9,9 @@ export const getAllNotifications = async (): Promise<Notification[]> => {
   return response.data;
 };
 
-export const getNotificationById = async (id: string): Promise<Notification> => {
+export const getNotificationById = async (
+  id: string
+): Promise<Notification> => {
   const response = await axios_instance.get<Notification>(
     NOTIFICATION_ENDPOINTS.GET_NOTIFICATION_BY_ID(id)
   );

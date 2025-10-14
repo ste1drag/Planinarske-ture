@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
+import NotificationPopup from './NotificationPopup';
 import { signalRService } from '../services/signalr-service';
 import { Notification } from '../types/notification';
-import NotificationPopup from './NotificationPopup';
 
 const NotificationContainer = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
