@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Cors;
 using Tours.Application.UseCases.Tours.Commands.DeleteTour;
 using Tours.Application.Common.Exceptions;
 using Tours.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Tours.API.Controllers
 {
@@ -61,10 +62,13 @@ namespace Tours.API.Controllers
             return Ok(tours);
         }
 
+        [Authorize(Roles = "TourGuide")]
         [HttpPost(Name = "AddTour")]
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<Unit>> AddTour([FromBody] AddTourCommand addTourCommand)
         {
             if (addTourCommand == null || addTourCommand.AddTourDTO == null)
@@ -76,9 +80,12 @@ namespace Tours.API.Controllers
             return Accepted();
         }
 
+        [Authorize(Roles = "TourGuide")]
         [HttpDelete(Name ="DeleteTour")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult> DeleteTour([FromBody] DeleteTourCommand deleteTourCommand)
         {
             await _mediator.Send(deleteTourCommand);

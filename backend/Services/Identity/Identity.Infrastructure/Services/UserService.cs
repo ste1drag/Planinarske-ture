@@ -60,5 +60,10 @@ namespace Identity.Infrastructure.Services
             return await _userManager.FindByNameAsync(username);
         }
 
+        public async Task<User> FindByIdAsync(string userId)
+        {
+            return await _userManager.FindByIdAsync(userId);
+        }
+
     }
 }

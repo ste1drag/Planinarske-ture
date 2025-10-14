@@ -11,6 +11,7 @@ namespace Identity.Application.Contracts
     {
         public IQueryable<User> Users { get; }
         public Task<User> FindNameByAsync(string username);
+        public Task<User> FindByIdAsync(string userId);
         public Task<IResult> CreateAsync(User user, string password);
         public Task<IResult> AddToRoleAsync(User user, string role);
     }
