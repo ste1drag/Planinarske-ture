@@ -14,7 +14,6 @@ import NotificationContainer from './features/notification/components/Notificati
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Mountains from './pages/Mountains';
-import Notifications from './pages/Notifications';
 import Profile from './pages/Profile';
 import Tours from './pages/Tours';
 
@@ -64,14 +63,6 @@ function AppContent() {
           element={
             <ProtectedRoute>
               <Mountains />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/notifications"
-          element={
-            <ProtectedRoute>
-              <Notifications />
             </ProtectedRoute>
           }
         />

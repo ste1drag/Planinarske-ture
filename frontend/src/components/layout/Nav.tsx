@@ -1,7 +1,8 @@
-import { Mountain, Calendar, Bell, User, LogOut } from 'lucide-react';
+import { Mountain, Calendar, User, LogOut } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from '@/contexts/TranslationContext';
 import { useAuthStore } from '@/features/auth/store/auth-store';
+import { NotificationBell } from '@/features/notifications';
 import { cn } from '@/lib/utils';
 
 const Nav = () => {
@@ -18,7 +19,6 @@ const Nav = () => {
   const navigationItems = [
     { name: t.tours, href: '/tours', icon: Calendar },
     { name: t.mountains, href: '/mountains', icon: Mountain },
-    { name: t.notifications, href: '/notifications', icon: Bell },
     { name: t.profile, href: '/profile', icon: User },
   ];
 
@@ -50,6 +50,7 @@ const Nav = () => {
               </Link>
             );
           })}
+          <NotificationBell />
           <button
             onClick={handleLogout}
             className="flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors text-muted-foreground hover:text-foreground hover:bg-muted"
