@@ -35,7 +35,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       console.log(authData);
       const roles = getRolesFromToken(authData.accessToken);
       const userId = getUserIdFromToken(authData.accessToken);
-      const userWithRoles = { ...authData, roles, userId: userId || undefined };
+      const userWithRoles = { ...authData, roles, userId: userId ?? undefined };
       localStorage.setItem('name', authData.userName);
       localStorage.setItem('auth_token', authData.accessToken);
       localStorage.setItem('refresh_token', authData.refreshToken);
@@ -103,7 +103,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       });
       const roles = getRolesFromToken(authData.accessToken);
       const userId = getUserIdFromToken(authData.accessToken);
-      const userWithRoles = { ...authData, roles, userId: userId || undefined };
+      const userWithRoles = { ...authData, roles, userId: userId ?? undefined };
       localStorage.setItem('auth_token', authData.accessToken);
       localStorage.setItem('refresh_token', authData.refreshToken);
       set({ user: userWithRoles });
@@ -133,7 +133,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
           name: name,
           userName: username,
           roles,
-          userId: userId || undefined,
+          userId: userId ?? undefined,
         },
       });
     }

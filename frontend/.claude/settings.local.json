@@ -6,7 +6,8 @@
       "Read(//c/Users/steva/Desktop/rs2/Planinarske-ture/backend/Services/Tours/**)",
       "Read(//c/Users/steva/Desktop/rs2/Planinarske-ture/backend/MountainToursGateway/MoutainToursGateway.API/**)",
       "Read(//c/Users/steva/Desktop/rs2/Planinarske-ture/backend/Services/Identity/Identity.API/**)",
-      "Read(//c/Users/steva/Desktop/rs2/Planinarske-ture/backend/Services/**)"
+      "Read(//c/Users/steva/Desktop/rs2/Planinarske-ture/backend/Services/**)",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []

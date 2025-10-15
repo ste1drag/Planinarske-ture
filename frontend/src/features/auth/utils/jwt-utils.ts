@@ -34,7 +34,9 @@ export const getUserIdFromToken = (token: string): string | null => {
 
   // Try different possible claim names for user ID
   return (
-    decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'] ||
+    decoded[
+      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+    ] ||
     decoded['sub'] ||
     decoded['userId'] ||
     null

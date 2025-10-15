@@ -15,16 +15,16 @@ export enum NotificationStatus {
 
 export interface InAppNotificationResponse {
   id: string;
-  userId: string;
-  type: NotificationType;
+  tourId: string;
+  type: number;
   title: string;
-  message: string;
-  status: NotificationStatus;
-  createdAt: string;
+  descriptionOfTour: string;
+  content: string;
+  status: string;
+  occuredOn: string;
+  createdAt?: string;
+  sentAt?: string;
   readAt?: string;
-  relatedEntityId?: string;
-  relatedEntityType?: string;
-  content?: Record<string, any>;
 }
 
 export interface NotificationFilters {

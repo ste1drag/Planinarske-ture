@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { Mountain, Calendar, Bell, User, LogOut, Shield } from 'lucide-react';
-=======
-import { Mountain, Calendar, User, LogOut } from 'lucide-react';
->>>>>>> origin/main
+import { Mountain, Calendar, User, LogOut, Shield } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from '@/contexts/TranslationContext';
 import { useAuthStore } from '@/features/auth/store/auth-store';
@@ -57,7 +53,6 @@ const Nav = () => {
               </Link>
             );
           })}
-<<<<<<< HEAD
           {isAdmin && (
             <Link
               to="/admin"
@@ -72,9 +67,7 @@ const Nav = () => {
               <span>Admin</span>
             </Link>
           )}
-=======
           <NotificationBell />
->>>>>>> origin/main
           <button
             onClick={handleLogout}
             className="flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors text-muted-foreground hover:text-foreground hover:bg-muted"

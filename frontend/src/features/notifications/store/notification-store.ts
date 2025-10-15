@@ -40,8 +40,10 @@ export const useNotificationStore = create<NotificationStore>((set, get) => ({
     set({ isLoading: true, error: null });
     try {
       const notifications = await getNotifications(filters);
+      console.log('Store: Fetched notifications:', notifications);
       set({ notifications, isLoading: false });
     } catch (error) {
+      console.error('Store: Failed to fetch notifications:', error);
       const errorMessage =
         (error as any)?.response?.data?.message ||
         'Failed to fetch notifications';
@@ -51,7 +53,12 @@ export const useNotificationStore = create<NotificationStore>((set, get) => ({
 
   fetchStats: async () => {
     try {
-      const stats = await getNotificationStats();
+      const notifications = await getNotifications();
+      const unreadCount = notifications.filter(n => n.status === 'Unread').length;
+      const stats = {
+        unreadCount,
+        totalCount: notifications.length,
+      };
       set({ stats });
     } catch (error) {
       console.error('Failed to fetch notification stats:', error);

@@ -1,32 +1,29 @@
 import { Loader2 } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { getAllNotifications } from '@/features/notification/api/notification-api';
-import NotificationCard from '@/features/notification/components/NotificationCard';
-import { Notification } from '@/features/notification/types/notification';
+import { useEffect } from 'react';
+import { useNotificationStore } from '@/features/notifications/store/notification-store';
+import { NotificationItem } from '@/features/notifications/components/NotificationItem';
 
 const Notifications = () => {
-  const [notifications, setNotifications] = useState<Notification[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const {
+    notifications,
+    isLoading,
+    error,
+    fetchNotifications,
+  } = useNotificationStore();
 
   useEffect(() => {
-    const fetchNotifications = async () => {
-      try {
-        setLoading(true);
-        const data = await getAllNotifications();
-        setNotifications(data);
-      } catch (err) {
-        console.error('Failed to fetch notifications:', err);
-        setError('Failed to load notifications. Please try again later.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchNotifications();
-  }, []);
+  }, [fetchNotifications]);
 
-  if (loading) {
+  // Debug logging
+  console.log('Notifications Page:', {
+    notifications,
+    isLoading,
+    error,
+    count: notifications?.length
+  });
+
+  if (isLoading) {
     return (
       <div className="container mx-auto px-4 py-8 flex justify-center items-center min-h-[50vh]">
         <Loader2 className="w-8 h-8 animate-spin text-forest" />
@@ -58,7 +55,7 @@ const Notifications = () => {
       ) : (
         <div className="space-y-4">
           {notifications.map(notification => (
-            <NotificationCard
+            <NotificationItem
               key={notification.id}
               notification={notification}
             />
