@@ -19,6 +19,7 @@ export interface AuthenticationModel {
   refreshToken: string;
   isAuthorized: boolean;
   roles?: string[];
+  userId?: string;
 }
 
 export interface UserDetailsDTO {

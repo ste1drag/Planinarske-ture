@@ -27,3 +27,16 @@ export const getRolesFromToken = (token: string): string[] => {
   // Role claim can be a string (single role) or array (multiple roles)
   return Array.isArray(roleClaim) ? roleClaim : [roleClaim];
 };
+
+export const getUserIdFromToken = (token: string): string | null => {
+  const decoded = decodeJWT(token);
+  if (!decoded) return null;
+
+  // Try different possible claim names for user ID
+  return (
+    decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'] ||
+    decoded['sub'] ||
+    decoded['userId'] ||
+    null
+  );
+};

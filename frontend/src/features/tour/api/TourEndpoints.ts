@@ -5,4 +5,6 @@ export const TOURS_ENDPOINTS = {
     `/tours-api/Tours/${mountainId}/tours`,
   ADD_TOUR: '/tours-api/Tours',
   DELETE_TOUR: '/tours-api/Tours',
+  JOIN_TOUR: (tourId: string) => `/tours-api/Tours/${tourId}/join`,
+  CANCEL_TOUR: (tourId: string) => `/tours-api/Tours/${tourId}/cancel`,
 } as const;

@@ -1,7 +1,8 @@
-import { Calendar, Star, Plus } from 'lucide-react';
+import { Calendar, Star, Plus, UserPlus, Ban } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import StatusBadge from './StatusBadge';
 import WeatherBadge from './WeatherBadge';
+import { joinTour, cancelTour, getTourById } from '../api/ToursApi';
 import { TourStatus } from '../enums/TourStatus';
 import { TourViewModel } from '../types/TourDto';
 import { Button } from '@/components/ui/Button';
@@ -12,6 +13,7 @@ import {
   DialogTitle,
 } from '@/components/ui/Dialog';
 import { useTranslation } from '@/contexts/TranslationContext';
+import { useAuthStore } from '@/features/auth/store/auth-store';
 import {
   getReviewsByTourId,
   createReview,
@@ -34,10 +36,14 @@ export default function TourDetailsDialog({
   onClose,
 }: TourDetailsDialogProps) {
   const t = useTranslation();
+  const { user } = useAuthStore();
   const [reviews, setReviews] = useState<ReadReviewDto[]>([]);
   const [isLoadingReviews, setIsLoadingReviews] = useState(false);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [currentUserId] = useState(1);
+  const [isJoining, setIsJoining] = useState(false);
+  const [isCanceling, setIsCanceling] = useState(false);
+  const [currentTour, setCurrentTour] = useState<TourViewModel | null>(tour);
 
   const loadReviews = () => {
     if (tour) {
@@ -63,6 +69,7 @@ export default function TourDetailsDialog({
 
   useEffect(() => {
     if (open && tour) {
+      setCurrentTour(tour);
       loadReviews();
       setShowReviewForm(false);
     }
@@ -79,7 +86,56 @@ export default function TourDetailsDialog({
     }
   };
 
-  if (!tour) return null;
+  const handleJoinTour = async () => {
+    if (!currentTour) return;
+
+    setIsJoining(true);
+    try {
+      await joinTour(currentTour.id);
+      alert('You have successfully joined the tour!');
+      // Refresh tour data to get updated participant count
+      const updatedTour = await getTourById(currentTour.id);
+      setCurrentTour(updatedTour);
+    } catch (error: any) {
+      alert(
+        error?.response?.data?.message ||
+          'Failed to join tour. Please try again.'
+      );
+    } finally {
+      setIsJoining(false);
+    }
+  };
+
+  const handleCancelTour = async () => {
+    if (!currentTour) return;
+
+    setIsCanceling(true);
+    try {
+      await cancelTour(currentTour.id);
+      alert('Tour has been canceled successfully.');
+      // Refresh tour data to get updated status
+      const updatedTour = await getTourById(currentTour.id);
+      setCurrentTour(updatedTour);
+    } catch (error: any) {
+      alert(
+        error?.response?.data?.message ||
+          'Failed to cancel tour. Please try again.'
+      );
+    } finally {
+      setIsCanceling(false);
+    }
+  };
+
+  if (!currentTour) return null;
+
+  const isTourGuide = user?.roles?.includes('TourGuide');
+  const isCreator = user?.userId === currentTour.createdBy;
+  const canJoinTour =
+    currentTour.status !== TourStatus.CANCELED &&
+    currentTour.status !== TourStatus.COMPLETED &&
+    currentTour.numberOfRegisteredPeople < currentTour.maxNumberOfPeople;
+  const canCancelTour =
+    isTourGuide && isCreator && currentTour.status !== TourStatus.COMPLETED;
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -109,18 +165,18 @@ export default function TourDetailsDialog({
         reviews.length
       : 0;
 
-  const canWriteReview = tour.status === TourStatus.COMPLETED;
+  const canWriteReview = currentTour.status === TourStatus.COMPLETED;
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-forest mb-3">
-            {tour.name}
+            {currentTour.name}
           </DialogTitle>
           <div className="flex gap-2">
-            <StatusBadge tourStatus={tour.status} />
-            <WeatherBadge weather={tour.weather} />
+            <StatusBadge tourStatus={currentTour.status} />
+            <WeatherBadge weather={currentTour.weather} />
           </div>
         </DialogHeader>
 
@@ -129,14 +185,45 @@ export default function TourDetailsDialog({
           <div className="space-y-3">
             <div className="flex items-center gap-2 text-muted-foreground">
               <Calendar className="h-5 w-5" />
-              <span>{formatDate(tour.date)}</span>
+              <span>{formatDate(currentTour.date)}</span>
+            </div>
+            <div className="text-muted-foreground">
+              Participants: {currentTour.numberOfRegisteredPeople} /{' '}
+              {currentTour.maxNumberOfPeople}
             </div>
           </div>
+
+          {/* Action Buttons */}
+          {user && (
+            <div className="flex gap-2">
+              {canJoinTour && (
+                <Button
+                  onClick={handleJoinTour}
+                  disabled={isJoining}
+                  className="flex items-center gap-2"
+                >
+                  <UserPlus className="h-4 w-4" />
+                  {isJoining ? 'Joining...' : 'Join Tour'}
+                </Button>
+              )}
+              {canCancelTour && (
+                <Button
+                  onClick={handleCancelTour}
+                  disabled={isCanceling}
+                  variant="destructive"
+                  className="flex items-center gap-2"
+                >
+                  <Ban className="h-4 w-4" />
+                  {isCanceling ? 'Canceling...' : 'Cancel Tour'}
+                </Button>
+              )}
+            </div>
+          )}
 
           {/* Description */}
           <div>
             <h3 className="text-lg font-semibold mb-2">Description</h3>
-            <p className="text-muted-foreground">{tour.description}</p>
+            <p className="text-muted-foreground">{currentTour.description}</p>
           </div>
 
           {/* Reviews Section */}
@@ -177,7 +264,7 @@ export default function TourDetailsDialog({
               <div className="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50">
                 <h4 className="text-md font-semibold mb-4">Write a Review</h4>
                 <CreateReviewForm
-                  tourId={tour.id}
+                  tourId={currentTour.id}
                   userId={currentUserId}
                   onSubmit={handleSubmitReview}
                   onCancel={() => setShowReviewForm(false)}

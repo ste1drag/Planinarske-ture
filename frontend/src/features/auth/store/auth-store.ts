@@ -10,7 +10,7 @@ import {
   NewUserDTO,
   UserCredentialsDTO,
 } from '../types/auth-types';
-import { getRolesFromToken } from '../utils/jwt-utils';
+import { getRolesFromToken, getUserIdFromToken } from '../utils/jwt-utils';
 
 interface AuthStore {
   user: AuthenticationModel | null;
@@ -34,7 +34,8 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
       const authData = await loginUser(credentials);
       console.log(authData);
       const roles = getRolesFromToken(authData.accessToken);
-      const userWithRoles = { ...authData, roles };
+      const userId = getUserIdFromToken(authData.accessToken);
+      const userWithRoles = { ...authData, roles, userId: userId || undefined };
       localStorage.setItem('name', authData.userName);
       localStorage.setItem('auth_token', authData.accessToken);
       localStorage.setItem('refresh_token', authData.refreshToken);
@@ -101,7 +102,8 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         refreshToken: refreshTokenValue,
       });
       const roles = getRolesFromToken(authData.accessToken);
-      const userWithRoles = { ...authData, roles };
+      const userId = getUserIdFromToken(authData.accessToken);
+      const userWithRoles = { ...authData, roles, userId: userId || undefined };
       localStorage.setItem('auth_token', authData.accessToken);
       localStorage.setItem('refresh_token', authData.refreshToken);
       set({ user: userWithRoles });
@@ -122,6 +124,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
     const username = localStorage.getItem('user_name');
     if (token && refreshTokenValue && name && username) {
       const roles = getRolesFromToken(token);
+      const userId = getUserIdFromToken(token);
       set({
         user: {
           accessToken: token,
@@ -130,6 +133,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
           name: name,
           userName: username,
           roles,
+          userId: userId || undefined,
         },
       });
     }

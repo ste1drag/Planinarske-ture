@@ -51,7 +51,7 @@ const Notifications = () => {
       {notifications.length === 0 ? (
         <div className="text-center py-12">
           <p className="text-gray-500 dark:text-gray-400 text-lg">
-            No notifications yet. You'll see them here when you receive new
+            No notifications yet. You&apos;ll see them here when you receive new
             notifications.
           </p>
         </div>

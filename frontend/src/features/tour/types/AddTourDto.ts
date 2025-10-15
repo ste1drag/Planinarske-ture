@@ -9,4 +9,5 @@ export interface AddTourDto {
 
 export interface AddTourCommand {
   addTourDTO: AddTourDto;
+  createdBy: string;
 }
