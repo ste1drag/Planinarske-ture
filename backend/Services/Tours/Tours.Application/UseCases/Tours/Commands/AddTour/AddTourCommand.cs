@@ -11,5 +11,6 @@ namespace Tours.Application.UseCases.Tours.Commands.AddTour
     public class AddTourCommand : IRequest
     {
         public AddTourDTO AddTourDTO { get; set; }
+        public string CreatedBy { get; set; }
     }
 }

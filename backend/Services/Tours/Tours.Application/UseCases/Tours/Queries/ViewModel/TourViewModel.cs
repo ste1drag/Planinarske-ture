@@ -17,5 +17,9 @@ namespace Tours.Application.UseCases.Tours.Queries.ViewModel
         public DateTime Date { get; set; }
         public TourStatusEnum Status { get; set; }
         public MountainWeatherEnum Weather { get; set; }
+        public int MinNumberOfPeople { get; set; }
+        public int MaxNumberOfPeople { get; set; }
+        public int NumberOfRegisteredPeople { get; set; }
+        public string CreatedBy { get; set; }
     }
 }

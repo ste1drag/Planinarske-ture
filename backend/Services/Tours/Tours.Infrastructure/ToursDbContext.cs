@@ -15,6 +15,7 @@ namespace Tours.Infrastructure
         }
         public DbSet<Tour> Tours { get; set; }
         public DbSet<Mountain> Mountains { get; set; }
+        public DbSet<TourEnrollment> TourEnrollments { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -27,6 +28,18 @@ namespace Tours.Infrastructure
                 h.Property<int>(hr => hr.NumberOfRegisteredPeople).HasColumnName("NumberOfRegisteredPeople");
                 h.Property<Guid>("TourId");
             });
+
+            modelBuilder.Entity<TourEnrollment>().HasKey(x => x.Id);
+            modelBuilder.Entity<TourEnrollment>()
+                .HasOne(x => x.Tour)
+                .WithMany()
+                .HasForeignKey(x => x.TourId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<TourEnrollment>()
+                .HasIndex(x => new { x.TourId, x.UserId })
+                .IsUnique(); // Prevent duplicate enrollments
         }
     }
 }
