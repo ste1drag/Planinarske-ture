@@ -10,5 +10,6 @@ namespace Identity.Domain.Entities
     {
         public const string User = "User";
         public const string Admin = "Administrator";
+        public const string TourGuide = "TourGuide";
     }
 }

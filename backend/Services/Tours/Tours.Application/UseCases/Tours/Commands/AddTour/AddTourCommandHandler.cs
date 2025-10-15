@@ -43,6 +43,7 @@ namespace Tours.Application.UseCases.Tours.Commands.AddTour
 
             Tour tour = _mapper.Map<Tour>(request.AddTourDTO);
             tour.HikerRange = new HikerRange(request.AddTourDTO.MinNumberOfPeople, request.AddTourDTO.MaxNumberOfPeople);
+            tour.CreatedBy = request.CreatedBy;
             await _toursRepository.AddNew(tour);
 
             var tourCreatedEvent = new TourCreateEvent.TourCreatedEvent

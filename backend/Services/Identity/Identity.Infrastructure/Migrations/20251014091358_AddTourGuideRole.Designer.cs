@@ -4,6 +4,7 @@ using Identity.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Identity.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251014091358_AddTourGuideRole")]
+    partial class AddTourGuideRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,26 +119,6 @@ namespace Identity.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "550e8400-e29b-41d4-a716-446655440001",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "4de519e8-9e50-46dc-9baa-ef692602d4ea",
-                            Email = "admin@mountainhiking.com",
-                            EmailConfirmed = true,
-                            FirstName = "System",
-                            LastName = "Administrator",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@MOUNTAINHIKING.COM",
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFw+Z6Q4B9QFnq2m1e0+p1H68QFsuO6e1ZGaMNSmHHM5SgSPZ9T72VD8kIS2DLNn2A==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "7b5d9e64-8b0a-4378-982b-8945162a22c2",
-                            TwoFactorEnabled = false,
-                            UserName = "admin"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -167,22 +150,19 @@ namespace Identity.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "660e8400-e29b-41d4-a716-446655440002",
-                            ConcurrencyStamp = "660e8400-e29b-41d4-a716-446655440002",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
-                        },
-                        new
-                        {
-                            Id = "660e8400-e29b-41d4-a716-446655440003",
-                            ConcurrencyStamp = "660e8400-e29b-41d4-a716-446655440003",
+                            Id = "6fdf221c-6a90-4266-a4d0-4f6442c8bff6",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "660e8400-e29b-41d4-a716-446655440004",
-                            ConcurrencyStamp = "660e8400-e29b-41d4-a716-446655440004",
+                            Id = "803e7e5d-afa0-4f97-ac83-e8e17819cffa",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = "a3b2f74a-83ae-4088-93c5-33f4a0fd8fef",
                             Name = "TourGuide",
                             NormalizedName = "TOURGUIDE"
                         });
@@ -273,13 +253,6 @@ namespace Identity.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "550e8400-e29b-41d4-a716-446655440001",
-                            RoleId = "660e8400-e29b-41d4-a716-446655440002"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

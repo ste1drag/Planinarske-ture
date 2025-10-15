@@ -10,12 +10,16 @@ using Microsoft.AspNetCore.Cors;
 using Tours.Application.UseCases.Tours.Commands.DeleteTour;
 using Tours.Application.Common.Exceptions;
 using Tours.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Tours.Application.UseCases.Tours.Commands.JoinTour;
+using Tours.Application.UseCases.Tours.Commands.CancelTour;
+using System.Security.Claims;
 
 namespace Tours.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [EnableCors("MyPolicy")]
+    [EnableCors("AllowFrontend")]
     public class ToursController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -61,27 +65,88 @@ namespace Tours.API.Controllers
             return Ok(tours);
         }
 
+        [Authorize(Roles = "TourGuide")]
         [HttpPost(Name = "AddTour")]
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<Unit>> AddTour([FromBody] AddTourCommand addTourCommand)
         {
             if (addTourCommand == null || addTourCommand.AddTourDTO == null)
             {
                 throw new ValidationException(new[] { ("Tour", "Invalid tour data provided") });
             }
-            
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new ValidationException(new[] { ("User", "User not authenticated") });
+            }
+
+            addTourCommand.CreatedBy = userId;
             await _mediator.Send(addTourCommand);
             return Accepted();
         }
 
+        [Authorize(Roles = "TourGuide")]
         [HttpDelete(Name ="DeleteTour")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult> DeleteTour([FromBody] DeleteTourCommand deleteTourCommand)
         {
             await _mediator.Send(deleteTourCommand);
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpPost("{tourId}/join")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult> JoinTour(Guid tourId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new ValidationException(new[] { ("User", "User not authenticated") });
+            }
+
+            var command = new JoinTourCommand
+            {
+                TourId = tourId,
+                UserId = userId
+            };
+
+            await _mediator.Send(command);
+            return Ok();
+        }
+
+        [Authorize(Roles = "TourGuide")]
+        [HttpPost("{tourId}/cancel")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public async Task<ActionResult> CancelTour(Guid tourId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new ValidationException(new[] { ("User", "User not authenticated") });
+            }
+
+            var command = new CancelTourCommand
+            {
+                TourId = tourId,
+                UserId = userId
+            };
+
+            await _mediator.Send(command);
             return Ok();
         }
     }

@@ -103,7 +103,6 @@ class SignalRService {
     } catch (error: any) {
       console.error(
         '❌ Error starting SignalR connection:',
-        'Error starting SignalR connection:',
         error?.message || error
       );
       this.connection = null;

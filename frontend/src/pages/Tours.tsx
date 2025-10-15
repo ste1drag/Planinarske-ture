@@ -9,6 +9,7 @@ import {
   SelectValue,
 } from '@/components/ui/Select';
 import { useTranslation } from '@/contexts/TranslationContext';
+import { useAuthStore } from '@/features/auth/store/auth-store';
 import AddNewTourDialog from '@/features/tour/components/AddNewTourDialog';
 import TourCard from '@/features/tour/components/TourCard';
 import { TourStatus } from '@/features/tour/enums/TourStatus';
@@ -17,8 +18,11 @@ import { useTourStore } from '@/features/tour/store/tour-store';
 const Tours = () => {
   const t = useTranslation();
   const { tours, isLoading, error, fetchAllTours } = useTourStore();
+  const user = useAuthStore(state => state.user);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string | undefined>();
+
+  const isTourGuide = user?.roles?.includes('TourGuide');
 
   useEffect(() => {
     fetchAllTours();
@@ -40,7 +44,7 @@ const Tours = () => {
       <HeaderTitle
         title={t.tours}
         subTitle={t.tourPageTitle}
-        button={<AddNewTourDialog />}
+        button={isTourGuide ? <AddNewTourDialog /> : undefined}
       />
       <div className="flex justify-between items-center gap-4">
         <SearchBar

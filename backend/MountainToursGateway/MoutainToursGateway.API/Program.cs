@@ -18,22 +18,15 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:3000", "http://localhost:5173", "https://gourav-d.github.io")
+        policy.SetIsOriginAllowed(_ => true)
               .AllowAnyHeader()
               .AllowAnyMethod()
-              .AllowCredentials()
-              .SetIsOriginAllowed(_ => true);
+              .AllowCredentials();
     });
 });
 
 builder.Services.AddReverseProxy()
     .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
-
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("authenticated", policy =>
-        policy.RequireAuthenticatedUser());
-});
 
 // Add MassTransit with RabbitMQ
 builder.Services.AddMassTransit(x =>
@@ -78,12 +71,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
-// Use CORS before authentication/authorization
+// Use CORS before routing
 app.UseCors("AllowFrontend");
-
-app.UseAuthentication();
-
-app.UseAuthorization();
 
 app.MapReverseProxy();
 

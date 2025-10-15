@@ -3,6 +3,9 @@ using Tours.Application;
 using Tours.Application.BackgroundServices;
 using Tours.Infrastructure;
 using Tours.API.Middleware;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,9 +23,33 @@ builder.Services.AddCors(options =>
     {
         policy.WithOrigins("http://localhost:3000", "http://localhost:5173", "http://localhost:8084")
               .AllowAnyHeader()
-              .AllowAnyMethod();
+              .AllowAnyMethod()
+              .AllowCredentials();
     });
 });
+
+// Add JWT Authentication
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+var secretKey = jwtSettings.GetValue<string>("SecretKey");
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey)),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+    };
+});
+
+builder.Services.AddAuthorization();
 
 // Add background service for updating tour statuses
 builder.Services.AddHostedService<TourStatusUpdateService>();
@@ -56,6 +83,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCustomExceptionHandler();
 app.UseCors("AllowFrontend");
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.Urls.Add("http://0.0.0.0:8080");

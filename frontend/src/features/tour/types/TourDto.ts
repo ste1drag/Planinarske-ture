@@ -9,4 +9,8 @@ export interface TourViewModel {
   date: string;
   status: TourStatus;
   weather: Weather;
+  minNumberOfPeople: number;
+  maxNumberOfPeople: number;
+  numberOfRegisteredPeople: number;
+  createdBy: string;
 }

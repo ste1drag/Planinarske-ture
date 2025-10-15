@@ -20,6 +20,53 @@ namespace Tours.Domain.Entities
         public Guid MountainId { get; set; }
         public Mountain Mountain { get; init; }
         public MountainWeatherEnum Weather { get; set; }
-        #endregion 
+        public string CreatedBy { get; set; }
+        #endregion
+
+        #region Domain Methods
+        public bool CanJoin()
+        {
+            if (Status == TourStatusEnum.CANCELED)
+                return false;
+
+            if (Status == TourStatusEnum.COMPLETED)
+                return false;
+
+            if (HikerRange == null)
+                return false;
+
+            return HikerRange.NumberOfRegisteredPeople < HikerRange.MaxNumberOfPeople;
+        }
+
+        public void IncrementEnrollment()
+        {
+            if (HikerRange == null)
+                throw new InvalidOperationException("HikerRange is not initialized");
+
+            if (!CanJoin())
+                throw new InvalidOperationException("Tour is full or not available for enrollment");
+
+            HikerRange = HikerRange with { NumberOfRegisteredPeople = HikerRange.NumberOfRegisteredPeople + 1 };
+        }
+
+        public void DecrementEnrollment()
+        {
+            if (HikerRange == null)
+                throw new InvalidOperationException("HikerRange is not initialized");
+
+            if (HikerRange.NumberOfRegisteredPeople > 0)
+            {
+                HikerRange = HikerRange with { NumberOfRegisteredPeople = HikerRange.NumberOfRegisteredPeople - 1 };
+            }
+        }
+
+        public void CancelTour()
+        {
+            if (Status == TourStatusEnum.COMPLETED)
+                throw new InvalidOperationException("Cannot cancel a completed tour");
+
+            Status = TourStatusEnum.CANCELED;
+        }
+        #endregion
     }
 }

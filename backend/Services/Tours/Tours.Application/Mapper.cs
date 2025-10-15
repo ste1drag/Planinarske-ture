@@ -16,7 +16,12 @@ namespace Tours.Application
         {
             CreateMap<AddTourDTO, Tour>().ReverseMap();
             CreateMap<Mountain, MountainViewModel>().ReverseMap();
-            CreateMap<Tour, TourViewModel>().ReverseMap();
+            CreateMap<Tour, TourViewModel>()
+                .ForMember(dest => dest.MinNumberOfPeople, opt => opt.MapFrom(src => src.HikerRange != null ? src.HikerRange.MinNumberOfPeople : 0))
+                .ForMember(dest => dest.MaxNumberOfPeople, opt => opt.MapFrom(src => src.HikerRange != null ? src.HikerRange.MaxNumberOfPeople : 0))
+                .ForMember(dest => dest.NumberOfRegisteredPeople, opt => opt.MapFrom(src => src.HikerRange != null ? src.HikerRange.NumberOfRegisteredPeople : 0))
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.CreatedBy))
+                .ReverseMap();
         }
     }
 }
