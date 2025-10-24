@@ -15,6 +15,18 @@ specification {
   tag critical
   tag async
   tag realtime
+
+  // Relationship kinds
+  relationship async
+  relationship sync
+  relationship publishes
+  relationship consumes
+  relationship queries
+  relationship commands
+  relationship stores
+  relationship applies
+  relationship routes
+  relationship realtime
 }
 
 
@@ -27,18 +39,19 @@ model {
       color red
     }
     technology '.NET 8, PostgreSQL'
-    -> rabbitMQ 'Publishes TourCreatedEvent'
+    -[publishes]-> rabbitMQ 'TourCreatedEvent'
   }
 
   externalSystem gateway 'API Gateway' {
     description 'Gateway with SignalR hub for real-time communication'
     technology '.NET 8, SignalR, YARP'
     style {
-      color secondary
+      icon tech:docker
+      color red
     }
-    -> frontend 'Pushes notifications via SignalR'
-    -> notificationsApi 'Proxies HTTP requests'
-    -> toursService 'Proxies HTTP requests'
+    -[realtime]-> frontend 'Pushes notifications via SignalR'
+    -[sync]-> notificationsApi 'Proxies HTTP requests'
+
   }
 
   externalSystem frontend 'Frontend Application' {
@@ -64,8 +77,8 @@ model {
       icon tech:rabbitmq
     }
 
-    -> notificationsService.applicationLayer.tourCreatedConsumer 'TourCreatedEvent queue'
-    -> gateway 'InAppNotificationCreatedTourEvent'
+    -[async]-> notificationsService.applicationLayer.tourCreatedConsumer 'TourCreatedEvent'
+    -[async]-> gateway 'InAppNotificationCreatedTourEvent'
   }
 
   database mongodb 'MongoDB' {
@@ -101,7 +114,7 @@ model {
         description 'REST API endpoints for notification CRUD operations'
         technology 'ASP.NET Core, MediatR'
 
-        -> mediator 'Sends Commands/Queries'
+        -[async]-> mediator 'Sends Commands/Queries'
       }
     }
 
@@ -119,7 +132,7 @@ model {
         description 'Consumes TourCreatedEvent from RabbitMQ and initiates notification creation'
         technology 'MassTransit, IConsumer'
 
-        -> mediator 'Sends CreateInAppNotificationCommand'
+        -[commands]-> mediator 'CreateInAppNotificationCommand'
       }
 
       // Mediator (CQRS)
@@ -127,12 +140,12 @@ model {
         description 'CQRS mediator - routes commands and queries to handlers'
         technology 'MediatR, FluentValidation'
 
-        -> createCommandHandler 'Routes CreateInAppNotificationCommand'
-        -> updateCommandHandler 'Routes UpdateInAppNotificationCommand'
-        -> deleteCommandHandler 'Routes DeleteInAppNotificationCommand'
-        -> getAllQueryHandler 'Routes GetAllInAppNotificationsQuery'
-        -> getByIdQueryHandler 'Routes GetInAppNotificationQuery'
-        -> getByTourIdQueryHandler 'Routes GetInAppNotificationsByTourIdQuery'
+        -[routes]-> createCommandHandler 'CreateInAppNotificationCommand'
+        -[routes]-> updateCommandHandler 'UpdateInAppNotificationCommand'
+        -[routes]-> deleteCommandHandler 'DeleteInAppNotificationCommand'
+        -[routes]-> getAllQueryHandler 'GetAllInAppNotificationsQuery'
+        -[routes]-> getByIdQueryHandler 'GetInAppNotificationQuery'
+        -[routes]-> getByTourIdQueryHandler 'GetInAppNotificationsByTourIdQuery'
       }
 
       // Command Handlers
@@ -140,23 +153,23 @@ model {
         description 'Handles notification creation with business rules and event publishing'
         technology 'IRequestHandler, AutoMapper'
 
-        -> notificationsService.domainLayer.deliveryRules 'Applies creation rules'
-        -> notificationsService.infrastructureLayer.notificationRepository 'Persists notification'
-        -> rabbitMQ 'Publishes InAppNotificationCreatedTourEvent'
+        -[applies]-> notificationsService.domainLayer.deliveryRules 'Creation rules'
+        -[stores]-> notificationsService.infrastructureLayer.notificationRepository 'Persists notification'
+        -[publishes]-> rabbitMQ 'InAppNotificationCreatedTourEvent'
       }
 
       handler updateCommandHandler 'UpdateInAppNotificationCommandHandler' {
         description 'Handles notification updates'
         technology 'IRequestHandler, AutoMapper'
 
-        -> notificationsService.infrastructureLayer.notificationRepository 'Updates notification'
+        -[stores]-> notificationsService.infrastructureLayer.notificationRepository 'Updates notification'
       }
 
       handler deleteCommandHandler 'DeleteInAppNotificationCommandHandler' {
         description 'Handles notification deletion'
         technology 'IRequestHandler'
 
-        -> notificationsService.infrastructureLayer.notificationRepository 'Deletes notification'
+        -[stores]-> notificationsService.infrastructureLayer.notificationRepository 'Deletes notification'
       }
 
       // Query Handlers
@@ -164,21 +177,21 @@ model {
         description 'Retrieves all notifications'
         technology 'IRequestHandler, AutoMapper'
 
-        -> notificationsService.infrastructureLayer.notificationRepository 'Fetches all notifications'
+        -[queries]-> notificationsService.infrastructureLayer.notificationRepository 'Fetches all notifications'
       }
 
       handler getByIdQueryHandler 'GetInAppNotificationQueryHandler' {
         description 'Retrieves notification by ID'
         technology 'IRequestHandler, AutoMapper'
 
-        -> notificationsService.infrastructureLayer.notificationRepository 'Fetches by ID'
+        -[queries]-> notificationsService.infrastructureLayer.notificationRepository 'Fetches by ID'
       }
 
       handler getByTourIdQueryHandler 'GetInAppNotificationsByTourIdQueryHandler' {
         description 'Retrieves notifications for specific tour'
         technology 'IRequestHandler, AutoMapper'
 
-        -> notificationsService.infrastructureLayer.notificationRepository 'Fetches by TourId'
+        -[queries]-> notificationsService.infrastructureLayer.notificationRepository 'Fetches by TourId'
       }
     }
 
@@ -200,7 +213,7 @@ model {
         description 'Business rules for notification lifecycle: creation, delivery, status transitions'
         technology 'Static Business Logic'
 
-        -> inAppNotification 'Applies rules to entity'
+        -[applies]-> inAppNotification 'Rules to entity'
       }
     }
 
@@ -217,7 +230,7 @@ model {
         description 'MongoDB repository implementation for notification persistence'
         technology 'MongoDB.Driver, IOptions'
 
-        -> mongodb 'CRUD operations on notifications collection'
+        -[stores]-> mongodb 'CRUD operations on notifications collection'
       }
     }
   }
@@ -341,14 +354,14 @@ views {
   // ============================================
   /**
    * @likec4-generated(v1)
-   * iKRoYXNo2Sg5MGMxNDcyMzFjY2M2YWIzMDM2ZmI1MjMxMWYzZjZmNzA4NWMzZGYyqmF1dG9MYXlvdXSBqWRpcmVjdGlvbqJMUqF4CKF50I+ld2lkdGjNDSGmaGVpZ2h0zQjPpW5vZGVz3gAQqHJhYmJpdE1RgqFilM0JtNCPzQFozKyhY8LZJm5vdGlmaWNhdGlvbnNTZXJ2aWNlLnByZXNlbnRhdGlvbkxheWVygqFilEvNB6rNAUDMtKFjwtklbm90aWZpY2F0aW9uc1NlcnZpY2UuYXBwbGljYXRpb25MYXllcoKhYpQIzL/NB+rNBsOhY8PZIG5vdGlmaWNhdGlvbnNTZXJ2aWNlLmRvbWFpbkxheWVygqFilM0JGMzlzQGAzQEJoWPD2Shub3RpZmljYXRpb25zU2VydmljZS5pbmZyYXN0cnVjdHVyZUxheWVygqFilM0JCs0Dic0BnM0BCaFjw6dtb25nb2RigqFilM0L2c0D
-   * vs0BUMy0oWPC2Tlub3RpZmljYXRpb25zU2VydmljZS5hcHBsaWNhdGlvbkxheWVyLnRvdXJDcmVhdGVkQ29uc3VtZXKCoWKUMM0D0c0Bdcy0oWPC2S5ub3RpZmljYXRpb25zU2VydmljZS5hcHBsaWNhdGlvbkxheWVyLm1lZGlhdG9ygqFilM0DI80D0c0Bacy0oWPC2Tpub3RpZmljYXRpb25zU2VydmljZS5hcHBsaWNhdGlvbkxheWVyLmNyZWF0ZUNvbW1hbmRIYW5kbGVygqFilM0GH8z8zQGdzLShY8LZOm5vdGlmaWNhdGlvbnNTZXJ2aWNlLmFwcGxpY2F0aW9uTGF5ZXIudXBkYXRlQ29tbWFuZEhhbmRsZXKCoWKUzQYdzQIezQGizLShY8LZOm5vdGlmaWNhdGlvbnNTZXJ2aWNlLmFwcGxpY2F0aW9uTGF5ZXIuZGVsZXRlQ29tbWFuZEhhbmRsZXKCoWKUzQYgzQRi
-   * zQGbzLShY8LZOG5vdGlmaWNhdGlvbnNTZXJ2aWNlLmFwcGxpY2F0aW9uTGF5ZXIuZ2V0QWxsUXVlcnlIYW5kbGVygqFilM0GMM0FhM0BfMy0oWPC2Tlub3RpZmljYXRpb25zU2VydmljZS5hcHBsaWNhdGlvbkxheWVyLmdldEJ5SWRRdWVyeUhhbmRsZXKCoWKUzQZAzQNAzQFczLShY8LZPW5vdGlmaWNhdGlvbnNTZXJ2aWNlLmFwcGxpY2F0aW9uTGF5ZXIuZ2V0QnlUb3VySWRRdWVyeUhhbmRsZXKCoWKUzQYSzQamzQG3zLShY8LZLm5vdGlmaWNhdGlvbnNTZXJ2aWNlLmRvbWFpbkxheWVyLmRlbGl2ZXJ5UnVsZXOCoWKUzQk4zQEazQFAzLShY8LZP25vdGlmaWNhdGlvbnNTZXJ2aWNlLmluZnJhc3RydWN0dXJlTGF5ZXIubm90aWZpY2F0aW9uUmVwb3NpdG9yeYKh
-   * YpTNCSrNA77NAVzMtKFjwqVlZGdlc94AEqZ2eHJ1Y2eDomNwkoKheM0Hs6F5aIKheM0DSaF5zQJGoWyEoXjNBUKhec0BT6V3aWR0aMyhpmhlaWdodBKhcJeSzQkkUpLNCF5Tks0HGGaSzQYTzMWSzQQfzQF7ks0CLM0DEJLNAVfNA8qmdHI3eTkxgqFshKF4zQLDoXnNBjyld2lkdGjMrKZoZWlnaHQSoXCXks0Bi80Hs5LNAZTNB6ySzQGdzQelks0Bps0HnZLNAqDNBrGSzQNczQU+ks0DrM0EjqZqbXBpcnCCoWyEoXjNAmChec0EK6V3aWR0aM0BBKZoZWlnaHQSoXCUks0Bps0EK5LNAhfNBCuSzQKozQQrks0DGs0EK6cxMXJ6dTlvgqFshKF4zQUNoXnNApmld2lkdGjNAQmmaGVpZ2h0EqFwmpLNBA7NA9GSzQQ6zQOKks0Ef80DJZLNBMnNAtqSzQVIzQJYks0Ffc0CT5LN
-   * BhPNAeeSzQYqzQHXks0GQ80BxpLNBlvNAbambDF2NWZ0gqFshKF4zQVUoXnNA1Kld2lkdGjNAQymaGVpZ2h0EqFwl5LNBHHNA9GSzQSOzQPAks0ErM0Dr5LNBMnNA5+SzQVDzQNbks0Fzs0DEJLNBjnNAtemYWVnZnE5gqFshKF4zQVPoXnNBJ+ld2lkdGjNAQemaGVpZ2h0EqFwl5LNBIzNBHWSzQShzQR7ks0Etc0EgZLNBMnNBIaSzQU1zQSfks0FsM0ErZLNBhbNBLSmZ2kyaGN5gqFshKF4zQUtoXnNBRmld2lkdGjM8aZoZWlnaHQSoXCXks0ERc0EhZLNBG3NBKSSzQSczQTGks0Eyc0E4ZLNBTjNBSSSzQW8zQVhks0GJ80Fj6cxYXc5b3FkgqFshKF4zQVhoXnNA+Old2lkdGjM26ZoZWlnaHQSoXCUks0EjM0ECpLNBQzNA/OSzQW2zQPTks0GNs0DvKU0ZDk2MYKhbISh
-   * eM0E4qF5zQXEpXdpZHRozOqmaGVpZ2h0IqFwl5LNBALNBIWSzQQrzQTYks0Ecs0FVZLNBMnNBaySzQUuzQYRks0Ft80GZpLNBibNBqGmcHlybHc5g6JjcJKCoXjNCFGhec0BA4KheM0JDaF5zMGhbISheM0I26F5zNeld2lkdGjM4KZoZWlnaHQioXCXks0Hvc0BKpLNCBrNARSSzQiIzPWSzQjozNGSzQkAzMeSzQkazLySzQkyzLCnMTd1aXZpYoKhbISheM0Is6F5zQKbpXdpZHRofaZoZWlnaHQSoXCXks0HoM0BsJLNB7zNAcGSzQfYzQHTks0H8s0B55LNCKHNAm6SzQk/zQM8ks0Jlc0DtqcxYmxnZ2FlgqFshKF4zQheoXnNA0ald2lkdGh/pmhlaWdodBKhcJSSzQeQzQLSks0ICs0DFpLNCLHNA3SSzQktzQO5pjZnam1uMoKhbISheM0IbaF5zQRnpXdpZHRoeqZoZWln
-   * aHQSoXCUks0Hu80Ej5LNCCvNBHaSzQi0zQRYks0JIM0EQKcxanM1YTU5gqFshKF4zQhuoXnNBQGld2lkdGjMlqZoZWlnaHQSoXCXks0Hk80FhJLNB7LNBXKSzQfTzQVfks0H8s0FTZLNCGXNBQiSzQjmzQS2ks0JRs0EeKYycDMzamWCoWyEoXjNCF6hec0D2KV3aWR0aFqmaGVpZ2h0EqFwlJLNB5zNA7eSzQgQzQPLks0Iqc0D5ZLNCSDNA/mnMTQxaTIyZYKhbISheM0Iu6F5zQWspXdpZHRodaZoZWlnaHQSoXCXks0HoM0GppLNB7zNBpWSzQfYzQaDks0H8s0Gb5LNCKvNBeCSzQlKzQT8ks0JnM0Ee6cxbWxnc2kygqFshKF4zQh1oXnNAWuld2lkdGjMiqZoZWlnaHQSoXCXks0Hvc0BY5LNB9XNAWWSzQfuzQFmks0IBs0BZ5LNCGjNAWuSzQjVzQFuks0JLs0BcaYzc2Ju
-   * eTiCoWyEoXjNCyqhec0EGKV3aWR0aMzTpmhlaWdodCOhcJSSzQqGzQQYks0K6s0EGJLNC2nNBBiSzQvOzQQY
+   * iKRoYXNo2ShmZWMwNjQ1NTc1MTNlNzUxZmJjNTg2Y2M1ODM4NTFkYjA5YTM4MjkyqmF1dG9MYXlvdXSBqWRpcmVjdGlvbqJMUqF4CKF50f9ypXdpZHRozQ0hpmhlaWdodM0I7KVub2Rlc94AEKhyYWJiaXRNUYKhYpTNCWTR/3LNAWjMrKFjwtkmbm90aWZpY2F0aW9uc1NlcnZpY2UucHJlc2VudGF0aW9uTGF5ZXKCoWKUS80Hqs0BQMy0oWPC2SVub3RpZmljYXRpb25zU2VydmljZS5hcHBsaWNhdGlvbkxheWVygqFilAjMys0H6c0GuKFjw9kgbm90aWZpY2F0aW9uc1NlcnZpY2UuZG9tYWluTGF5ZXKCoWKUzQkQzOjNAZDNAQ6hY8PZKG5vdGlmaWNhdGlvbnNTZXJ2aWNlLmluZnJhc3RydWN0dXJlTGF5ZXKCoWKUzQkCzQOMzQGszQEOoWPDp21vbmdvZGKCoWKUzQvZ
+   * zQO+zQFQzLShY8LZOW5vdGlmaWNhdGlvbnNTZXJ2aWNlLmFwcGxpY2F0aW9uTGF5ZXIudG91ckNyZWF0ZWRDb25zdW1lcoKhYpQwzQPRzQF1zLShY8LZLm5vdGlmaWNhdGlvbnNTZXJ2aWNlLmFwcGxpY2F0aW9uTGF5ZXIubWVkaWF0b3KCoWKUzQMjzQPRzQFpzLShY8LZOm5vdGlmaWNhdGlvbnNTZXJ2aWNlLmFwcGxpY2F0aW9uTGF5ZXIuY3JlYXRlQ29tbWFuZEhhbmRsZXKCoWKUzQYfzPzNAZ3MtKFjwtk6bm90aWZpY2F0aW9uc1NlcnZpY2UuYXBwbGljYXRpb25MYXllci51cGRhdGVDb21tYW5kSGFuZGxlcoKhYpTNBh3NAh7NAaLMtKFjwtk6bm90aWZpY2F0aW9uc1NlcnZpY2UuYXBwbGljYXRpb25MYXllci5kZWxldGVDb21tYW5kSGFuZGxlcoKhYpTNBiDN
+   * BGLNAZvMtKFjwtk4bm90aWZpY2F0aW9uc1NlcnZpY2UuYXBwbGljYXRpb25MYXllci5nZXRBbGxRdWVyeUhhbmRsZXKCoWKUzQYwzQWEzQF8zLShY8LZOW5vdGlmaWNhdGlvbnNTZXJ2aWNlLmFwcGxpY2F0aW9uTGF5ZXIuZ2V0QnlJZFF1ZXJ5SGFuZGxlcoKhYpTNBkDNA0DNAVzMtKFjwtk9bm90aWZpY2F0aW9uc1NlcnZpY2UuYXBwbGljYXRpb25MYXllci5nZXRCeVRvdXJJZFF1ZXJ5SGFuZGxlcoKhYpTNBhLNBqbNAbfMtKFjwtkubm90aWZpY2F0aW9uc1NlcnZpY2UuZG9tYWluTGF5ZXIuZGVsaXZlcnlSdWxlc4KhYpTNCTjNARrNAUDMtKFjwtk/bm90aWZpY2F0aW9uc1NlcnZpY2UuaW5mcmFzdHJ1Y3R1cmVMYXllci5ub3RpZmljYXRpb25SZXBvc2l0b3J5
+   * gqFilM0JKs0Dvs0BXMy0oWPCpWVkZ2Vz3gASpnZ4cnVjZ4OiY3CSgqF4zQezoXlogqF4zQNJoXnNAkahbISheMtAlHYAAAAAAKF5zQFkpXdpZHRozKGmaGVpZ2h0EqFwl5LNCSRSks0IXlOSzQcYZpLNBhPMxZLNBB/NAXuSzQIszQMQks0BV80DyqZ0cjd5OTGCoWyEoXjNAsOhec0GPKV3aWR0aMyspmhlaWdodBKhcJeSzQGLzQezks0BlM0HrJLNAZ3NB6WSzQGmzQedks0CoM0GsZLNA1zNBT6SzQOszQSOpmptcGlycIKhbISheM0CYKF5zQQrpXdpZHRozQEEpmhlaWdodBKhcJSSzQGmzQQrks0CF80EK5LNAqjNBCuSzQMazQQrpzExcnp1OW+CoWyEoXjNBQ2hec0CmaV3aWR0aM0BCaZoZWlnaHQSoXCaks0EDs0D0ZLNBDrNA4qSzQR/zQMlks0Eyc0C2pLNBUjNAliS
+   * zQV9zQJPks0GE80B55LNBirNAdeSzQZDzQHGks0GW80BtqZsMXY1ZnSCoWyEoXjNBVShec0DUqV3aWR0aM0BDKZoZWlnaHQSoXCXks0Ecc0D0ZLNBI7NA8CSzQSszQOvks0Eyc0Dn5LNBUPNA1uSzQXOzQMQks0GOc0C16ZhZWdmcTmCoWyEoXjNBU+hec0En6V3aWR0aM0BB6ZoZWlnaHQSoXCXks0EjM0EdZLNBKHNBHuSzQS1zQSBks0Eyc0EhpLNBTXNBJ+SzQWwzQStks0GFs0EtKZnaTJoY3mCoWyEoXjNBS2hec0FGaV3aWR0aMzxpmhlaWdodBKhcJeSzQRFzQSFks0Ebc0EpJLNBJzNBMaSzQTJzQThks0FOM0FJJLNBbzNBWGSzQYnzQWPpzFhdzlvcWSCoWyEoXjNBWGhec0D46V3aWR0aMzbpmhlaWdodBKhcJSSzQSMzQQKks0FDM0D85LNBbbNA9OSzQY2zQO8pTRk
+   * OTYxgqFshKF4zQTioXnNBcSld2lkdGjM6qZoZWlnaHQioXCXks0EAs0EhZLNBCvNBNiSzQRyzQVVks0Eyc0FrJLNBS7NBhGSzQW3zQZmks0GJs0GoaZweXJsdzmDomNwkoKheM0IUaF5zQEDgqF4zQkNoXnMwaFshKF4zQjaoXnLQGtwAAAAAACld2lkdGjM4KZoZWlnaHQioXCXks0Hvc0BKpLNCBrNARSSzQiIzPWSzQjozNGSzQkAzMeSzQkazLySzQkyzLCnMTd1aXZpYoKhbISheM0Is6F5zQKbpXdpZHRofaZoZWlnaHQSoXCXks0HoM0BsJLNB7zNAcGSzQfYzQHTks0H8s0B55LNCKHNAm6SzQk/zQM8ks0Jlc0DtqcxYmxnZ2FlgqFshKF4zQheoXnNA0ald2lkdGh/pmhlaWdodBKhcJSSzQeQzQLSks0ICs0DFpLNCLHNA3SSzQktzQO5pjZnam1uMoKhbISheM0IbaF5
+   * zQRnpXdpZHRoeqZoZWlnaHQSoXCUks0Hu80Ej5LNCCvNBHaSzQi0zQRYks0JIM0EQKcxanM1YTU5gqFshKF4zQhuoXnNBQGld2lkdGjMlqZoZWlnaHQSoXCXks0Hk80FhJLNB7LNBXKSzQfTzQVfks0H8s0FTZLNCGXNBQiSzQjmzQS2ks0JRs0EeKYycDMzamWCoWyEoXjNCF6hec0D2KV3aWR0aFqmaGVpZ2h0EqFwlJLNB5zNA7eSzQgQzQPLks0Iqc0D5ZLNCSDNA/mnMTQxaTIyZYKhbISheM0Iu6F5zQWspXdpZHRodaZoZWlnaHQSoXCXks0HoM0GppLNB7zNBpWSzQfYzQaDks0H8s0Gb5LNCKvNBeCSzQlKzQT8ks0JnM0Ee6cxbWxnc2kygqFshKF4zQh1oXnNAWuld2lkdGjMiqZoZWlnaHQSoXCXks0Hvc0BY5LNB9XNAWWSzQfuzQFmks0IBs0BZ5LNCGjNAWuSzQjV
+   * zQFuks0JLs0BcaYzc2JueTiCoWyEoXjNCyqhec0EGKV3aWR0aMzTpmhlaWdodCOhcJSSzQqGzQQYks0K6s0EGJLNC2nNBBiSzQvOzQQY
    */
   view applicationLayerDetail of notificationsService.applicationLayer {
     title 'Application Layer - CQRS Pattern'
@@ -406,6 +419,16 @@ views {
   // ============================================
   // DATA PERSISTENCE FLOW
   // ============================================
+  /**
+   * @likec4-generated(v1)
+   * iKRoYXNo2Sg2YzExNThkOTVjY2ZjYjc4NWI0YzVjYzczMWViMTJjMDhlOGUwMzAxqmF1dG9MYXlvdXSBqWRpcmVjdGlvbqJUQqF4CKF5DqV3aWR0aM0MMqZoZWlnaHTNBSelbm9kZXOPtG5vdGlmaWNhdGlvbnNTZXJ2aWNlgqFilAgOzQwyzQQQoWPDp21vbmdvZGKCoWKUzQWXzQSBzQFQzLShY8LZJW5vdGlmaWNhdGlvbnNTZXJ2aWNlLmFwcGxpY2F0aW9uTGF5ZXKCoWKUMEXNC+LNAlyhY8PZIG5vdGlmaWNhdGlvbnNTZXJ2aWNlLmRvbWFpbkxheWVygqFilF/NAtTNA53NARmhY8PZKG5vdGlmaWNhdGlvbnNTZXJ2aWNlLmluZnJhc3RydWN0dXJlTGF5ZXKCoWKUzQVXzQLjzQGszQEToWPD2S5ub3RpZmljYXRpb25zU2VydmljZS5hcHBsaWNhdGlvbkxheWVyLm1l
+   * ZGlhdG9ygqFilM0FicyCzQFpzLShY8LZOm5vdGlmaWNhdGlvbnNTZXJ2aWNlLmFwcGxpY2F0aW9uTGF5ZXIuY3JlYXRlQ29tbWFuZEhhbmRsZXKCoWKUWM0Bxc0Bncy0oWPC2Tpub3RpZmljYXRpb25zU2VydmljZS5hcHBsaWNhdGlvbkxheWVyLnVwZGF0ZUNvbW1hbmRIYW5kbGVygqFilM0CZM0Bxc0Bosy0oWPC2Tpub3RpZmljYXRpb25zU2VydmljZS5hcHBsaWNhdGlvbkxheWVyLmRlbGV0ZUNvbW1hbmRIYW5kbGVygqFilM0EdM0Bxc0Bm8y0oWPC2Thub3RpZmljYXRpb25zU2VydmljZS5hcHBsaWNhdGlvbkxheWVyLmdldEFsbFF1ZXJ5SGFuZGxlcoKhYpTNBn7NAcXNAXzMtKFjwtk5bm90aWZpY2F0aW9uc1NlcnZpY2UuYXBwbGljYXRpb25MYXllci5nZXRC
+   * eUlkUXVlcnlIYW5kbGVygqFilM0IaM0Bxc0BXMy0oWPC2T1ub3RpZmljYXRpb25zU2VydmljZS5hcHBsaWNhdGlvbkxheWVyLmdldEJ5VG91cklkUXVlcnlIYW5kbGVygqFilM0KMs0Bxc0Bt8y0oWPC2S5ub3RpZmljYXRpb25zU2VydmljZS5kb21haW5MYXllci5kZWxpdmVyeVJ1bGVzgqFilMyHzQMRzQFAzLShY8LZMm5vdGlmaWNhdGlvbnNTZXJ2aWNlLmRvbWFpbkxheWVyLmluQXBwTm90aWZpY2F0aW9ugqFilM0ClM0DEc0BQMy0oWPC2T9ub3RpZmljYXRpb25zU2VydmljZS5pbmZyYXN0cnVjdHVyZUxheWVyLm5vdGlmaWNhdGlvblJlcG9zaXRvcnmCoWKUzQV+zQMYzQFczLShY8KlZWRnZXOPpzExcnp1OW+CoWyEoXjNA8Khec0BXaV3aWR0aMzYpmhlaWdo
+   * dBKhcJeSzQWKzP6SzQS4zQEmks0DV80BbpLNAi3NAcWSzQIezQHKks0CD80BzpLNAf/NAdOmbDF2NWZ0gqFshKF4y0CS8gAAAAAAoXnLQHaIAAAAAACld2lkdGjM3KZoZWlnaHQSoXCXks0Fic0BG5LNBULNATWSzQTvzQFUks0Epc0BcpLNBGvNAYqSzQQtzQGnks0D9c0BwaZhZWdmcTmCoWyEoXjLQJaqAAAAAAChec0BdqV3aWR0aMzXpmhlaWdodBKhcJeSzQXjzQE2ks0F0M0BSZLNBb7NAV6SzQWuzQFyks0FnM0BiZLNBYrNAaSSzQV7zQG9pmdpMmhjeYKhbISheMtAmuYAAAAAAKF5y0B3mAAAAAAApXdpZHRozMGmaGVpZ2h0EqFwlJLNBoTNATaSzQamzQFgks0Gzc0BkpLNBu/NAb2nMWF3OW9xZIKhbISheMtAnqYAAAAAAKF5zQF1pXdpZHRozKumaGVpZ2h0EqFw
+   * l5LNBvLNASeSzQcrzQE/ks0Has0BWZLNB6PNAXKSzQfgzQGNks0II80BrJLNCF/NAcilNGQ5NjGCoWyEoXjLQKEfAAAAAAChectAdlgAAAAAAKV3aWR0aMzqpmhlaWdodBKhcJeSzQbzzQEFks0HtM0BMJLNCO/NAXmSzQn7zQHFks0KCs0ByZLNChnNAc6SzQopzQHTpzE3dWl2aWKDomNwk4KheM0B+aF5zQKPgqF4zQNYoXnNAsGCoXjNBNahec0C/6FshKF4y0CNZAAAAAAAoXnNAs2ld2lkdGh9pmhlaWdodBKhcJqSzQHFzQJ5ks0B580CiZLNAgrNApeSzQItzQKhks0CYs0CsJLNA+HNAsqSzQQXzQLUks0Ek80C65LNBR3NAxGSzQWHzQMwpzFibGdnYWWDomNwkoKheM0EEqF5zQKOgqF4zQWDoXnNAyahbISheMtAkwYAAAAAAKF5zQLapXdpZHRof6ZoZWlnaHQSoXCX
+   * ks0D5s0CeZLNBAPNAoeSzQQhzQKVks0EPc0CoZLNBKnNAtGSzQUlzQMBks0Fh80DJ6Y2Z2ptbjKDomNwkYKheM0FvaF5zQLBoWyEoXjLQJcGAAAAAAChec0CyKV3aWR0aHqmaGVpZ2h0EqFwlJLNBYbNAnmSzQWozQKmks0F0s0C3JLNBfXNAwmnMWpzNWE1OYOiY3CRgqF4zQbBoXnNAsGhbISheM0GuaF5zQLLpXdpZHRozJamaGVpZ2h0EqFwlJLNBvjNAnmSzQbWzQKmks0GrM0C3JLNBonNAwmmMnAzM2plg6JjcJKCoXjNCH+hec0CeYKheM0HkaF5zQLpoWyEoXjNB7ihectAhrwAAAAAAKV3aWR0aFqmaGVpZ2h0EqFwl5LNCH/NAnmSzQhlzQKHks0IS80ClZLNCDHNAqGSzQfLzQLSks0HVs0DApLNBvfNAyenMTQxaTIyZYOiY3CSgqF4zQouoXnNAo+CoXjNCGChec0D
+   * DqFshKF4zQidoXnLQIf8AAAAAACld2lkdGh1pmhlaWdodBKhcJeSzQpgzQJ5ks0KP80CiJLNChzNApaSzQn7zQKhks0I9c0C+ZLNB7rNAzKSzQb3zQNQpjNzYm55OIOiY3CRgqF4zQY/oXnNBByhbISheMtAmP4AAAAAAKF5y0CQpgAAAAAApXdpZHRozNOmaGVpZ2h0I6FwlJLNBj/NA8WSzQY/zQP6ks0GP80EPpLNBj/NBHanMW1sZ3NpMoKhbISheM0BJ6F5zQLApXdpZHRoW6ZoZWlnaHQSoXCUks0BJ80CeZLNASfNAqWSzQEnzQLaks0BJ80DB6ZuZzNtaW+CoWyEoXjLQIFEAAAAAAChec0Da6V3aWR0aF2maGVpZ2h0EqFwlJLNAcfNA2uSzQIFzQNrks0CS80Da5LNAorNA2s=
+   */
   view dataPersistence {
     title 'Data Persistence Flow'
     description 'How notifications are persisted through repository pattern to MongoDB'
