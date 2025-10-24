@@ -1,0 +1,427 @@
+specification {
+  element externalSystem
+  element service
+  element layer
+  element component
+  element controller
+  element consumer
+  element handler
+  element repository
+  element database
+  element messagebroker
+  element entity
+  element businessLogic
+
+  tag critical
+  tag async
+  tag realtime
+}
+
+
+model {
+  // External Systems
+  externalSystem toursService 'Tours Service' {
+    description 'Microservice responsible for managing hiking tours'
+    style {
+      icon tech:docker
+      color red
+    }
+    technology '.NET 8, PostgreSQL'
+    -> rabbitMQ 'Publishes TourCreatedEvent'
+  }
+
+  externalSystem gateway 'API Gateway' {
+    description 'Gateway with SignalR hub for real-time communication'
+    technology '.NET 8, SignalR, YARP'
+    style {
+      color secondary
+    }
+    -> frontend 'Pushes notifications via SignalR'
+    -> notificationsApi 'Proxies HTTP requests'
+    -> toursService 'Proxies HTTP requests'
+  }
+
+  externalSystem frontend 'Frontend Application' {
+    description 'React-based web application'
+    technology 'React, TypeScript, SignalR Client'
+
+    style {
+      icon tech:react
+      shape browser
+      color green
+    }
+
+  }
+
+  // Infrastructure
+  messagebroker rabbitMQ 'RabbitMQ' {
+    description 'Message broker for event-driven communication'
+    technology 'RabbitMQ, MassTransit'
+
+    style {
+      shape queue
+      color amber
+      icon tech:rabbitmq
+    }
+
+    -> notificationsService.applicationLayer.tourCreatedConsumer 'TourCreatedEvent queue'
+    -> gateway 'InAppNotificationCreatedTourEvent'
+  }
+
+  database mongodb 'MongoDB' {
+    description 'NoSQL database for notification storage'
+    technology 'MongoDB 7.0'
+    style {
+      color amber
+      shape storage
+      icon tech:mongodb
+    }
+  }
+
+  // Notifications Service
+  service notificationsService 'Notifications Service' {
+    description 'Microservice for managing in-app notifications in the Mountain Tours application'
+    technology '.NET 8, Clean Architecture'
+
+    style {
+
+      icon tech:docker
+    }
+
+    // ============================================
+    // PRESENTATION LAYER
+    // ============================================
+    layer presentationLayer 'Presentation Layer' {
+      description 'API Controllers - HTTP interface'
+      style {
+        color secondary
+      }
+
+      controller notificationsApi 'InAppNotificationsController' {
+        description 'REST API endpoints for notification CRUD operations'
+        technology 'ASP.NET Core, MediatR'
+
+        -> mediator 'Sends Commands/Queries'
+      }
+    }
+
+    // ============================================
+    // APPLICATION LAYER
+    // ============================================
+    layer applicationLayer 'Application Layer' {
+      description 'Business logic, Use Cases, CQRS, Event Consumers'
+      style {
+        color primary
+      }
+
+      // Event Consumer
+      consumer tourCreatedConsumer 'TourCreatedEventConsumer' {
+        description 'Consumes TourCreatedEvent from RabbitMQ and initiates notification creation'
+        technology 'MassTransit, IConsumer'
+
+        -> mediator 'Sends CreateInAppNotificationCommand'
+      }
+
+      // Mediator (CQRS)
+      component mediator 'MediatR Pipeline' {
+        description 'CQRS mediator - routes commands and queries to handlers'
+        technology 'MediatR, FluentValidation'
+
+        -> createCommandHandler 'Routes CreateInAppNotificationCommand'
+        -> updateCommandHandler 'Routes UpdateInAppNotificationCommand'
+        -> deleteCommandHandler 'Routes DeleteInAppNotificationCommand'
+        -> getAllQueryHandler 'Routes GetAllInAppNotificationsQuery'
+        -> getByIdQueryHandler 'Routes GetInAppNotificationQuery'
+        -> getByTourIdQueryHandler 'Routes GetInAppNotificationsByTourIdQuery'
+      }
+
+      // Command Handlers
+      handler createCommandHandler 'CreateInAppNotificationCommandHandler' {
+        description 'Handles notification creation with business rules and event publishing'
+        technology 'IRequestHandler, AutoMapper'
+
+        -> notificationsService.domainLayer.deliveryRules 'Applies creation rules'
+        -> notificationsService.infrastructureLayer.notificationRepository 'Persists notification'
+        -> rabbitMQ 'Publishes InAppNotificationCreatedTourEvent'
+      }
+
+      handler updateCommandHandler 'UpdateInAppNotificationCommandHandler' {
+        description 'Handles notification updates'
+        technology 'IRequestHandler, AutoMapper'
+
+        -> notificationsService.infrastructureLayer.notificationRepository 'Updates notification'
+      }
+
+      handler deleteCommandHandler 'DeleteInAppNotificationCommandHandler' {
+        description 'Handles notification deletion'
+        technology 'IRequestHandler'
+
+        -> notificationsService.infrastructureLayer.notificationRepository 'Deletes notification'
+      }
+
+      // Query Handlers
+      handler getAllQueryHandler 'GetAllInAppNotificationsQueryHandler' {
+        description 'Retrieves all notifications'
+        technology 'IRequestHandler, AutoMapper'
+
+        -> notificationsService.infrastructureLayer.notificationRepository 'Fetches all notifications'
+      }
+
+      handler getByIdQueryHandler 'GetInAppNotificationQueryHandler' {
+        description 'Retrieves notification by ID'
+        technology 'IRequestHandler, AutoMapper'
+
+        -> notificationsService.infrastructureLayer.notificationRepository 'Fetches by ID'
+      }
+
+      handler getByTourIdQueryHandler 'GetInAppNotificationsByTourIdQueryHandler' {
+        description 'Retrieves notifications for specific tour'
+        technology 'IRequestHandler, AutoMapper'
+
+        -> notificationsService.infrastructureLayer.notificationRepository 'Fetches by TourId'
+      }
+    }
+
+    // ============================================
+    // DOMAIN LAYER
+    // ============================================
+    layer domainLayer 'Domain Layer' {
+      description 'Core business entities and domain logic'
+      style {
+        color muted
+      }
+
+      entity inAppNotification 'InAppNotification Entity' {
+        description 'Core notification entity with status management and timestamps'
+        technology 'Domain Entity, Rich Model'
+      }
+
+      businessLogic deliveryRules 'NotificationDeliveryRules' {
+        description 'Business rules for notification lifecycle: creation, delivery, status transitions'
+        technology 'Static Business Logic'
+
+        -> inAppNotification 'Applies rules to entity'
+      }
+    }
+
+    // ============================================
+    // INFRASTRUCTURE LAYER
+    // ============================================
+    layer infrastructureLayer 'Infrastructure Layer' {
+      description 'Data persistence and external service integrations'
+      style {
+        color secondary
+      }
+
+      repository notificationRepository 'MongoInAppNotificationRepository' {
+        description 'MongoDB repository implementation for notification persistence'
+        technology 'MongoDB.Driver, IOptions'
+
+        -> mongodb 'CRUD operations on notifications collection'
+      }
+    }
+  }
+}
+
+views {
+  // ============================================
+  // MAIN EVENT FLOW VIEW
+  // ============================================
+  /**
+   * @likec4-generated(v1)
+   * iKRoYXNo2Sg2ZTZmMWI5NzhmNTJhZjhmYWYwNDc1N2JjNzc2NGMwNDZlNzkzYjJiqmF1dG9MYXlvdXSBqWRpcmVjdGlvbqJUQqF40f3HoXnQ16V3aWR0aM0JeaZoZWlnaHTNBhOlbm9kZXOKrHRvdXJzU2VydmljZYKhYpTR/ccWzQFUzLShY8KocmFiYml0TVGCoWKUzQEFA80Bacy0oWPCp2dhdGV3YXmCoWKU0J7NAo3NAUDMtKFjwrRub3RpZmljYXRpb25zU2VydmljZYKhYpTNA/fNARrNAz7NA6ShY8OoZnJvbnRlbmSCoWKU0f8yzQTJzQFAzLShY8KnbW9uZ29kYoKhYpTNBc3NBTbNAUDMtKFjwtkmbm90aWZpY2F0aW9uc1NlcnZpY2UucHJlc2VudGF0aW9uTGF5ZXKCoWKUzQTKzQFMzQFAzLShY8LZJW5vdGlmaWNhdGlvbnNTZXJ2aWNlLmFwcGxpY2F0aW9uTGF5
+   * ZXKCoWKUzQTKzQKgzQFAzLShY8LZIG5vdGlmaWNhdGlvbnNTZXJ2aWNlLmRvbWFpbkxheWVygqFilM0EH80D4s0BQMy0oWPC2Shub3RpZmljYXRpb25zU2VydmljZS5pbmZyYXN0cnVjdHVyZUxheWVygqFilM0Fzc0D4s0BQMy0oWPCpWVkZ2VziqY5bTdxNmmDomNwkoKheM0CgaF5zQK9gqF4zQReoXnNAjihbISheM0C4aF5zQKppXdpZHRozJWmaGVpZ2h0EqFwl5LNAUDNAuqSzQHtzQLYks0DBs0CsJLNA+7NAmSSzQQ4zQJLks0Ehc0CJ5LNBMfNAgWmd3JrYXA4g6JjcJKCoXjNAaihec0CN4KheM0DKKF5zQK7oWyEoXjNAmmhec0ClqV3aWR0aMyhpmhlaWdodBKhcJeSzQF8zQIAks0Blc0CJJLNAbbNAkySzQHfzQJkks0CWc0Cq5LNA93NAteSzQTAzQLrpzFtM2pz
+   * cnGCoWyEoXjNBWqhec0CS6V3aWR0aMyspmhlaWdodBKhcJSSzQVqzQIAks0Fas0CLpLNBWrNAmaSzQVqzQKVpzE3Y2xuNGeCoWyEoXjNBRehec0DlqV3aWR0aMyKpmhlaWdodBKhcJSSzQU7zQNUks0FJM0DfZLNBQrNA6+SzQTzzQPZpzE1Y2x2bzeCoWyEoXjNBeihec0DmKV3aWR0aBmmaGVpZ2h0EqFwlJLNBbLNA1SSzQXUzQN+ks0F/M0DsJLNBh/NA9umbGptcHJng6JjcJKCoXjNA+qhec0CqoKheM0CwqF5zQJNoWyEoXjNAuahec0CZqV3aWR0aMzgpmhlaWdodCKhcJeSzQTKzQLbks0ESc0CwpLNA5HNApiSzQL1zQJkks0C7s0CYZLNAnfNAiySzQIIzQH7pzFlYWdyaTmCoWyEoXjNBm2hec0E4aV3aWR0aMzTpmhlaWdodCOhcJSSzQZtzQSWks0Gbc0ExJLNBm3N
+   * BPySzQZtzQUspzFhcTR6dTKDomNwkYKheM0BeaF50NehbISheGKhef+ld2lkdGjMt6ZoZWlnaHQSoXCUks0BSsy0ks0BSszgks0BSs0BFZLNAUrNAUKnMXV2dTUxY4OiY3CSgqF4zJ6hec0CHIKheH6hec0CaKFshKF4zO6hec0BnKV3aWR0aMzgpmhlaWdodBKhcJeSzLjNAgCSzKXNAhGSzJXNAiWSzIrNAjySfM0CV5J8zQJ4ksyAzQKWpjcyazhsOIOiY3CRgqF4zKChec0DlqFshKF4dKF5zQQKpXdpZHRozMumaGVpZ2h0EqFwlJLMoM0DVJLMoM0DfZLMoM0DrpLMoM0D2A==
+   */
+  view eventFlow {
+    title 'Notifications Service - Event Flow Architecture'
+    description 'Complete event-driven flow showing TourCreatedEvent consumption, processing, and notification delivery'
+
+    // Include external systems
+    include toursService
+    include gateway
+    include frontend
+    include rabbitMQ
+    include mongodb
+
+    // Include all layers and their components
+    include notificationsService.presentationLayer.*
+    include notificationsService.applicationLayer.*
+    include notificationsService.domainLayer.*
+    include notificationsService.infrastructureLayer.*
+
+    // Auto layout
+    autoLayout TopBottom
+    style rabbitMQ {
+      shape queue
+    }
+    style mongodb {
+      shape storage
+    }
+  }
+
+  // ============================================
+  // TOUR CREATED EVENT FLOW
+  // ============================================
+  view tourCreatedEventFlow {
+    title 'Tour Created Event - End-to-End Flow'
+    description 'Detailed flow from tour creation to real-time notification delivery to frontend'
+
+    // External trigger
+    include toursService
+    include rabbitMQ -> notificationsService.applicationLayer.tourCreatedConsumer
+
+    // Event processing
+    include notificationsService.applicationLayer.tourCreatedConsumer -> notificationsService.applicationLayer.mediator
+    include notificationsService.applicationLayer.mediator -> notificationsService.applicationLayer.createCommandHandler
+    include notificationsService.applicationLayer.createCommandHandler -> notificationsService.domainLayer.deliveryRules
+    include notificationsService.domainLayer.deliveryRules -> notificationsService.domainLayer.inAppNotification
+    include notificationsService.applicationLayer.createCommandHandler -> notificationsService.infrastructureLayer.notificationRepository
+    include notificationsService.infrastructureLayer.notificationRepository -> mongodb
+
+    // Event publishing
+    include notificationsService.applicationLayer.createCommandHandler -> rabbitMQ
+    include rabbitMQ -> gateway
+    include gateway -> frontend
+
+    autoLayout LeftRight
+  }
+
+  // ============================================
+  // REST API FLOW
+  // ============================================
+  view restApiFlow {
+    title 'REST API Operations Flow'
+    description 'HTTP request flow through Clean Architecture layers for CRUD operations'
+
+    include frontend
+    include gateway -> notificationsService.presentationLayer.notificationsApi
+
+    // Command flow (Create/Update/Delete)
+    include notificationsService.presentationLayer.notificationsApi -> notificationsService.applicationLayer.mediator
+    include notificationsService.applicationLayer.mediator -> notificationsService.applicationLayer.createCommandHandler
+    include notificationsService.applicationLayer.mediator -> notificationsService.applicationLayer.updateCommandHandler
+    include notificationsService.applicationLayer.mediator -> notificationsService.applicationLayer.deleteCommandHandler
+    include notificationsService.applicationLayer.createCommandHandler -> notificationsService.domainLayer.deliveryRules
+    include notificationsService.domainLayer.deliveryRules -> notificationsService.domainLayer.inAppNotification
+    include notificationsService.applicationLayer.createCommandHandler -> notificationsService.infrastructureLayer.notificationRepository
+    include notificationsService.applicationLayer.updateCommandHandler -> notificationsService.infrastructureLayer.notificationRepository
+    include notificationsService.applicationLayer.deleteCommandHandler -> notificationsService.infrastructureLayer.notificationRepository
+    include notificationsService.infrastructureLayer.notificationRepository -> mongodb
+
+    // Query flow (Read)
+    include notificationsService.applicationLayer.mediator -> notificationsService.applicationLayer.getAllQueryHandler
+    include notificationsService.applicationLayer.mediator -> notificationsService.applicationLayer.getByIdQueryHandler
+    include notificationsService.applicationLayer.mediator -> notificationsService.applicationLayer.getByTourIdQueryHandler
+    include notificationsService.applicationLayer.getAllQueryHandler -> notificationsService.infrastructureLayer.notificationRepository
+    include notificationsService.applicationLayer.getByIdQueryHandler -> notificationsService.infrastructureLayer.notificationRepository
+    include notificationsService.applicationLayer.getByTourIdQueryHandler -> notificationsService.infrastructureLayer.notificationRepository
+
+    autoLayout TopBottom
+  }
+
+  // ============================================
+  // ARCHITECTURAL LAYERS VIEW
+  // ============================================
+  view layeredArchitecture of notificationsService {
+    title 'Clean Architecture - Layered View'
+    description 'Four-layer architecture with clear separation of concerns and dependency rules'
+
+    include notificationsService.presentationLayer
+    include notificationsService.applicationLayer
+    include notificationsService.domainLayer
+    include notificationsService.infrastructureLayer
+
+    autoLayout TopBottom
+  }
+
+  // ============================================
+  // APPLICATION LAYER DETAIL
+  // ============================================
+  /**
+   * @likec4-generated(v1)
+   * iKRoYXNo2Sg5MGMxNDcyMzFjY2M2YWIzMDM2ZmI1MjMxMWYzZjZmNzA4NWMzZGYyqmF1dG9MYXlvdXSBqWRpcmVjdGlvbqJMUqF4CKF50I+ld2lkdGjNDSGmaGVpZ2h0zQjPpW5vZGVz3gAQqHJhYmJpdE1RgqFilM0JtNCPzQFozKyhY8LZJm5vdGlmaWNhdGlvbnNTZXJ2aWNlLnByZXNlbnRhdGlvbkxheWVygqFilEvNB6rNAUDMtKFjwtklbm90aWZpY2F0aW9uc1NlcnZpY2UuYXBwbGljYXRpb25MYXllcoKhYpQIzL/NB+rNBsOhY8PZIG5vdGlmaWNhdGlvbnNTZXJ2aWNlLmRvbWFpbkxheWVygqFilM0JGMzlzQGAzQEJoWPD2Shub3RpZmljYXRpb25zU2VydmljZS5pbmZyYXN0cnVjdHVyZUxheWVygqFilM0JCs0Dic0BnM0BCaFjw6dtb25nb2RigqFilM0L2c0D
+   * vs0BUMy0oWPC2Tlub3RpZmljYXRpb25zU2VydmljZS5hcHBsaWNhdGlvbkxheWVyLnRvdXJDcmVhdGVkQ29uc3VtZXKCoWKUMM0D0c0Bdcy0oWPC2S5ub3RpZmljYXRpb25zU2VydmljZS5hcHBsaWNhdGlvbkxheWVyLm1lZGlhdG9ygqFilM0DI80D0c0Bacy0oWPC2Tpub3RpZmljYXRpb25zU2VydmljZS5hcHBsaWNhdGlvbkxheWVyLmNyZWF0ZUNvbW1hbmRIYW5kbGVygqFilM0GH8z8zQGdzLShY8LZOm5vdGlmaWNhdGlvbnNTZXJ2aWNlLmFwcGxpY2F0aW9uTGF5ZXIudXBkYXRlQ29tbWFuZEhhbmRsZXKCoWKUzQYdzQIezQGizLShY8LZOm5vdGlmaWNhdGlvbnNTZXJ2aWNlLmFwcGxpY2F0aW9uTGF5ZXIuZGVsZXRlQ29tbWFuZEhhbmRsZXKCoWKUzQYgzQRi
+   * zQGbzLShY8LZOG5vdGlmaWNhdGlvbnNTZXJ2aWNlLmFwcGxpY2F0aW9uTGF5ZXIuZ2V0QWxsUXVlcnlIYW5kbGVygqFilM0GMM0FhM0BfMy0oWPC2Tlub3RpZmljYXRpb25zU2VydmljZS5hcHBsaWNhdGlvbkxheWVyLmdldEJ5SWRRdWVyeUhhbmRsZXKCoWKUzQZAzQNAzQFczLShY8LZPW5vdGlmaWNhdGlvbnNTZXJ2aWNlLmFwcGxpY2F0aW9uTGF5ZXIuZ2V0QnlUb3VySWRRdWVyeUhhbmRsZXKCoWKUzQYSzQamzQG3zLShY8LZLm5vdGlmaWNhdGlvbnNTZXJ2aWNlLmRvbWFpbkxheWVyLmRlbGl2ZXJ5UnVsZXOCoWKUzQk4zQEazQFAzLShY8LZP25vdGlmaWNhdGlvbnNTZXJ2aWNlLmluZnJhc3RydWN0dXJlTGF5ZXIubm90aWZpY2F0aW9uUmVwb3NpdG9yeYKh
+   * YpTNCSrNA77NAVzMtKFjwqVlZGdlc94AEqZ2eHJ1Y2eDomNwkoKheM0Hs6F5aIKheM0DSaF5zQJGoWyEoXjNBUKhec0BT6V3aWR0aMyhpmhlaWdodBKhcJeSzQkkUpLNCF5Tks0HGGaSzQYTzMWSzQQfzQF7ks0CLM0DEJLNAVfNA8qmdHI3eTkxgqFshKF4zQLDoXnNBjyld2lkdGjMrKZoZWlnaHQSoXCXks0Bi80Hs5LNAZTNB6ySzQGdzQelks0Bps0HnZLNAqDNBrGSzQNczQU+ks0DrM0EjqZqbXBpcnCCoWyEoXjNAmChec0EK6V3aWR0aM0BBKZoZWlnaHQSoXCUks0Bps0EK5LNAhfNBCuSzQKozQQrks0DGs0EK6cxMXJ6dTlvgqFshKF4zQUNoXnNApmld2lkdGjNAQmmaGVpZ2h0EqFwmpLNBA7NA9GSzQQ6zQOKks0Ef80DJZLNBMnNAtqSzQVIzQJYks0Ffc0CT5LN
+   * BhPNAeeSzQYqzQHXks0GQ80BxpLNBlvNAbambDF2NWZ0gqFshKF4zQVUoXnNA1Kld2lkdGjNAQymaGVpZ2h0EqFwl5LNBHHNA9GSzQSOzQPAks0ErM0Dr5LNBMnNA5+SzQVDzQNbks0Fzs0DEJLNBjnNAtemYWVnZnE5gqFshKF4zQVPoXnNBJ+ld2lkdGjNAQemaGVpZ2h0EqFwl5LNBIzNBHWSzQShzQR7ks0Etc0EgZLNBMnNBIaSzQU1zQSfks0FsM0ErZLNBhbNBLSmZ2kyaGN5gqFshKF4zQUtoXnNBRmld2lkdGjM8aZoZWlnaHQSoXCXks0ERc0EhZLNBG3NBKSSzQSczQTGks0Eyc0E4ZLNBTjNBSSSzQW8zQVhks0GJ80Fj6cxYXc5b3FkgqFshKF4zQVhoXnNA+Old2lkdGjM26ZoZWlnaHQSoXCUks0EjM0ECpLNBQzNA/OSzQW2zQPTks0GNs0DvKU0ZDk2MYKhbISh
+   * eM0E4qF5zQXEpXdpZHRozOqmaGVpZ2h0IqFwl5LNBALNBIWSzQQrzQTYks0Ecs0FVZLNBMnNBaySzQUuzQYRks0Ft80GZpLNBibNBqGmcHlybHc5g6JjcJKCoXjNCFGhec0BA4KheM0JDaF5zMGhbISheM0I26F5zNeld2lkdGjM4KZoZWlnaHQioXCXks0Hvc0BKpLNCBrNARSSzQiIzPWSzQjozNGSzQkAzMeSzQkazLySzQkyzLCnMTd1aXZpYoKhbISheM0Is6F5zQKbpXdpZHRofaZoZWlnaHQSoXCXks0HoM0BsJLNB7zNAcGSzQfYzQHTks0H8s0B55LNCKHNAm6SzQk/zQM8ks0Jlc0DtqcxYmxnZ2FlgqFshKF4zQheoXnNA0ald2lkdGh/pmhlaWdodBKhcJSSzQeQzQLSks0ICs0DFpLNCLHNA3SSzQktzQO5pjZnam1uMoKhbISheM0IbaF5zQRnpXdpZHRoeqZoZWln
+   * aHQSoXCUks0Hu80Ej5LNCCvNBHaSzQi0zQRYks0JIM0EQKcxanM1YTU5gqFshKF4zQhuoXnNBQGld2lkdGjMlqZoZWlnaHQSoXCXks0Hk80FhJLNB7LNBXKSzQfTzQVfks0H8s0FTZLNCGXNBQiSzQjmzQS2ks0JRs0EeKYycDMzamWCoWyEoXjNCF6hec0D2KV3aWR0aFqmaGVpZ2h0EqFwlJLNB5zNA7eSzQgQzQPLks0Iqc0D5ZLNCSDNA/mnMTQxaTIyZYKhbISheM0Iu6F5zQWspXdpZHRodaZoZWlnaHQSoXCXks0HoM0GppLNB7zNBpWSzQfYzQaDks0H8s0Gb5LNCKvNBeCSzQlKzQT8ks0JnM0Ee6cxbWxnc2kygqFshKF4zQh1oXnNAWuld2lkdGjMiqZoZWlnaHQSoXCXks0Hvc0BY5LNB9XNAWWSzQfuzQFmks0IBs0BZ5LNCGjNAWuSzQjVzQFuks0JLs0BcaYzc2Ju
+   * eTiCoWyEoXjNCyqhec0EGKV3aWR0aMzTpmhlaWdodCOhcJSSzQqGzQQYks0K6s0EGJLNC2nNBBiSzQvOzQQY
+   */
+  view applicationLayerDetail of notificationsService.applicationLayer {
+    title 'Application Layer - CQRS Pattern'
+    description 'Detailed view of CQRS implementation with MediatR, command/query handlers, and event consumers'
+
+    include *
+    include rabbitMQ -> notificationsService.applicationLayer.tourCreatedConsumer
+    include notificationsService.infrastructureLayer.notificationRepository
+    include notificationsService.domainLayer.deliveryRules
+    include mongodb
+
+    autoLayout LeftRight
+  }
+
+  // ============================================
+  // INFRASTRUCTURE INTEGRATION
+  // ============================================
+  view infrastructureIntegration {
+    title 'Infrastructure Integration'
+    description 'External system integrations: RabbitMQ for messaging and MongoDB for persistence'
+
+    include toursService -> rabbitMQ
+    include rabbitMQ -> notificationsService.applicationLayer.tourCreatedConsumer
+    include notificationsService.applicationLayer.createCommandHandler
+    include notificationsService.applicationLayer.createCommandHandler -> rabbitMQ
+    include rabbitMQ -> gateway
+    include notificationsService.infrastructureLayer.notificationRepository -> mongodb
+
+    autoLayout LeftRight
+  }
+
+  // ============================================
+  // SYSTEM CONTEXT
+  // ============================================
+  /**
+   * @likec4-generated(v1)
+   * iKRoYXNo2ShiMTI1MTlmN2E3YWE1MTRhY2I4M2E1ODE0MGNjN2MyMDE0MTdjZmNkqmF1dG9MYXlvdXSBqWRpcmVjdGlvbqJUQqF40I2heQCld2lkdGjNBwGmaGVpZ2h0zQNKpW5vZGVzhqdnYXRld2F5gqFilM0BrgDNAUDMtKFjwqx0b3Vyc1NlcnZpY2WCoWKUzQU6AM0BVMy0oWPCtG5vdGlmaWNhdGlvbnNTZXJ2aWNlgqFilM0Brs0BQ80BQMy0oWPCqGZyb250ZW5kgqFilNCNzQFMzQFAzLShY8KocmFiYml0TVGCoWKUzQMBzQKWzQFpzLShY8KnbW9uZ29kYoKhYpQJzQKWzQFAzLShY8KlZWRnZXOHpjZ5aTI0eIKhbISheM0CTqF5zPeld2lkdGjMlaZoZWlnaHQSoXCUks0CTsy0ks0CTszdks0CTs0BDpLNAk7NATmmNzJrOGw4g6JjcJKCoXjNAZCheczSgqF4zQE3
+   * oXnNARWhbISheM0BSaF5zQEJpXdpZHRozMumaGVpZ2h0EqFwl5LNAbzMtJLNAZ/Mx5LNAYHM3JLNAWbM8JLNAUfNAQeSzQEmzQEiks0BCc0BPKcxYXE0enUygqFshKF4zQTyoXnNAa2ld2lkdGjMt6ZoZWlnaHQSoXCXks0Fqcy0ks0Fbs0BCZLNBRDNAY2SzQS0zQH3ks0Ehs0CLJLNBE/NAmOSzQQgzQKPpnZqNjFpeoKhbISheM0CL6F5zQKQpXdpZHRozOCmaGVpZ2h0I6Fwl5LNAerNAfeSzQHRzQIXks0BxM0CO5LNAdvNAlqSzQH+zQKKks0Cg80CsZLNAvjNAsynMThrejI2eoKhbISheM0DBaF5zQJKpXdpZHRozKGmaGVpZ2h0EqFwlJLNA1fNApaSzQMlzQJnks0C580CLpLNArTNAf6nMXV2dTUxY4KhbISheM0DhKF5zQGOpXdpZHRozOCmaGVpZ2h0EqFwmpLNA87N
+   * ApeSzQPTzQJ3ks0D1M0CU5LNA8vNAjOSzQOczQGQks0Db80BcJLNAwDM8JLNAvDM3pLNAt7MzJLNAsvMu6ZrMmk4YnaCoWyEoXjNAROhec0CEKV3aWR0aMzTpmhlaWdodCOhcJqSzQGuzQHgks0BnM0B6JLNAYnNAfCSzQF3zQH3ks0BNM0CEpLNARDNAf2SzN/NAjOSzMnNAkuSzLzNAm2SzLTNAow=
+   */
+  view systemContext {
+    title 'System Context - Notifications Service'
+    description 'High-level view showing how Notifications Service fits in the microservices ecosystem'
+
+    include toursService
+    include notificationsService
+    include gateway
+    include frontend
+    include rabbitMQ
+    include mongodb
+
+    autoLayout TopBottom
+  }
+
+  // ============================================
+  // DATA PERSISTENCE FLOW
+  // ============================================
+  view dataPersistence {
+    title 'Data Persistence Flow'
+    description 'How notifications are persisted through repository pattern to MongoDB'
+
+    include notificationsService.applicationLayer.mediator
+    include notificationsService.applicationLayer.createCommandHandler
+    include notificationsService.applicationLayer.updateCommandHandler
+    include notificationsService.applicationLayer.deleteCommandHandler
+    include notificationsService.applicationLayer.getAllQueryHandler
+    include notificationsService.applicationLayer.getByIdQueryHandler
+    include notificationsService.applicationLayer.getByTourIdQueryHandler
+    include notificationsService.infrastructureLayer.notificationRepository
+    include mongodb
+    include notificationsService.domainLayer.inAppNotification
+    include notificationsService.domainLayer.deliveryRules
+
+    autoLayout TopBottom
+  }
+}
